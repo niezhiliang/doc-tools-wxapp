@@ -1,7 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/upload/upload",
+    "pages/view/view",
+    "pages/result/result"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -13,6 +16,9 @@
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
-    "van-button": "@vant/weapp/button/index"
+    "van-button": "@vant/weapp/button/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
   }
 }
