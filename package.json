@@ -1,0 +1,14 @@
+{
+  "name": "doc-tools-app",
+  "version": "1.0.0",
+  "description": "文档助手小程序",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nzl",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.11.4"
+  }
+}

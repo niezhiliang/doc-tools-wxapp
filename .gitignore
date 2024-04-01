@@ -1,0 +1,5 @@
+node_modules
+*.local
+*.sh
+.idea/
+miniprogram_npm/
