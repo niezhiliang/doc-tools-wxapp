@@ -1,7 +1,9 @@
 <view>
-    <van-grid direction="horizontal" gutter="15" column-num="2">
-    <van-grid-item  link-type="navigateTo"
+    <van-grid gutter="10" column-num="4" icon-size="55" square="true">
+    <van-grid-item
     url="/pages/upload/upload" icon="https://picsum.photos/230?a=1" text="PDF转图片"/>
     <van-grid-item icon="https://picsum.photos/230?a=2" text="Word转PDF" bind:click="openShow"/>
+    <van-grid-item icon="https://picsum.photos/230?a=3" text="Word转PDF" bind:click="openShow"/>
+    <van-grid-item icon="https://picsum.photos/230?a=4" text="Word转PDF" bind:click="openShow"/>
     </van-grid>
 </view>

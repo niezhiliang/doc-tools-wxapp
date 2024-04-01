@@ -57,13 +57,7 @@ uploadChatMsgFile() {
       }
     })
 },
-serverUpload() {
-    console.log("serverUpload----")
-    
-}
-,
 onSelect(event) {
-  this.serverUpload();
   this.uploadChatMsgFile();
   console.log(event.detail);
 }

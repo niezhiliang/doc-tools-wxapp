@@ -4,3 +4,8 @@ page {
   display: flex;
   flex-direction: column;
 }
+
+/* 在页面的样式文件中 */
+/* .van-grid-item__icon {
+    font-size: 3rem !important
+} */

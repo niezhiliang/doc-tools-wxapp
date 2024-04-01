@@ -5,5 +5,5 @@
     <view>文件key：{{item.urlKey}}</view>
   </block>
 
-    <van-button icon="photo" type="primary" size="large" bind:click="onConvert">立即转换</van-button>
+    <van-button icon="photo" type="primary" size="large" bind:click="onConvert" class="footer">立即转换</van-button>
 </view>

@@ -1,6 +1,7 @@
 
 Page({
     data: {
+        iconSize:"80px"  // 设置图标大小
       },
       openShow(params) {
         wx.request({
