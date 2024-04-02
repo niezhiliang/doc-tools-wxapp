@@ -1,12 +1,47 @@
 /**index.wxss**/
-/* page {
+page {
   height: 100vh;
   display: flex;
   flex-direction: column;
-} */
+  background-color: #ADD8E6;
+  align-items:stretch;
+}
 
 .custom-grid-item .van-grid-item__text {
     font-size:0.8rem;
     font-weight: bolder;
     margin-top:2rem;
+   }
+/* 在 WXSS 文件中 */
+.grid-container {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin-top: 380rpx;
+    padding-top: 30rpx;
+    overflow:hidden;
+    background-color: white;
+    border-radius: 40rpx;
+    flex:1;/* 填充剩余的空间，将高度延伸至底部 */
+   }
+   .title {
+    font-family: Helvetica;
+    position:absolute;
+    top:200rpx;/* 距离顶部的距离 */
+    left:60rpx;/* 距离左侧的距离 */
+    color:#ffffff;/* 设置为白色字体 */
+    font-size:60rpx;/* 设置字体大小 */
+    opacity:0;/* 初始设置为透明 */
+    animation:fadeIn 1s forwards;/* 使用动画实现延时显示 */
+   }
+   
+   @keyframes fadeIn {
+    from {
+      opacity:0;
+    }
+    to {
+      opacity:1;
+    }
    }

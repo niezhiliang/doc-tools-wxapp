@@ -1,4 +1,6 @@
-<view>
+<view class="full-screen-container">
+    <view class="title">易用PDF转换</view>
+    <view class="grid-container">
     <van-grid gutter="8" column-num="4" icon-size="45" square="true">
         <van-grid-item
         key="0"
@@ -30,6 +32,44 @@
         url="/pages/upload/upload?type=4"
         icon="/imgs/excel.png"
         custom-class="custom-grid-item"/>
+        <van-grid-item
+        key="2"
+        text="图片转PDF"
+        url="/pages/upload/upload?type=2"
+        icon="/imgs/excel.png"
+        custom-class="custom-grid-item"/>
+        <van-grid-item
+        key="3"
+        text="Word转PDF"
+        url="/pages/upload/upload?type=3"
+        icon="/imgs/WORD.png"
+        custom-class="custom-grid-item"/>
+        <van-grid-item
+        key="3"
+        text="Excel转PDF"
+        url="/pages/upload/upload?type=4"
+        icon="/imgs/excel.png"
+        custom-class="custom-grid-item"/>
+        <van-grid-item
+        key="2"
+        text="图片转PDF"
+        url="/pages/upload/upload?type=2"
+        icon="/imgs/excel.png"
+        custom-class="custom-grid-item"/>
+        <van-grid-item
+        key="3"
+        text="Word转PDF"
+        url="/pages/upload/upload?type=3"
+        icon="/imgs/WORD.png"
+        custom-class="custom-grid-item"/>
+        <van-grid-item
+        key="3"
+        text="Excel转PDF"
+        url="/pages/upload/upload?type=4"
+        icon="/imgs/excel.png"
+        custom-class="custom-grid-item"/>
     </van-grid>
     
 </view>
+</view>
+

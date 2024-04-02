@@ -18,12 +18,8 @@ Page({
     responseData:[],
     show: false,
     actions: [
-      {
-        name: '微信聊天文件',
-      },
-      {
-        name: '本地文件',
-      }
+        { name:'微信聊天文件',value:0 },
+        { name:'本地文件',value: 1 }
     ],
   },
   onLoad(option) {
@@ -79,7 +75,24 @@ uploadChatMsgFile() {
     }
   })
 },
+chooseImage() {
+    wx.chooseImage({
+      success:(res) => {
+        const tempFilePath = res.tempFilePaths[0];
+        this.setData({
+          imagePath:tempFilePath
+        });
+      }
+    });
+  },
 onSelect(event) {
-  this.uploadChatMsgFile();
+    const { value } = event.detail;
+    // 微信聊天记录赛选文件
+    if (value == 0) {
+        this.uploadChatMsgFile();
+    } else if(value == 1) {
+        console.log('本地资源文件选择')
+        this.chooseImage();
+    }
 }
 })

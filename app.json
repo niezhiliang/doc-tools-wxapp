@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/index/index",
+   "pages/index/index",
     "pages/home/home",
     "pages/logs/logs",
     "pages/upload/upload",
@@ -10,8 +10,7 @@
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "文档转换助手",
-    "navigationBarBackgroundColor": "#ffffff",
-    "backgroundColor": "#85DB29"
+    "navigationBarBackgroundColor": "#ffffff"
   },
   "style": "v2",
   "componentFramework": "glass-easel",
