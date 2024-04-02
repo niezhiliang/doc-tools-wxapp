@@ -1,4 +1,7 @@
 // pages/view/view.js
+
+import Toast from '@vant/weapp/toast/toast';
+
 Page({
 
   /**
@@ -33,11 +36,13 @@ Page({
     Toast.loading({
       message: '文件转换中...',
       forbidClick: true,
+      // 持续展示 toast
+      duration: 0,     
     });
     console.log(this.data.fileList)
-          wx.navigateTo({
-            url: '/pages/result/result',
-          })
+    wx.navigateTo({
+      url: '/pages/result/result',
+    })
     // wx.request({
     //     url:'http://127.0.0.1:8080/doc/convert',
     //     method:'POST',
