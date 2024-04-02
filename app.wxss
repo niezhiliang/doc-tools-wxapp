@@ -1,4 +1,7 @@
 /**app.wxss**/
+page {
+  background-color: #f8f7fad8;
+}
 .container {
   height: 100%;
   display: flex;
@@ -22,4 +25,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.van-doc-card {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 12px #ebedf0;
+  margin-bottom: 24px;
+  padding: 24px;
 }

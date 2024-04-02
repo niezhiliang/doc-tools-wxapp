@@ -1,12 +1,14 @@
 <!-- 文件上传标题，提示用户使用的类型 -->
-<view>{{msg}}</view>
-
-<!-- 功能使用说明，就是让用户浏览从而增加广告时长 -->
-<van-panel title="标题" desc="描述信息" status="状态">
-  <block wx:for="{{tips}}" wx:key="tip" wx:for-item="tip" wx:for-index="i">
-    <view>{{tip}}</view>
+<view class="van-doc-content">
+  <view class="van-doc-card">
+    <view class="jie-shao-title">{{msg}}</view>
+<block wx:for="{{tips}}" wx:key="tip" wx:for-item="tip" wx:for-index="i">
+    <view class="jie-shao-front">{{tip}}</view>
   </block>
-</van-panel>
+</view>
+
+
+
  <!-- 打开弹框，让用户选择文件类型，也是增加广告时长 -->
 <van-button icon="photo" type="primary" size="large" bind:click="openShow" class="footer">文件上传</van-button>
 
@@ -16,3 +18,6 @@
   bind:close="onClose"
   bind:select="onSelect"
 />
+</view>
+
+
