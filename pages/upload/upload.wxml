@@ -1,4 +1,6 @@
 <!-- 文件上传标题，提示用户使用的类型 -->
+
+<view style="text-align: center;padding-top: 2rem; padding-bottom: 2rem;font-size: 1.5rem;">{{title}}</view>
 <view class="van-doc-content">
   <view class="van-doc-card">
     <view class="jie-shao-title">{{msg}}</view>

@@ -18,5 +18,7 @@ Page({
               }
           })
      },
+     onLoad(options) {
+    }
     
 })

@@ -2,6 +2,6 @@
 <text>转换结果：xxxxx</text><a>重命名</a>
 <view>记录仅保存24小时，请及时下载文件</view>
 
-<van-button type="primary" size="large" class="footer">下载文件并转发到微信，将在广告展示完成后下载</van-button>
+<van-button type="primary" size="large" class="footer"  bind:click="fileShare">下载文件并转发到微信，将在广告展示完成后下载</van-button>
 
 

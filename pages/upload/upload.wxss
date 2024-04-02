@@ -2,18 +2,20 @@
   flex: 1;
   padding: 0 0 75px;
   position: relative;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .jie-shao-title {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color:  #323233;
 }
 
 .jie-shao-front {
-  padding: 0.3rem;
+  padding: 0.5rem;
   color: #34495e;
   font-weight: normal;
-  font-size: 0.3rem;
+  font-size: 0.8rem;
 }

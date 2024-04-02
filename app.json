@@ -5,10 +5,11 @@
     "pages/upload/upload",
     "pages/view/view",
     "pages/result/result"
+
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "文档转换助手",
     "navigationBarBackgroundColor": "#ffffff"
   },
   "style": "v2",
@@ -19,6 +20,8 @@
     "van-button": "@vant/weapp/button/index",
     "van-grid": "@vant/weapp/grid/index",
     "van-grid-item": "@vant/weapp/grid-item/index",
-    "van-action-sheet": "@vant/weapp/action-sheet/index"
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-toast": "@vant/weapp/toast/index"
   }
 }

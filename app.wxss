@@ -29,8 +29,8 @@ page {
 
 .van-doc-card {
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 2rem;
   box-shadow: 0 8px 12px #ebedf0;
-  margin-bottom: 24px;
-  padding: 24px;
+  margin-bottom: 2rem;
+  padding: 1rem;
 }
