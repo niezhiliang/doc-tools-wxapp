@@ -5,22 +5,8 @@
   flex-direction: column;
 } */
 
-/* 在页面的样式文件中 */
-/* .van-grid-item__icon {
-    font-size: 3rem !important
-} */
-
-/* 图片样式 */
-.grid-image {
-  width: 100%;
-  height: 160px; /* 可以根据实际情况设置 */
-}
-
-/* 文本样式 */
-.grid-text {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  color: #333; /* 根据需求设置颜色 */
-  font-size: 14px; /* 设置你想要的字体大小 */
-}
+.custom-grid-item .van-grid-item__text {
+    font-size:0.8rem;
+    font-weight: bolder;
+    margin-top:2rem;
+   }

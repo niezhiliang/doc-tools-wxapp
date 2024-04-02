@@ -1,15 +1,17 @@
 {
   "pages": [
-    "pages/result/result",
     "pages/index/index",
+    "pages/home/home",
     "pages/logs/logs",
     "pages/upload/upload",
-    "pages/view/view"
+    "pages/view/view",
+    "pages/result/result"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "文档转换助手",
-    "navigationBarBackgroundColor": "#ffffff"
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#85DB29"
   },
   "style": "v2",
   "componentFramework": "glass-easel",

@@ -2,9 +2,7 @@
 
 
 <van-cell-group inset>
-  <text>转换结果：xxxxx</text><a>重命名</a>
-  <view>记录仅保存24小时，请及时下载文件</view>
-    </van-cell-group>
+</van-cell-group>
 
   <van-empty description="{{convertMsg}}">
   <van-button round type="primary" class="bottom-button"  bind:click="fileShare">下载并分享</van-button>

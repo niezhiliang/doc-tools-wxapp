@@ -1,0 +1,30 @@
+<view class="menu-container">
+ <van-grid
+   clickable
+   column-num="3"
+   border
+   custom-class="grid"
+   bind:click="onMenuClick"
+ >
+   <van-grid-item
+     key="1"
+     text="菜单1"
+     icon="/imgs/pdf.png"
+     icon-size="60"
+   >
+   </van-grid-item>
+   <van-grid-item
+     key="2"
+     text="菜单2"
+   >
+     <image src="https://picsum.photos/230?a=23" class="menu-image" mode="aspectFill" />
+   </van-grid-item>
+   <van-grid-item
+     key="3"
+     text="菜单3"
+   >
+     <image src="https://picsum.photos/230?a=24" class="menu-image" mode="aspectFill" />
+   </van-grid-item>
+   <!-- 其他菜单项 -->
+ </van-grid>
+</view>
