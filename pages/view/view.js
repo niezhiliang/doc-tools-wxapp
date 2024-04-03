@@ -1,6 +1,7 @@
 // pages/view/view.js
 
 import Toast from '@vant/weapp/toast/toast';
+const baseUrl = getApp().globalData.baseUrl;
 
 Page({
 
@@ -36,8 +37,9 @@ Page({
     // wx.navigateTo({
     //   url: '/pages/result/result',
     // })
+    const requestUrl = baseUrl + '/doc/convert';
     wx.request({
-        url:'http://127.0.0.1:8080/doc/convert',
+        url: requestUrl,
         method:'POST',
         header:{
           'content-type':'application/json'  // 设置请求头为json格式

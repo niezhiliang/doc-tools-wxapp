@@ -1,4 +1,6 @@
 // pages/upload/upload.js
+const baseUrl = getApp().globalData.baseUrl;
+
 Page({
 
   /**
@@ -28,7 +30,8 @@ Page({
       })
     this.setData({
         // 设置转换的类型
-        docType: option.type
+        docType: option.type,
+        title: option.title
     })
     if (option.type == 2) {
         this.setData({
@@ -38,7 +41,12 @@ Page({
   },
   openShow(params) {
     console.log(params);
-  this.setData({ show: true });
+    // 图片转pdf直接打开相册
+    if (this.data.docType == 2) {
+        this.chooseImage();
+    } else {
+      this.setData({ show: true });
+    }
 },
 onClose() {
   this.setData({ show: false });
@@ -52,26 +60,25 @@ uploadChatMsgFile() {
     extension:['png','.xlsx'],
     success (res) {
       const tempFilePath = res.tempFiles[0].path
-      // 文件后缀名
-      const type = res.tempFiles[0].type
-      console.log(tempFilePath, "tempFilePaths")
-    //   wx.navigateTo({
-    //     url: '/pages/view/view',
-    //   })
-        wx.uploadFile({
-        url: 'http://localhost:8080/doc/upload',
-        filePath: tempFilePath,
-        name: 'file',
-        success:function (res) {
-            wx.navigateTo({
-            url: '/pages/view/view?data=' + res.data + '&type=' + convType
-            })
-            // 上传成功后的处理逻辑
-        },
-        fail(err) {
-            console.log(err);
-        }
-        })
+      console.log(tempFilePath, "tempFilePaths")      
+      wx.navigateTo({
+        url: '/pages/view/view',
+      })
+      const requestUrl = baseUrl + '/doc/upload';
+      // wx.uploadFile({
+      //   url: requestUrl,
+      //   filePath: tempFilePath,
+      //   name: 'file',
+      //   success:function (res) {
+      //       wx.navigateTo({
+      //       url: '/pages/view/view?data=' + res.data + '&type=' + convType
+      //       })
+      //       // 上传成功后的处理逻辑
+      // },
+      // fail(err) {
+      //     console.log(err);
+      // }
+      // })
     }
   })
 },
@@ -82,6 +89,23 @@ chooseImage() {
         this.setData({
           imagePath:tempFilePath
         });
+      // wx.uploadFile({
+      //   url: 'http://localhost:8080/doc/upload',
+      //   filePath: tempFilePath,
+      //   name: 'file',
+      //   success:function (res) {
+      //       wx.navigateTo({
+      //       url: '/pages/imgview/imgview?data=' + res.data + '&type=' + convType
+      //       })
+      //       // 上传成功后的处理逻辑
+      // },
+      // fail(err) {
+      //     console.log(err);
+      // }
+      // })
+        wx.navigateTo({
+          url: '/pages/imgview/imgview',
+        })
       }
     });
   },

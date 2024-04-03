@@ -14,6 +14,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    baseUrl: 'http://localhost:8080' // 后端请求地址的常量
   }
 })

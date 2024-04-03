@@ -1,12 +1,8 @@
 <view>
     文件详情
-    <!-- <block wx:for="{{fileList}}" wx:key="item" wx:for-item="item" wx:for-index="i">
-      <view>文件地址：{{item.url}}</view>
-      <view>文件key：{{item.urlKey}}</view>
-    </block> -->
 
-     <van-uploader file-list="{{ fileList }}" deletable="{{ true }}" preview-size="120" max-count="9"/>
+    <view data-url="这是文档下载地址" data-type="pdf" catchtap='downloadFile'></view>
 
-    <van-button icon="photo" type="primary" size="large" bind:click="onConvert" class="footer">立即转换</van-button>
+    <van-button  type="primary" size="large" bind:click="onConvert" class="footer">立即转换</van-button>
     <van-toast id="van-toast" />
 </view>
