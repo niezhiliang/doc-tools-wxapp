@@ -10,7 +10,7 @@ Page({
    */
   data: {
     convType: 0,
-    fileList: {},
+    fileList: [],
     loadStatus: false
   },
 
@@ -18,15 +18,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    // let obj = JSON.parse(options.data)
-    // console.log(obj.data);
-    // this.setData({
-    // //   fileList: this.data.fileList.concat(obj.data),
-    //   fileList: obj.data,
-    //   convType: options.type
-    // });
-    this.downloadFile();
-    // console.log(this.data)
+    let obj = JSON.parse(options.data)
+    console.log(obj.data);
+    this.setData({
+      fileList: this.data.fileList.concat(obj.data),
+      convType: options.type
+    });
+    // this.downloadFile();
   },
   onConvert() {
     Toast.loading({
