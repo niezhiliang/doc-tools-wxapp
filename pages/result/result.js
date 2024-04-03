@@ -6,7 +6,7 @@ Page({
    */
   data: {
     url: "https://img.yzcdn.cn/vant/leaf.jpg",
-    convertMsg:"如果需要转发到微信，将在广告展示完成转发功能"
+    convertMsg:"如需转发到微信，将在广告展示完成后转发"
   },
 
   /**
