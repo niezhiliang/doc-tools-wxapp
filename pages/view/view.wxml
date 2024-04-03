@@ -3,6 +3,7 @@
 
     <view data-url="这是文档下载地址" data-type="pdf" catchtap='downloadFile'></view>
 
-    <van-button  type="primary" size="large" bind:click="onConvert" class="footer">立即转换</van-button>
+    <van-button loading="{{loadStatus}}"  type="primary" size="large" bind:click="onConvert"
+     class="footer" loading-text="文件转换中....">立即转换</van-button>
     <van-toast id="van-toast" />
 </view>

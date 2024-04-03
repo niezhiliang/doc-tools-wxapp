@@ -4,11 +4,11 @@
 <van-cell-group inset>
 </van-cell-group>
 
-  <van-empty image="/imgs/success.png" description="转化成功">
-  <view style="text-align: center;margin-top: -20rpx;">
-    <view style="padding: 20rpx;">{{convertMsg}}</view>
-  <van-button round type="primary" class="bottom-button"  bind:click="fileShare">转发到微信</van-button>
-  </view>
+  <van-empty image="/imgs/success1.png" description="转换成功" style="width: 200rpx; height: 200rpx;">
+    <view style="text-align: center;margin-top: -20rpx;">
+      <view style="padding: 20rpx;">{{convertMsg}}</view>
+      <van-button round type="primary" class="bottom-button"  bind:click="fileShare">转发到微信</van-button>
+    </view>
 </van-empty>
 
 

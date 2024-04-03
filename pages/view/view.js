@@ -10,8 +10,8 @@ Page({
    */
   data: {
     convType: 0,
-    fileList: [
-  ]
+    fileList: [],
+    loadStatus: false
   },
 
   /**
@@ -51,6 +51,7 @@ Page({
         },
         success:function (res) {
           console.log(res.data)  // 请求成功，处理返回的数据
+          Toast.clear();
           var response = JSON.stringify(res.data);
           wx.navigateTo({
             url: '/pages/result/result?url=' + response,
@@ -58,6 +59,7 @@ Page({
         },
         fail:function (error) {
           console.log(error)  // 请求失败处理
+          Toast.fail('转换失败')
         }
        })
   }

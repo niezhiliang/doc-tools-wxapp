@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/view/view",
+    "pages/result/result",
     "pages/index/index",
+    "pages/view/view",
     "pages/imgview/imgview",
     "pages/home/home",
-    "pages/upload/upload",
-    "pages/result/result"
+    "pages/upload/upload"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -28,6 +28,7 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-empty": "@vant/weapp/empty/index",
     "van-row": "@vant/weapp/row/index",
-    "van-col": "@vant/weapp/col/index"
+    "van-col": "@vant/weapp/col/index",
+    "van-notify": "@vant/weapp/notify/index"
   }
 }

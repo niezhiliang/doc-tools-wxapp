@@ -50,6 +50,7 @@ Page({
           },
           fail(err) {
               console.log(err);
+              Toast.fail('文件上传失败')
           }
           })
         }
@@ -66,7 +67,7 @@ Page({
   },
   onConvert() {
     Toast.loading({
-      message: '文件转换中...',
+      message: '图片转换中...',
       forbidClick: true,
       // 持续展示 toast
       duration: 0,     
@@ -75,27 +76,29 @@ Page({
     wx.navigateTo({
       url: '/pages/result/result',
     })
-    // wx.request({
-    //     url:'http://127.0.0.1:8080/doc/convert',
-    //     method:'POST',
-    //     header:{
-    //       'content-type':'application/json'  // 设置请求头为json格式
-    //     },
-    //     data:{
-    //       pathKeys: this.data.fileList.map(item => item.urlKey),
-    //       type: this.data.convType
-    //       // 添加更多需要发送的数据
-    //     },
-    //     success:function (res) {
-    //       console.log(res.data)  // 请求成功，处理返回的数据
-    //       var response = JSON.stringify(res.data);
-    //       wx.navigateTo({
-    //         url: '/pages/result/result?url=' + response,
-    //       })
-    //     },
-    //     fail:function (error) {
-    //       console.log(error)  // 请求失败处理
-    //     }
-    // })
+    const reqUrl = baseUrl + '/doc/convert'
+    wx.request({
+        url: reqUrl,
+        method:'POST',
+        header:{
+          'content-type':'application/json'
+        },
+        data:{
+          pathKeys: this.data.fileList.map(item => item.urlKey),
+          type: this.data.convType
+        },
+        success:function (res) {
+          console.log(res.data)  // 请求成功，处理返回的数据
+          var response = JSON.stringify(res.data);
+          Toast.clear();
+          wx.navigateTo({
+            url: '/pages/result/result?url=' + response,
+          })
+        },
+        fail:function (error) {
+          console.log(error)  // 请求失败处理
+          Toast.fail('图片转换失败');
+        }
+    })
   }
 })

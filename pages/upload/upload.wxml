@@ -12,9 +12,9 @@
 
  <!-- 打开弹框，让用户选择文件类型，也是增加广告时长 -->
     <view class="footer">
-        <van-button icon="photo" type="primary" bind:click="openShow" class="footer ">选择文件</van-button>
+        <van-button type="primary" bind:click="openShow" class="footer"
+        loading="{{loadStatus}}"  loading-text="上传中...">选择文件</van-button>
     </view>
-
 
     <van-action-sheet
     show="{{ show }}"
@@ -22,6 +22,7 @@
     bind:close="onClose"
     bind:select="onSelect"
     />
+    <van-toast id="van-toast" />
 </view>
 
 

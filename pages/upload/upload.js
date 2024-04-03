@@ -1,5 +1,6 @@
 // pages/upload/upload.js
 const baseUrl = getApp().globalData.baseUrl;
+import Toast from '@vant/weapp/toast/toast';
 
 Page({
 
@@ -23,6 +24,7 @@ Page({
         { name:'微信聊天文件',value:0 },
         { name:'本地文件',value: 1 }
     ],
+    loadStatus: false
   },
   onLoad(option) {
     wx.setNavigationBarTitle({
@@ -41,7 +43,6 @@ Page({
   },
   openShow(params) {
     console.log(params);
-    // 图片转pdf直接打开相册
     if (this.data.docType == 2) {
         this.chooseImage();
     } else {
@@ -61,24 +62,24 @@ uploadChatMsgFile() {
     success (res) {
       const tempFilePath = res.tempFiles[0].path
       console.log(tempFilePath, "tempFilePaths")      
-      wx.navigateTo({
-        url: '/pages/view/view',
-      })
       const requestUrl = baseUrl + '/doc/upload';
-      // wx.uploadFile({
-      //   url: requestUrl,
-      //   filePath: tempFilePath,
-      //   name: 'file',
-      //   success:function (res) {
-      //       wx.navigateTo({
-      //       url: '/pages/view/view?data=' + res.data + '&type=' + convType
-      //       })
-      //       // 上传成功后的处理逻辑
-      // },
-      // fail(err) {
-      //     console.log(err);
-      // }
-      // })
+      wx.uploadFile({
+        url: requestUrl,
+        filePath: tempFilePath,
+        name: 'file',
+        success:function (res) {
+            wx.navigateTo({
+            url: '/pages/view/view?data=' + res.data + '&type=' + convType
+            })
+            // 上传成功后的处理逻辑
+      },
+      fail(err) {
+        Toast.fail('文件上传失败');
+        wx.navigateTo({
+          url: '/pages/view/view',
+        })
+      }
+      })
     }
   })
 },
@@ -118,5 +119,8 @@ onSelect(event) {
         console.log('本地资源文件选择')
         this.chooseImage();
     }
+    this.setData({
+      loadStatus: false
+    })
 }
 })
