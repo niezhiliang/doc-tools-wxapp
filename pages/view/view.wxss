@@ -1,1 +1,3 @@
-/* pages/view/view.wxss */
+.custom-button {
+    width:70% !important; /* 自定义按钮宽度 */
+ }

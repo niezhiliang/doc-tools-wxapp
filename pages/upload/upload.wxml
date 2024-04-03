@@ -12,8 +12,12 @@
 
  <!-- 打开弹框，让用户选择文件类型，也是增加广告时长 -->
     <view class="footer">
-        <van-button type="primary" bind:click="openShow" class="footer"
-        loading="{{loadStatus}}"  loading-text="上传中...">选择文件</van-button>
+        <van-button type="primary" 
+        class="footer"
+        bind:click="openShow" 
+        loading="{{loadStatus}}"
+        custom-class="custom-button"
+        loading-text="上传中...">选择文件</van-button>
     </view>
 
     <van-action-sheet

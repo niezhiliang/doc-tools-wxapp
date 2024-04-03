@@ -45,3 +45,15 @@ page {
       opacity:1;
     }
    }
+
+   /* .custom-grid-item .van-grid-item__content {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+ } */
+ 
+ .custom-grid-item .van-grid-item__text {
+    margin-top:30rpx !important;
+    font-size: 25rpx;
+ }

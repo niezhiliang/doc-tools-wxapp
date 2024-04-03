@@ -1,7 +1,48 @@
 /* pages/result/result.wxss */
 
-
-.bottom-button {
-  width: 10rem;
-  height: 5rem;
+.custom-empty{
+    margin-top: 50rpx !important;
 }
+.custom-empty .van-empty__image {
+    width:80px;/* 例如100px */
+    height:80px;/* 例如100px */
+}
+
+.custom-empty .van-empty__description {
+    color:black;
+    font-size:40rpx;
+}
+
+.custom-empty .van-empty__description {
+    color:black;
+    font-size:20px;
+   }
+   
+.button-container {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin-top: -20rpx;
+}
+
+.button-group {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin-top: 100rpx;
+   }
+   
+   .preview-button,.bottom-button {
+      margin-bottom:15px;
+   }
+
+.convertMsg {
+    font-size:28rpx;  /* 设置字体大小为16像素 */
+    color:#969799;     /* 设置字体颜色为黑色 */
+    white-space:pre-wrap;/* 处理换行 */
+    text-align:center; /* 居中对齐 */
+    width: 55%;
+    margin-top: 10rpx;
+   }

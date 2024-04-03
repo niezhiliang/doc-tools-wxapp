@@ -48,3 +48,7 @@
   width: 44rpx;
   height: 44rpx;
 }
+.custom-button {
+    width:70% !important; /* 自定义按钮宽度 */
+ }
+

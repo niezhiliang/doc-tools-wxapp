@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/result/result",
+
     "pages/index/index",
     "pages/view/view",
     "pages/imgview/imgview",
