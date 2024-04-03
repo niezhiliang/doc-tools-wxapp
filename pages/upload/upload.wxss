@@ -19,3 +19,7 @@
   font-weight: normal;
   font-size: 1rem;
 }
+
+.custom-button {
+    width:70% !important; /* 自定义按钮宽度 */
+ }

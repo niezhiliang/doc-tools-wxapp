@@ -13,6 +13,9 @@
 </movable-area>
 
 <view class="footer">
-    <van-button type="primary" bind:click="onConvert" class="footer ">图片生成PDF</van-button>
+    <van-button type="primary"
+     bind:click="onConvert" 
+     custom-class="custom-button"
+     class="footer ">图片生成PDF</van-button>
 </view>
 <van-toast id="van-toast" />

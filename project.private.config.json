@@ -3,6 +3,7 @@
   "projectname": "doc-tools-wxapp",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": false
+    "urlCheck": false,
+    "bigPackageSizeSupport": true
   }
 }
