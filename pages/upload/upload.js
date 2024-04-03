@@ -58,7 +58,6 @@ uploadChatMsgFile() {
   wx.chooseMessageFile({
     count: 1,
     type: this.data.fileType,
-    extension:['png','.xlsx'],
     success (res) {
       const tempFilePath = res.tempFiles[0].path
       console.log(tempFilePath, "tempFilePaths")      

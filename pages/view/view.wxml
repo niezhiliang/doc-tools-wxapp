@@ -1,9 +1,14 @@
 <view>
-    文件详情
+        <view class="container">
+            <pdf-viewer src="http://159.75.95.172:8080/20240403/202404031947583925.pdf" />
+        </view>
 
-    <view data-url="这是文档下载地址" data-type="pdf" catchtap='downloadFile'></view>
-
-    <van-button loading="{{loadStatus}}"  type="primary" size="large" bind:click="onConvert"
-     class="footer" loading-text="文件转换中....">立即转换</van-button>
+    <van-button loading="{{loadStatus}}"
+      type="primary"
+      size="large" 
+      bind:click="onConvert"
+      class="footer"
+      custom-class="custom-button"
+      loading-text="文件转换中....">立即转换</van-button>
     <van-toast id="van-toast" />
 </view>
