@@ -3,12 +3,12 @@ const baseUrl = getApp().globalData.baseUrl;
 import Toast from '@vant/weapp/toast/toast';
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     appInfo:{
+        id: 1,
         title: "APP标题",
         supportType: '',
         maxSize: 5,
@@ -30,13 +30,8 @@ Page({
     wx.setNavigationBarTitle({
         title: '文件上传',
       })
-    this.getAppInfo(option.type);
-    this.getAppPrompt(option.type);
-    if (option.type == 2) {
-        this.setData({
-            fileType: "image"
-        })
-    }
+    this.getAppInfo(option.appId);
+    this.getAppPrompt(option.appId);
   },
   openShow(params) {
     console.log(params);
@@ -50,38 +45,34 @@ onClose() {
   this.setData({ show: false });
 },
 uploadChatMsgFile() {
-  const convType = this.data.docType
-  console.log("选择聊天文件" + convType)
+  const appId = this.data.appInfo.id;
+  console.log("选择聊天文件" + appId)
   const type = this.data.fileTypeArray[this.data.appInfo.fileType];
   // TODO 文件类型排除
   wx.chooseMessageFile({
     count: 1,
     type: type,
+    // extension:['xlsx','.xlsx'],
     success (res) {
-      const tempFilePath = res.tempFiles[0].path
-      console.log(tempFilePath, "tempFilePaths")      
+      const tempFilePath = res.tempFiles[0].path   
       const requestUrl = baseUrl + '/doc/upload';
       wx.uploadFile({
         url: requestUrl,
         filePath: tempFilePath,
         name: 'file',
         success:function (res) {
+            let toPage = '/pages/view/view?data=';
             if (type === 'image') {
-                wx.navigateTo({
-                    url: '/pages/imgview/imgview?data=' + res.data
-                })
-            } else {
-                wx.navigateTo({
-                    url: '/pages/view/view?data=' + res.data + '&type=' + convType
-                })
+                toPage = '/pages/imgview/imgview?data=';
             }
+            wx.navigateTo({
+                url: toPage + res.data + '&appId=' + appId
+            })
             // 上传成功后的处理逻辑
       },
       fail(err) {
+          console.log(err.detail)
         Toast.fail('文件上传失败');
-        wx.navigateTo({
-          url: '/pages/view/view',
-        })
       }
       })
     }

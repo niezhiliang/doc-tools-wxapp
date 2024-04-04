@@ -10,11 +10,15 @@
 </van-empty>
 
 <view class="button-group">
-    <van-button type="default" class="preview-button"
-     bind:click="preview">预览</van-button>
+    <van-button type="default" 
+     class="preview-button"
+     bind:click="preView">预览</van-button>
      <van-button type="primary" 
-     class="bottom-button" bind:click="fileShare">转发到微信</van-button>
+     color="#BE99FF"
+     class="bottom-button"
+     bind:click="fileShare">转发到微信</van-button>
    </view>
+   <van-toast id="van-toast" />
 
 
 

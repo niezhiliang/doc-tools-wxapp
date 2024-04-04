@@ -1,5 +1,5 @@
 <view class="full-screen-container">
-    <view class="title">易用PDF转换</view>
+    <view class="title">PDF转换助手</view>
     <view class="grid-container">
         <view  wx:for="{{appList}}" wx:for-item="appGroup">
             <view class="app-group">{{appGroup.groupName}}</view>
@@ -8,7 +8,7 @@
                 wx:for="{{appGroup.appList}}" wx:for-item="app"
                 key="{{app.id}}"
                 text="{{app.appName}}"
-                url="{{app.appUrl + '?type=' + app.id}}"
+                url="{{app.appUrl + '?appId=' + app.id}}"
                 icon="{{app.appIcon}}"
                 custom-class="custom-grid-item"/>
             </van-grid>

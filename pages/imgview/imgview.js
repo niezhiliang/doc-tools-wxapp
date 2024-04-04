@@ -9,18 +9,13 @@ Page({
     defaultX: 0,
     defaultY: 0,
     moveIng: false,
-    picList: [],
-    picObjList: [
-      {url:'',urlKey: '',tempPath: ''}
-    ]
+    picObjList: []
   },
   onLoad(options){
     let obj = JSON.parse(options.data)
-    console.log('viewimages' + obj.data);
     this.setData({
         picObjList: this.data.picObjList.concat(obj.data),
-        picList: this.data.picList.concat(obj.data.url),
-      });
+    });
   },
   // 显示底层可移动模块
   showMoveBlock(e){
@@ -30,21 +25,19 @@ Page({
     })
   },
   deleteImg(e){
-
     const i = e.currentTarget.dataset.index
-    console.log("删除图片" + i)
-    const picList = this.data.picList;
-    picList.splice(i,1);
+    const picObjList = this.data.picObjList;
+    picObjList.splice(i,1);
     this.setData({
-      picList: picList
+        picObjList: picObjList
     })
   },
   // 预览图片
   previewImg(e){
     const i = e.currentTarget.dataset.index
     wx.previewImage({
-      current: this.data.picList[i], // 当前显示图片的 http 链接
-      urls: this.data.picList // 需要预览的图片 http 链接列表
+      current: this.data.picObjList[i].url, // 当前显示图片的 http 链接
+      urls: this.data.picObjList.map(item => item.url) // 需要预览的图片 http 链接列表
     })
   },
   onUpload() {
@@ -62,8 +55,7 @@ Page({
                 let obj = JSON.parse(res.data)
                 that.setData({
                     picObjList: that.data.picObjList.concat(obj.data),
-                    picList: that.data.picList.concat(obj.data.url),
-                  });
+                });
             },
             fail(err) {
                 console.log(err);
@@ -99,8 +91,8 @@ Page({
           console.log(res.data)  // 请求成功，处理返回的数据
           var response = JSON.stringify(res.data);
           Toast.clear();
-          wx.navigateTo({
-            url: '/pages/result/result?url=' + response,
+          wx.reLaunch({
+            url: '/pages/result/result?isImg=true&respData=' + response,
           })
         },
         fail:function (error) {
