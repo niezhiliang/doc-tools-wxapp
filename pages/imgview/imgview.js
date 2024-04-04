@@ -9,10 +9,18 @@ Page({
     defaultX: 0,
     defaultY: 0,
     moveIng: false,
-    picList: ['https://picsum.photos/200?a=1','https://picsum.photos/200?a=2','https://picsum.photos/200?a=3','https://picsum.photos/200?a=4','/imgs/add.png'],
+    picList: [],
     picObjList: [
       {url:'',urlKey: '',tempPath: ''}
     ]
+  },
+  onLoad(options){
+    let obj = JSON.parse(options.data)
+    console.log('viewimages' + obj.data);
+    this.setData({
+        picObjList: this.data.picObjList.concat(obj.data),
+        picList: this.data.picList.concat(obj.data.url),
+      });
   },
   // 显示底层可移动模块
   showMoveBlock(e){
@@ -33,36 +41,36 @@ Page({
   },
   // 预览图片
   previewImg(e){
-    console.log('图片预览')
-    const indexs = e.currentTarget.dataset.index
-    if (indexs === this.data.picList.length -1) {
-      const requestUrl = baseUrl + '/doc/upload';
-      wx.chooseImage({
+    const i = e.currentTarget.dataset.index
+    wx.previewImage({
+      current: this.data.picList[i], // 当前显示图片的 http 链接
+      urls: this.data.picList // 需要预览的图片 http 链接列表
+    })
+  },
+  onUpload() {
+    const requestUrl = baseUrl + '/doc/upload';
+    wx.chooseImage({
         count: 1,
         success:(res) => {
-          const tempFilePath = res.tempFiles[0].path
-          wx.uploadFile({
+        const tempFilePath = res.tempFiles[0].path
+        const that = this;
+        wx.uploadFile({
             url: requestUrl,
             filePath: tempFilePath,
             name: 'file',
             success:function (res) {
-               console.log(res.data);
-          },
-          fail(err) {
-              console.log(err);
-              Toast.fail('文件上传失败')
-          }
-          })
+                let obj = JSON.parse(res.data)
+                that.setData({
+                    picObjList: that.data.picObjList.concat(obj.data),
+                    picList: that.data.picList.concat(obj.data.url),
+                  });
+            },
+            fail(err) {
+                console.log(err);
+                Toast.fail('服务网络异常')
+            }
+        })
         }
-      })
-    }
-    let urlList = []
-    this.data.picList.forEach((item)=>{
-      urlList.push(item.tempFilePath)
-    })
-    wx.previewImage({
-      current: this.data.picList[0], // 当前显示图片的 http 链接
-      urls: urlList // 需要预览的图片 http 链接列表
     })
   },
   onConvert() {

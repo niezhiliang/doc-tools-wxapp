@@ -21,5 +21,6 @@
 }
 
 .custom-button {
-    width:70% !important; /* 自定义按钮宽度 */
+    width:80% !important; /* 自定义按钮宽度 */
+    border-radius:10rpx !important;
  }

@@ -8,16 +8,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: "PDF转图片",
+    appInfo:{
+        title: "APP标题",
+        supportType: '',
+        maxSize: 5,
+        fileType: 2,
+    },
+    fileTypeArray:['file','all','file','image','video'],
+    appPrompt:[],
     msg: "功能说明",
-    docType: 0,
-    fileType: "file",
-    supportType:[".png,"],
-    tips:[
-        "1. 水电费水电费是东闪，电水电费水电哈哈哈。",
-        "2. 水电费水电费是东方闪电水电费水电费是。",
-        "3. 水电费水电费是东方闪电，水电费水电费是。",
-    ],
+    supportType:[".png"],
     responseData:[],
     show: false,
     actions: [
@@ -30,11 +30,8 @@ Page({
     wx.setNavigationBarTitle({
         title: '文件上传',
       })
-    this.setData({
-        // 设置转换的类型
-        docType: option.type,
-        title: option.title
-    })
+    this.getAppInfo(option.type);
+    this.getAppPrompt(option.type);
     if (option.type == 2) {
         this.setData({
             fileType: "image"
@@ -55,9 +52,11 @@ onClose() {
 uploadChatMsgFile() {
   const convType = this.data.docType
   console.log("选择聊天文件" + convType)
+  const type = this.data.fileTypeArray[this.data.appInfo.fileType];
+  // TODO 文件类型排除
   wx.chooseMessageFile({
     count: 1,
-    type: this.data.fileType,
+    type: type,
     success (res) {
       const tempFilePath = res.tempFiles[0].path
       console.log(tempFilePath, "tempFilePaths")      
@@ -67,9 +66,15 @@ uploadChatMsgFile() {
         filePath: tempFilePath,
         name: 'file',
         success:function (res) {
-            wx.navigateTo({
-            url: '/pages/view/view?data=' + res.data + '&type=' + convType
-            })
+            if (type === 'image') {
+                wx.navigateTo({
+                    url: '/pages/imgview/imgview?data=' + res.data
+                })
+            } else {
+                wx.navigateTo({
+                    url: '/pages/view/view?data=' + res.data + '&type=' + convType
+                })
+            }
             // 上传成功后的处理逻辑
       },
       fail(err) {
@@ -82,44 +87,85 @@ uploadChatMsgFile() {
     }
   })
 },
-chooseImage() {
-    wx.chooseImage({
-      success:(res) => {
-        const tempFilePath = res.tempFilePaths[0];
-        this.setData({
-          imagePath:tempFilePath
-        });
-      // wx.uploadFile({
-      //   url: 'http://localhost:8080/doc/upload',
-      //   filePath: tempFilePath,
-      //   name: 'file',
-      //   success:function (res) {
-      //       wx.navigateTo({
-      //       url: '/pages/imgview/imgview?data=' + res.data + '&type=' + convType
-      //       })
-      //       // 上传成功后的处理逻辑
-      // },
-      // fail(err) {
-      //     console.log(err);
-      // }
-      // })
-        wx.navigateTo({
-          url: '/pages/imgview/imgview',
-        })
-      }
-    });
-  },
+// chooseImage() {
+//     wx.chooseImage({
+//       success:(res) => {
+//         const tempFilePath = res.tempFilePaths[0];
+//         this.setData({
+//           imagePath:tempFilePath
+//         });
+//       // wx.uploadFile({
+//       //   url: 'http://localhost:8080/doc/upload',
+//       //   filePath: tempFilePath,
+//       //   name: 'file',
+//       //   success:function (res) {
+//       //       wx.navigateTo({
+//       //       url: '/pages/imgview/imgview?data=' + res.data + '&type=' + convType
+//       //       })
+//       //       // 上传成功后的处理逻辑
+//       // },
+//       // fail(err) {
+//       //     console.log(err);
+//       // }
+//       // })
+//         wx.navigateTo({
+//           url: '/pages/imgview/imgview',
+//         })
+//       }
+//     });
+//   },
 onSelect(event) {
     const { value } = event.detail;
     // 微信聊天记录赛选文件
     if (value == 0) {
         this.uploadChatMsgFile();
     } else if(value == 1) {
-        console.log('本地资源文件选择')
-        this.chooseImage();
+        // TODO 打开本地资源路径
+        this.uploadChatMsgFile();
+        // this.chooseImage();
     }
     this.setData({
       loadStatus: false
+    })
+},
+getAppInfo(appId) {
+    const that = this;
+    const reqUrl = baseUrl + '/app/getById?appId=' + appId;
+    wx.request({
+        url: reqUrl,
+        method:'GET',
+        success:function (res) {
+            if (res.data.code === 'SUCCESS') {
+                that.setData({
+                    appInfo: res.data.data
+                })
+            } else {
+                Toast.fail('功能列表获取失败');
+            }
+        },
+        fail:function (error) {
+          Toast.fail('服务网络异常');
+        }
+    })
+},
+getAppPrompt(appId) {
+    const that = this;
+    const reqUrl = baseUrl + '/app/getAppPrompt?appId=' + appId;
+    wx.request({
+        url: reqUrl,
+        method:'GET',
+        success:function (res) {
+            if (res.data.code === 'SUCCESS') {
+                that.setData({
+                    appPrompt: res.data.data.promptList
+                })
+            } else {
+                Toast.fail('功能列表获取失败');
+            }
+        },
+        fail:function (error) {
+          Toast.fail('服务网络异常');
+        }
     })
 }
 })

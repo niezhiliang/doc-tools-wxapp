@@ -3,8 +3,8 @@
 
         <view class="picRelative" wx:for="{{picList}}" wx:key="p" wx:for-item="pic" wx:for-index="">
             <image class="dynamicImg" src="{{pic}}" mode="aspectFill" lazy-load="false" binderror="" bindload=""></image>
-            <image class="deleteImg" wx:if="{{index !== picList.length - 1}}" bindtap="deleteImg" src="/imgs/delete.png" mode="scaleToFill" lazy-load="false" binderror="" bindload="" data-index="{{index}}" />
-            <!-- <van-image round mode="scaleToFill" src="/imgs/delete.png" custom-class="deleteImg" data-index="{{index}}"/> -->
+            <!-- <image class="deleteImg" wx:if="{{index !== picList.length - 1}}" bindtap="deleteImg" src="/imgs/delete.png" mode="scaleToFill" lazy-load="false" binderror="" bindload="" data-index="{{index}}" /> -->
+            <image class="deleteImg" wx:if="{{0 !== picList.length}}" bindtap="deleteImg" src="/imgs/delete.png" mode="scaleToFill" lazy-load="false" binderror="" bindload="" data-index="{{index}}" />
             <movable-view wx:if="{{!moveIng}}" class="areaMove" bindchange="bindchange" direction="all" damping="30" x="{{defaultX}}" y="{{defaultY}}" disabled="{{currentTouchIndex === index ? false : true}}" style="z-index: {{currentTouchIndex === index ? '3' : '1'}}">
                 <image class="{{currentTouchIndex === index ? 'areaImg' : ''}}" bindtap="previewImg" data-index="{{index}}" src="{{item.tempFilePath}}" mode="aspectFill" lazy-load="false" binderror="" bindload="" />
             </movable-view>
@@ -12,10 +12,22 @@
     </view>
 </movable-area>
 
-<view class="footer">
+<view>
+    <van-button 
+    bind:click="onUpload"
+    class="footer"
+    style="margin-bottom: 200rpx !important;"
+    custom-class="custom-button">添加图片</van-button>
     <van-button type="primary"
      bind:click="onConvert" 
      custom-class="custom-button"
-     class="footer ">图片生成PDF</van-button>
+     class="footer">图片生成PDF</van-button>
 </view>
+
+<!-- <view class="button-group">
+ <van-button type="primary" bind:click="onConvert" custom-class="custom-button">图片生成PDF</van-button>
+ <van-button type="primary" bind:click="onAnotherAction" custom-class="custom-button">另一个按钮</van-button>
+</view> -->
+
+
 <van-toast id="van-toast" />

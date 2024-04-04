@@ -1,15 +1,12 @@
 <!-- 文件上传标题，提示用户使用的类型 -->
-<view style="text-align: center;padding-top: 2rem; padding-bottom: 2rem;font-size: 1.5rem;">{{title}}</view>
+<view style="text-align: center;padding-top: 2rem; padding-bottom: 2rem;font-size: 1.5rem;">{{appInfo.appName}}</view>
 <view class="van-doc-content">
     <view class="van-doc-card">
     <view class="jie-shao-title">{{msg}}</view>
-    <block wx:for="{{tips}}" wx:key="tip" wx:for-item="tip" wx:for-index="i">
+    <block wx:for="{{appPrompt}}" wx:key="tip" wx:for-item="tip" wx:for-index="i">
         <view class="jie-shao-front">{{tip}}</view>
     </block>
 </view>
-
-
-
  <!-- 打开弹框，让用户选择文件类型，也是增加广告时长 -->
     <view class="footer">
         <van-button type="primary" 
@@ -19,7 +16,7 @@
         custom-class="custom-button"
         loading-text="上传中...">选择文件</van-button>
     </view>
-
+    
     <van-action-sheet
     show="{{ show }}"
     actions="{{ actions }}"
