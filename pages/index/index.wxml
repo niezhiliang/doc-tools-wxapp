@@ -1,39 +1,18 @@
 <view class="full-screen-container">
     <view class="title">易用PDF转换</view>
     <view class="grid-container">
-    <van-grid gutter="8" column-num="4" icon-size="45" square="true">
-        <van-grid-item
-        key="0"
-        text="PDF转图片"
-        url="/pages/upload/upload?type=0&title=PDF转图片"
-        icon="/imgs/pdf.png"
-        custom-class="custom-grid-item"/>
-        <van-grid-item
-        key="1"
-        text="PDF转Word"
-        url="/pages/upload/upload?type=1&title=PDF转Word"
-        icon="/imgs/img.png"
-        custom-class="custom-grid-item"/>
-        <van-grid-item
-        key="2"
-        text="图片转PDF"
-        url="/pages/upload/upload?type=2&title=图片转PDF"
-        icon="/imgs/img.png"
-        custom-class="custom-grid-item"/>
-        <van-grid-item
-        key="3"
-        text="Word转PDF"
-        url="/pages/upload/upload?type=3&title=Word转PDF"
-        icon="/imgs/WORD.png"
-        custom-class="custom-grid-item"/>
-        <van-grid-item
-        key="4"
-        text="Excel转PDF"
-        url="/pages/upload/upload?type=4&title=Excel转PDF"
-        icon="/imgs/excel.png"
-        custom-class="custom-grid-item"/>
-    </van-grid>
-    
-</view>
+        <view  wx:for="{{appList}}" wx:for-item="appGroup">
+            <view class="app-group">{{appGroup.groupName}}</view>
+            <van-grid gutter="8" column-num="4" icon-size="45" square="true">
+                <van-grid-item
+                wx:for="{{appGroup.appList}}" wx:for-item="app"
+                key="{{app.appGroupId}}"
+                text="{{app.appName}}"
+                url="{{app.appUrl}}"
+                icon="{{app.appIcon}}"
+                custom-class="custom-grid-item"/>
+            </van-grid>
+        </view>
+    </view>
 </view>
 

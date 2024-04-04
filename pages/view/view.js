@@ -4,7 +4,6 @@ import Toast from '@vant/weapp/toast/toast';
 const baseUrl = getApp().globalData.baseUrl;
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -24,7 +23,7 @@ Page({
       fileList: this.data.fileList.concat(obj.data),
       convType: options.type
     });
-    // this.downloadFile();
+    this.downloadFile();
   },
   onConvert() {
     Toast.loading({

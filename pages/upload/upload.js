@@ -8,16 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: "PDF转图片",
+    appInfo:{
+        title: "APP标题",
+        supportType: '',
+        maxSize: 5
+    },
+    appPrompt:[],
     msg: "功能说明",
-    docType: 0,
     fileType: "file",
     supportType:[".png,"],
-    tips:[
-        "1. 水电费水电费是东闪，电水电费水电哈哈哈。",
-        "2. 水电费水电费是东方闪电水电费水电费是。",
-        "3. 水电费水电费是东方闪电，水电费水电费是。",
-    ],
     responseData:[],
     show: false,
     actions: [
@@ -30,11 +29,8 @@ Page({
     wx.setNavigationBarTitle({
         title: '文件上传',
       })
-    this.setData({
-        // 设置转换的类型
-        docType: option.type,
-        title: option.title
-    })
+    this.getAppInfo(option.type);
+    this.getAppPrompt(option.type);
     if (option.type == 2) {
         this.setData({
             fileType: "image"
@@ -120,6 +116,46 @@ onSelect(event) {
     }
     this.setData({
       loadStatus: false
+    })
+},
+getAppInfo(appId) {
+    const that = this;
+    const reqUrl = baseUrl + '/app/getById?appId=' + appId;
+    wx.request({
+        url: reqUrl,
+        method:'GET',
+        success:function (res) {
+            if (res.data.code === 'SUCCESS') {
+                that.setData({
+                    appInfo: res.data.data
+                })
+            } else {
+                Toast.fail('功能列表获取失败');
+            }
+        },
+        fail:function (error) {
+          Toast.fail('服务网络异常');
+        }
+    })
+},
+getAppPrompt(appId) {
+    const that = this;
+    const reqUrl = baseUrl + '/app/getAppPrompt?appId=' + appId;
+    wx.request({
+        url: reqUrl,
+        method:'GET',
+        success:function (res) {
+            if (res.data.code === 'SUCCESS') {
+                that.setData({
+                    appPrompt: res.data.data.promptList
+                })
+            } else {
+                Toast.fail('功能列表获取失败');
+            }
+        },
+        fail:function (error) {
+          Toast.fail('服务网络异常');
+        }
     })
 }
 })
