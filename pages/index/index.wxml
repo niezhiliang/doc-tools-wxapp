@@ -6,9 +6,9 @@
             <van-grid gutter="8" column-num="4" icon-size="45" square="true">
                 <van-grid-item
                 wx:for="{{appGroup.appList}}" wx:for-item="app"
-                key="{{app.appGroupId}}"
+                key="{{app.id}}"
                 text="{{app.appName}}"
-                url="{{app.appUrl}}"
+                url="{{app.appUrl + '?type=' + app.id}}"
                 icon="{{app.appIcon}}"
                 custom-class="custom-grid-item"/>
             </van-grid>
