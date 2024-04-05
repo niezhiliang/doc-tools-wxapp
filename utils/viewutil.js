@@ -12,7 +12,7 @@ function fileViwe(url) {
             var Path = res.tempFilePath 
             wx.openDocument({
                 filePath: Path,
-                showMenu: true,
+                showMenu: false,
                 success: function (res) {
                     console.log(url + '打开了')
                 }
@@ -28,7 +28,7 @@ function fileViwe(url) {
 function directViwe(path) {
     wx.openDocument({
         filePath: path,
-        showMenu: true,
+        showMenu: false,
         success: function (res) {
             console.log(path + '打开了')
         }

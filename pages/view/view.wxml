@@ -1,16 +1,19 @@
     <!-- <view wx:for="{{2}}" wx:key="i"  wx:for-item="index"> -->
         <van-card
-        desc="文件大小3.5MB"
         style="padding: 30rpx; "
         lazy-load="true"
-        thumb="http://localhost:8080/excel.png">
+        thumb="/imgs/file.png">
         <view slot="title" 
         bind:tap="onPreView" 
         class="van-card__title">
         {{fileName}}
         </view>
+        <view slot="desc">
+           <view>文件类型：{{fileType}}</view>
+           <view>文件大小：{{fileSize}}</view>
+        </view>
         <view slot="price" style="margin-bottom: 35rpx;">
-            <van-progress color="#BE99FF" percentage="{{percentage}}" />
+            <van-progress color="{{bgColor}}" percentage="{{percentage}}" />
         </view>
     </van-card>
     <!-- </view> -->

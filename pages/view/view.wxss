@@ -5,15 +5,18 @@
  .van-card__title {
     font-weight: 600;
     line-height: var(--card-title-line-height,16px);
-    font-size: 28rpx;
+    font-size: 30rpx;
     margin-bottom: 10rpx;
     text-decoration:underline;
     color:blue;
     margin-top: 15rpx;
+    white-space:nowrap;      /* 不换行 */
+    overflow:hidden;         /* 超出部分隐藏 */
+    text-overflow:ellipsis;  /* 超出部分显示省略号 */
 }
 
 .van-card__desc {
-    font-size: 25rpx;
+    font-size: 28rpx;
 }
 .van-card__header{
     height: 180rpx;

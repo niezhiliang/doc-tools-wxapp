@@ -14,7 +14,9 @@ Page({
     appId: 1,
     fileInfo: {},
     fileName: '',
+    fileType: '',
     fileTmpPath: '',
+    fileSize: '',
     loadStatus: true,
     btnText: '文件上传中...'
   },
@@ -23,18 +25,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    wx.setNavigationBarTitle({
+        title: '文件预览',
+      })
     let obj = JSON.parse(options.data)
+    let filePath = options.name;
     this.setData({
         bgColor: app.globalData.bgColor,
         adSwitch: app.globalData.adSwitch,
         percentage: 5,
         fileInfo: obj.data,
         appId: options.appId,
-        fileName: options.name,
+        fileName: filePath.substring(0,filePath.lastIndexOf('.')),
+        fileType: filePath.substring(filePath.lastIndexOf('.') + 1),
         fileTmpPath: options.path,
         fileSize: options.size,
     });
-    console.log(this.data.fileInfo.fileSize)
     this.startTimer();
   },
   // 启动定时器
@@ -71,7 +77,9 @@ Page({
    },
   // 文件预览功能
   onPreView() {
-    docView.directViwe(this.data.fileTmpPath);
+      if (this.data.percentage == 100) {
+        docView.directViwe(this.data.fileTmpPath);
+      }
   },
   onConvert() {
     Toast.loading({
