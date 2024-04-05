@@ -21,7 +21,7 @@
     <van-button type="primary"
      bind:click="onConvert" 
      custom-class="custom-button"
-     color="#BE99FF"
+     color="{{bgColor}}"
      class="footer">图片生成PDF</van-button>
 </view>
 

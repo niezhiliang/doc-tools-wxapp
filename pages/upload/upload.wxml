@@ -14,7 +14,7 @@
         bind:click="openShow" 
         loading="{{loadStatus}}"
         custom-class="custom-button"
-        color="#BE99FF"
+        color="{{bgColor}}"
         loading-text="上传中...">选择文件</van-button>
     </view>
     

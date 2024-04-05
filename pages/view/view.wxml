@@ -1,7 +1,21 @@
-<view>
-    <view class="container">
-        这里是文件上传后的一个显示，可以提示用户预览的功能
-    </view>
+    <!-- <view wx:for="{{2}}" wx:key="i"  wx:for-item="index"> -->
+        <van-card
+        desc="文件大小3.5MB"
+        style="padding: 30rpx; "
+        lazy-load="true"
+        thumb="http://localhost:8080/excel.png">
+        <view slot="title" 
+        bind:tap="onPreView" 
+        class="van-card__title">
+        {{fileName}}
+        </view>
+        <view slot="price" style="margin-bottom: 35rpx;">
+            <van-progress color="#BE99FF" percentage="{{percentage}}" />
+        </view>
+    </van-card>
+    <!-- </view> -->
+    
+    
 
     <van-button loading="{{loadStatus}}"
       type="primary"
@@ -9,7 +23,6 @@
       bind:click="onConvert"
       class="footer"
       custom-class="custom-button"
-      color="#BE99FF"
-      loading-text="文件转换中....">立即转换</van-button>
+      color="{{bgColor}}"
+      loading-text="{{btnText}}">立即转换</van-button>
     <van-toast id="van-toast" />
-</view>

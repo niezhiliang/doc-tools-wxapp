@@ -1,5 +1,6 @@
 import Toast from '@vant/weapp/toast/toast';
-const baseUrl = getApp().globalData.baseUrl;
+const app = getApp();
+const baseUrl = app.globalData.baseUrl;
 const docView = require('../../utils/viewutil');
 
 Page({
@@ -7,9 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    bgColor: '',
+    adSwitch: false,
+    percentage: 5,
     appId: 1,
     fileInfo: {},
-    loadStatus: false
+    fileName: '',
+    fileTmpPath: '',
+    loadStatus: true,
+    btnText: '文件上传中...'
   },
 
   /**
@@ -17,12 +24,54 @@ Page({
    */
   onLoad(options) {
     let obj = JSON.parse(options.data)
-    console.log('____'+ JSON.stringify(obj.data));
     this.setData({
+        bgColor: app.globalData.bgColor,
+        adSwitch: app.globalData.adSwitch,
+        percentage: 5,
         fileInfo: obj.data,
-        appId: options.appId
+        appId: options.appId,
+        fileName: options.name,
+        fileTmpPath: options.path,
+        fileSize: options.size,
     });
-    docView.fileViwe(this.data.fileInfo.url);
+    console.log(this.data.fileInfo.fileSize)
+    this.startTimer();
+  },
+  // 启动定时器
+ startTimer:function() {
+    // 每1000ms（1秒）更新一次进度条
+    this.timer = setInterval(() => {
+      const newPercentage = this.data.percentage + this.getRandomInt(5);
+      if (newPercentage <= 100) {
+        this.setData({
+          percentage:newPercentage
+        });
+      } else {
+        this.setData({
+            percentage:100,
+            loadStatus: false
+          });
+          
+        Toast.success('上传成功')
+        // 当进度条达到100%时清除定时器
+        clearInterval(this.timer);
+      }
+    },300);
+  },
+  // 页面隐藏时清除定时器
+  onHide:function () {
+    clearInterval(this.timer);
+  },
+  getRandomInt(max) {
+    let min = 1;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    // 使用 Math.random() 生成 [0,1) 之间的随机数，然后乘以范围长度并取整，再加上最小值
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+   },
+  // 文件预览功能
+  onPreView() {
+    docView.directViwe(this.data.fileTmpPath);
   },
   onConvert() {
     Toast.loading({

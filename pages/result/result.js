@@ -1,12 +1,15 @@
 const docView = require('../../utils/viewutil');
 import Toast from '@vant/weapp/toast/toast';
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    respData: ['a','b'],
+    bgColor: '',
+    adSwitch: false,
+    respData: [],
     isImg: false,
     convertMsg:"如需转发到微信，将在广告展示完成后转发"
   },
@@ -17,6 +20,8 @@ Page({
   onLoad(options) {
       const respData = JSON.parse(options.respData);
       this.setData({
+        bgColor: app.globalData.bgColor,
+        adSwitch: app.globalData.adSwitch,
         isImg: options.isImg,
         respData: respData
       })

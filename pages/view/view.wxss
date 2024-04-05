@@ -1,3 +1,31 @@
 .custom-button {
-    width:70% !important; /* 自定义按钮宽度 */
+    width:85% !important; /* 自定义按钮宽度 */
  }
+
+ .van-card__title {
+    font-weight: 600;
+    line-height: var(--card-title-line-height,16px);
+    font-size: 28rpx;
+    margin-bottom: 10rpx;
+    text-decoration:underline;
+    color:blue;
+    margin-top: 15rpx;
+}
+
+.van-card__desc {
+    font-size: 25rpx;
+}
+.van-card__header{
+    height: 180rpx;
+    /* background-color: red; */
+    border-radius: 20rpx;
+    padding: 25rpx;
+    border: 2px solid whitesmoke;
+    background-color: white;
+}
+.van-card__thumb{
+    height: 150rpx !important;
+    width: 150rpx !important;
+    /* margin-top: 20rpx; */
+    border: 4px solid whitesmoke;
+}

@@ -25,6 +25,17 @@ function fileViwe(url) {
     })
 }
 
+function directViwe(path) {
+    wx.openDocument({
+        filePath: path,
+        showMenu: true,
+        success: function (res) {
+            console.log(path + '打开了')
+        }
+    })
+}
+
 module.exports = {
-    fileViwe:fileViwe
+    fileViwe:fileViwe,
+    directViwe:directViwe
 };

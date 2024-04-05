@@ -47,11 +47,16 @@ page {
    }
  
  .custom-grid-item .van-grid-item__text {
-    margin-top:30rpx !important;
+    margin-top:20rpx !important;
     font-size: 23rpx;
+    color: #323233;
+    border: none !important;
  }
  .app-group {
-    margin: 20rpx;
+    margin: 15rpx;
     font-size: 32rpx;
-    font-weight: bolder;
+    color: #323233;
+    font-weight: bold;
+    line-height: 1.5;
+    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, miui, Hiragino Sans GB, Microsoft Yahei, sans-serif;
  }

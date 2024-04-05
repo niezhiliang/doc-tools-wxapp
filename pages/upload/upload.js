@@ -1,5 +1,6 @@
 // pages/upload/upload.js
-const baseUrl = getApp().globalData.baseUrl;
+const app = getApp();
+const baseUrl = app.globalData.baseUrl;
 import Toast from '@vant/weapp/toast/toast';
 
 Page({
@@ -7,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    bgColor: '',
+    adSwitch: false,
     appInfo:{
         id: 1,
         title: "APP标题",
@@ -30,6 +33,10 @@ Page({
     wx.setNavigationBarTitle({
         title: '文件上传',
       })
+      this.setData({
+          bgColor: app.globalData.bgColor,
+          adSwitch: app.globalData.adSwitch
+      })
     this.getAppInfo(option.appId);
     this.getAppPrompt(option.appId);
   },
@@ -44,29 +51,45 @@ Page({
 onClose() {
   this.setData({ show: false });
 },
+formatBytes(bytes,) {
+    if (bytes === 0) return '0 Bytes';
+   
+    const k = 1024;
+    const dm = 2;
+    const sizes = ['Bytes','KB','MB','GB','TB','PB','EB','ZB','YB'];
+   
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+   
+    return parseFloat((bytes / Math.pow(k,i)).toFixed(dm)) + ' ' + sizes[i];
+},
 uploadChatMsgFile() {
   const appId = this.data.appInfo.id;
-  console.log("选择聊天文件" + appId)
   const type = this.data.fileTypeArray[this.data.appInfo.fileType];
   // TODO 文件类型排除
+  const that = this;
   wx.chooseMessageFile({
     count: 1,
     type: type,
     // extension:['xlsx','.xlsx'],
     success (res) {
-      const tempFilePath = res.tempFiles[0].path   
-      const requestUrl = baseUrl + '/doc/upload';
+      console.log('haha' + JSON.stringify(res.tempFiles))
+      const tempFilePath = res.tempFiles[0].path;   
+      const fileName = res.tempFiles[0].name;   
+      const path = res.tempFiles[0].path;
+      const size = that.formatBytes(res.tempFiles[0].size);
+      const requestUrl = baseUrl + '/doc/upload?fileName=' + fileName;
       wx.uploadFile({
         url: requestUrl,
         filePath: tempFilePath,
         name: 'file',
         success:function (res) {
-            let toPage = '/pages/view/view?data=';
+            let toPage = '/pages/view/view?name=' + fileName+'&data=';
             if (type === 'image') {
-                toPage = '/pages/imgview/imgview?data=';
+                toPage = '/pages/imgview/imgview?name=' + fileName+'&data=';
             }
             wx.navigateTo({
-                url: toPage + res.data + '&appId=' + appId
+                url: toPage + res.data + '&appId=' + appId + '&path=' + path
+                + '&size=' +  size
             })
             // 上传成功后的处理逻辑
       },
@@ -78,33 +101,6 @@ uploadChatMsgFile() {
     }
   })
 },
-// chooseImage() {
-//     wx.chooseImage({
-//       success:(res) => {
-//         const tempFilePath = res.tempFilePaths[0];
-//         this.setData({
-//           imagePath:tempFilePath
-//         });
-//       // wx.uploadFile({
-//       //   url: 'http://localhost:8080/doc/upload',
-//       //   filePath: tempFilePath,
-//       //   name: 'file',
-//       //   success:function (res) {
-//       //       wx.navigateTo({
-//       //       url: '/pages/imgview/imgview?data=' + res.data + '&type=' + convType
-//       //       })
-//       //       // 上传成功后的处理逻辑
-//       // },
-//       // fail(err) {
-//       //     console.log(err);
-//       // }
-//       // })
-//         wx.navigateTo({
-//           url: '/pages/imgview/imgview',
-//         })
-//       }
-//     });
-//   },
 onSelect(event) {
     const { value } = event.detail;
     // 微信聊天记录赛选文件

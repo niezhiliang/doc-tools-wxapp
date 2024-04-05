@@ -1,8 +1,11 @@
 import Toast from '@vant/weapp/toast/toast';
-const baseUrl = getApp().globalData.baseUrl;
+const app = getApp();
+const baseUrl = app.globalData.baseUrl;
 
 Page({
   data: {
+    bgColor: '',
+    adSwitch: false,
     currentTouchIndex: -1,
     currentX: 0,
     currentY: 0,
@@ -15,6 +18,8 @@ Page({
     let obj = JSON.parse(options.data)
     this.setData({
         picObjList: this.data.picObjList.concat(obj.data),
+        bgColor: app.globalData.bgColor,
+        adSwitch: app.globalData.adSwitch,
     });
   },
   // 显示底层可移动模块
