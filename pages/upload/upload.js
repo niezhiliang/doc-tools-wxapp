@@ -1,6 +1,7 @@
 const app = getApp();
-const baseUrl = app.globalData.baseUrl;
+import { requestApi } from "../../utils/service";
 import Toast from '@vant/weapp/toast/toast';
+const baseUrl = app.globalData.baseUrl;
 
 Page({
   /**
@@ -19,7 +20,6 @@ Page({
     fileTypeArray:['file','all','file','image','video'],
     appPrompt:[],
     msg: "功能说明",
-    supportType:[".png"],
     responseData:[],
     show: false,
     actions: [
@@ -32,10 +32,10 @@ Page({
     wx.setNavigationBarTitle({
         title: '文件上传',
       })
-      this.setData({
-          bgColor: app.globalData.bgColor,
-          adSwitch: app.globalData.adSwitch
-      })
+    this.setData({
+        bgColor: app.globalData.bgColor,
+        adSwitch: app.globalData.adSwitch
+    }),
     this.getAppInfo(option.appId);
     this.getAppPrompt(option.appId);
   },
@@ -63,12 +63,14 @@ formatBytes(bytes) {
 uploadChatMsgFile() {
   const appId = this.data.appInfo.id;
   const type = this.data.fileTypeArray[this.data.appInfo.fileType];
+  console.log(JSON.stringify(this.data.appInfo))
   // TODO 文件类型排除
+  const extension = this.data.appInfo.supportType.split(',');
   const that = this;
   wx.chooseMessageFile({
     count: 1,
     type: type,
-    // extension:['xlsx','.xlsx'],
+    extension: extension,
     success (res) {
       console.log('haha' + JSON.stringify(res.tempFiles))
       const tempFilePath = res.tempFiles[0].path;   
@@ -76,7 +78,7 @@ uploadChatMsgFile() {
       const path = res.tempFiles[0].path;
       const size = that.formatBytes(res.tempFiles[0].size);
       const requestUrl = baseUrl + '/doc/upload?fileName=' + fileName;
-      wx.uploadFile({
+      const uploadTask = wx.uploadFile({
         url: requestUrl,
         filePath: tempFilePath,
         name: 'file',
@@ -96,6 +98,11 @@ uploadChatMsgFile() {
         Toast.fail('文件上传失败');
       }
       })
+    uploadTask.onProgressUpdate((res) => {
+        console.log('上传进度', res.progress)
+        console.log('已经上传的数据长度', res.totalBytesSent)
+        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+    })
     }
   })
 },
@@ -115,11 +122,8 @@ onSelect(event) {
 },
 getAppInfo(appId) {
     const that = this;
-    const reqUrl = baseUrl + '/app/getById?appId=' + appId;
-    wx.request({
-        url: reqUrl,
-        method:'GET',
-        success:function (res) {
+        requestApi({ url: "/app/getById", data: {"appId": appId} })
+        .then((res) => {
             if (res.data.code === 'SUCCESS') {
                 that.setData({
                     appInfo: res.data.data
@@ -127,29 +131,18 @@ getAppInfo(appId) {
             } else {
                 Toast.fail('功能列表获取失败');
             }
-        },
-        fail:function (error) {
-          Toast.fail('服务网络异常');
-        }
-    })
+        })
 },
 getAppPrompt(appId) {
     const that = this;
-    const reqUrl = baseUrl + '/app/getAppPrompt?appId=' + appId;
-    wx.request({
-        url: reqUrl,
-        method:'GET',
-        success:function (res) {
-            if (res.data.code === 'SUCCESS') {
-                that.setData({
-                    appPrompt: res.data.data.promptList
-                })
-            } else {
-                Toast.fail('功能列表获取失败');
-            }
-        },
-        fail:function (error) {
-          Toast.fail('服务网络异常');
+    requestApi({ url: "/app/getAppPrompt", data: {"appId": appId} })
+    .then((res) => {
+        if (res.data.code === 'SUCCESS') {
+            that.setData({
+                appPrompt: res.data.data.promptList
+            })
+        } else {
+            Toast.fail('功能列表获取失败');
         }
     })
 }

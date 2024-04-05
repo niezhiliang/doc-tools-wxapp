@@ -1,6 +1,6 @@
 import Toast from '@vant/weapp/toast/toast';
 const app = getApp();
-const baseUrl = app.globalData.baseUrl;
+import { requestApi } from "../../utils/service";
 
 Page({
     data: {
@@ -24,41 +24,30 @@ Page({
     },
     getAppSeeting() {
         const that = this;
-        const reqUrl = baseUrl + '/app/getAppSetting'
-        wx.request({
-            url: reqUrl,
-            method:'GET',
-            success:function (res) {
-                if (res.data.code === 'SUCCESS') {
-                    that.setData({
-                        appSeeting: res.data.data
-                    })
-                } else {
-                    Toast.fail('功能列表获取失败');
-                }
-            },
-            fail:function (error) {
-              Toast.fail('服务网络异常');
+        requestApi({ url: "/app/getAppSetting", data: {} })
+        .then((res) => {
+            if (res.data.code === 'SUCCESS') {
+                that.setData({
+                    appSeeting: res.data.data
+                })
+            } else {
+                Toast.fail('功能列表获取失败');
             }
         })
+        //     fail:function (error) {
+        //       Toast.fail('服务网络异常');
+        //     }
     },
     getAppList() {
         const that = this;
-        const reqUrl = baseUrl + '/app/getAppList'
-        wx.request({
-            url: reqUrl,
-            method:'GET',
-            success:function (res) {
-                if (res.data.code === 'SUCCESS') {
-                    that.setData({
-                        appList: res.data.data
-                    })
-                } else {
-                    Toast.fail('功能列表获取失败');
-                }
-            },
-            fail:function (error) {
-              Toast.fail('服务网络异常');
+        requestApi({ url: "/app/getAppList", data: {} })
+        .then((res) => {
+            if (res.data.code === 'SUCCESS') {
+                that.setData({
+                    appList: res.data.data
+                })
+            } else {
+                Toast.fail('功能列表获取失败');
             }
         })
     }

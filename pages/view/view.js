@@ -1,6 +1,6 @@
 import Toast from '@vant/weapp/toast/toast';
 const app = getApp();
-const baseUrl = app.globalData.baseUrl;
+import { requestApi } from "../../utils/service";
 const docView = require('../../utils/viewutil');
 
 Page({
@@ -89,37 +89,23 @@ Page({
       duration: 0,     
     });
     console.log(this.data.fileList)
-    const requestUrl = baseUrl + '/doc/convert';
+
     const appId = this.data.appId;
-    wx.request({
-        url: requestUrl,
-        method:'POST',
-        header:{
-          'content-type':'application/json'  // 设置请求头为json格式
-        },
-        data:{
-          pathKeys: new Array(this.data.fileInfo.urlKey),
-          type: appId
-          // 添加更多需要发送的数据
-        },
-        success:function (res) {
-            console.log(JSON.stringify(res) + "999")
-            console.log(res.statusCode + "---" + res.data.code)
-            if (res.statusCode ===200 && res.data.code === 'SUCCESS') {
-                Toast.clear();
-                var response = JSON.stringify(res.data.data);
-                wx.reLaunch({
-                  url: '/pages/result/result?appId=' + appId + '&respData=' + response,
-                })
-            } else {
-                Toast.fail('转换失败',5)
-            }
-            console.log(res.data)  // 请求成功，处理返回的数据
-        },
-        fail:function (error) {
-          console.log(error)  // 请求失败处理
-          Toast.fail('服务网络异常',5)
+    requestApi({ url: "/doc/convert", method: 'POST',
+     data: {
+        "type": appId,
+        "pathKeys":new Array(this.data.fileInfo.urlKey)
+    }})
+    .then((res) => {
+        if (res.statusCode ===200 && res.data.code === 'SUCCESS') {
+            Toast.clear();
+            var response = JSON.stringify(res.data.data);
+            wx.reLaunch({
+              url: '/pages/result/result?appId=' + appId + '&respData=' + response,
+            })
+        } else {
+            Toast.fail('转换失败',5)
         }
-       })
+    })
   },
 })

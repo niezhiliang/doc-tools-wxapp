@@ -1,9 +1,11 @@
 import Toast from '@vant/weapp/toast/toast';
 const app = getApp();
 const baseUrl = app.globalData.baseUrl;
+import { requestApi } from "../../utils/service";
 
 Page({
   data: {
+    appId: 1,
     bgColor: '',
     adSwitch: false,
     currentTouchIndex: -1,
@@ -17,6 +19,7 @@ Page({
   onLoad(options){
     let obj = JSON.parse(options.data)
     this.setData({
+        appId: options.appId,
         picObjList: this.data.picObjList.concat(obj.data),
         bgColor: app.globalData.bgColor,
         adSwitch: app.globalData.adSwitch,
@@ -79,28 +82,21 @@ Page({
       // 持续展示 toast
       duration: 0,     
     });
-    const reqUrl = baseUrl + '/doc/convert'
-    wx.request({
-        url: reqUrl,
-        method:'POST',
-        header:{
-          'content-type':'application/json'
-        },
-        data:{
-          pathKeys: this.data.fileList.map(item => item.urlKey),
-          type: this.data.convType
-        },
-        success:function (res) {
-          console.log(res.data)  // 请求成功，处理返回的数据
-          var response = JSON.stringify(res.data);
-          Toast.clear();
-          wx.reLaunch({
-            url: '/pages/result/result?respData=' + response,
-          })
-        },
-        fail:function (error) {
-          console.log(error)  // 请求失败处理
-          Toast.fail('图片转换失败');
+    const appId = this.data.appId;
+    requestApi({ url: "/doc/convert", method: 'POST',
+     data: {
+        "type": appId,
+        "pathKeys": this.data.picObjList.map(item => item.urlKey)
+    }})
+    .then((res) => {
+        if (res.statusCode ===200 && res.data.code === 'SUCCESS') {
+            var response = JSON.stringify(res.data);
+            Toast.clear();
+            wx.reLaunch({
+              url: '/pages/result/result?respData=' + response,
+            })
+        } else {
+            Toast.fail('转换失败',5)
         }
     })
   }

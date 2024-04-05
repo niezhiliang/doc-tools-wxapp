@@ -9,7 +9,6 @@
   "author": "nzl",
   "license": "ISC",
   "dependencies": {
-    "@vant/weapp": "^1.11.4",
-    "pdfjs-dist": "^4.0.379"
+    "@vant/weapp": "^1.11.4"
   }
 }
