@@ -1,4 +1,3 @@
-// pages/upload/upload.js
 const app = getApp();
 const baseUrl = app.globalData.baseUrl;
 import Toast from '@vant/weapp/toast/toast';
@@ -41,7 +40,6 @@ Page({
     this.getAppPrompt(option.appId);
   },
   openShow(params) {
-    console.log(params);
     if (this.data.docType == 2) {
         this.chooseImage();
     } else {

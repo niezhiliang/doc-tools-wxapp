@@ -24,3 +24,7 @@
     width:85% !important; /* 自定义按钮宽度 */
     border-radius:10rpx !important;
  }
+
+.van-action-sheet__item{
+    width: 100% !important;
+}

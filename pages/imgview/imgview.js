@@ -40,6 +40,8 @@ Page({
   // 预览图片
   previewImg(e){
     const i = e.currentTarget.dataset.index
+    console.log('7777777'+this.data.picObjList[i].url)
+    console.log('7777777'+this.data.picObjList.map(item => item.url))
     wx.previewImage({
       current: this.data.picObjList[i].url, // 当前显示图片的 http 链接
       urls: this.data.picObjList.map(item => item.url) // 需要预览的图片 http 链接列表
@@ -77,10 +79,6 @@ Page({
       // 持续展示 toast
       duration: 0,     
     });
-    console.log(this.data.picList)
-    wx.navigateTo({
-      url: '/pages/result/result',
-    })
     const reqUrl = baseUrl + '/doc/convert'
     wx.request({
         url: reqUrl,
@@ -97,7 +95,7 @@ Page({
           var response = JSON.stringify(res.data);
           Toast.clear();
           wx.reLaunch({
-            url: '/pages/result/result?isImg=true&respData=' + response,
+            url: '/pages/result/result?respData=' + response,
           })
         },
         fail:function (error) {

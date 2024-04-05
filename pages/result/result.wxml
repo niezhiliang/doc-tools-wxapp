@@ -1,20 +1,28 @@
 <!--pages/result/result.wxml-->
-
+<van-notice-bar 
+    background="#f8f7fad8"
+    left-icon="volume-o"
+    wx:if="{{appId == 1}}"
+    color="{{bgColor}}"
+    style="margin-top: 30rpx;border-radius: 10rpx;"
+    text="预览时，图片可左右滑动，长按目标图片，屏幕下方会弹出微信内置的转发到微信和保存到相册的选项。"/>
   <van-empty image="/imgs/success1.png" 
   description="转换成功" 
   custom-class="small-image"
   custom-class="custom-empty">
     <view class="button-container">
-      <view wx:if="{{adSwitch}}" class="convertMsg">{{convertMsg}}</view>
+      <view wx:if="{{adSwitch}}" class="convert-msg">{{convertMsg}}</view>
+      <view  class="convert-msg"></view>
     </view>
 </van-empty>
 
 <view class="button-group">
     <van-button type="default" 
      class="preview-button"
-     bind:click="preView">预览</van-button>
-     <van-button type="primary" 
-     color="#BE99FF"
+     color="{{preBtnColor}}"
+     bind:click="preView">{{preBtnText}}</van-button>
+     <van-button type="primary" wx:if="{{appId != 1}}"
+     color="{{bgColor}}"
      class="bottom-button"
      bind:click="fileShare">转发到微信</van-button>
    </view>

@@ -38,7 +38,7 @@
       margin-bottom:15px;
    }
 
-.convertMsg {
+.convert-msg {
     font-size:28rpx;  /* 设置字体大小为16像素 */
     color:#969799;     /* 设置字体颜色为黑色 */
     white-space:pre-wrap;/* 处理换行 */

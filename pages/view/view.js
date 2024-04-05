@@ -62,7 +62,7 @@ Page({
         // 当进度条达到100%时清除定时器
         clearInterval(this.timer);
       }
-    },300);
+    },200);
   },
   // 页面隐藏时清除定时器
   onHide:function () {
@@ -90,6 +90,7 @@ Page({
     });
     console.log(this.data.fileList)
     const requestUrl = baseUrl + '/doc/convert';
+    const appId = this.data.appId;
     wx.request({
         url: requestUrl,
         method:'POST',
@@ -98,7 +99,7 @@ Page({
         },
         data:{
           pathKeys: new Array(this.data.fileInfo.urlKey),
-          type: this.data.appId
+          type: appId
           // 添加更多需要发送的数据
         },
         success:function (res) {
@@ -108,7 +109,7 @@ Page({
                 Toast.clear();
                 var response = JSON.stringify(res.data.data);
                 wx.reLaunch({
-                  url: '/pages/result/result?isImg=false&respData=' + response,
+                  url: '/pages/result/result?appId=' + appId + '&respData=' + response,
                 })
             } else {
                 Toast.fail('转换失败',5)

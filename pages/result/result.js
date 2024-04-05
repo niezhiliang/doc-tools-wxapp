@@ -10,7 +10,9 @@ Page({
     bgColor: '',
     adSwitch: false,
     respData: [],
-    isImg: false,
+    appId: 2,
+    preBtnColor: '',
+    preBtnText: '预览',
     convertMsg:"如需转发到微信，将在广告展示完成后转发"
   },
 
@@ -22,9 +24,15 @@ Page({
       this.setData({
         bgColor: app.globalData.bgColor,
         adSwitch: app.globalData.adSwitch,
-        isImg: options.isImg,
+        appId: options.appId,
         respData: respData
       })
+      if (this.data.appId == 1) {
+          this.setData({
+            preBtnText: '预览分享保存',
+            preBtnColor: app.globalData.bgColor,
+          })
+      }
   },
   // 文件分享到聊天记录
   fileShare() {
@@ -45,6 +53,13 @@ Page({
       })
   },
   preView() {
-    docView.fileViwe(this.data.respData[0]);
+    if (this.data.appId != 1) {
+        docView.fileViwe(this.data.respData[0]);
+    } else {
+        wx.previewImage({
+            current: this.data.respData[0], // 当前显示图片的 http 链接
+            urls: this.data.respData // 需要预览的图片 http 链接列表
+        })
+    }
   }
 })

@@ -15,15 +15,12 @@ Page({
             "adSwich": 0
           }
       },
-      openShow(params) {
-     },
      onLoad(options) {
         this.getAppSeeting();
         this.getAppList();
         // 全局变量存入缓存
         app.globalData.bgColor = this.data.appSeeting.bgColor;
         app.globalData.adSwich = this.data.appSeeting.adSwich;
-        console.log(app.globalData.bgColor)
     },
     getAppSeeting() {
         const that = this;
@@ -33,7 +30,6 @@ Page({
             method:'GET',
             success:function (res) {
                 if (res.data.code === 'SUCCESS') {
-                console.log("--" + res.data)
                     that.setData({
                         appSeeting: res.data.data
                     })
@@ -54,7 +50,6 @@ Page({
             method:'GET',
             success:function (res) {
                 if (res.data.code === 'SUCCESS') {
-                console.log("--" + res.data)
                     that.setData({
                         appList: res.data.data
                     })

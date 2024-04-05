@@ -32,6 +32,7 @@
     "van-notify": "@vant/weapp/notify/index",
     "van-card": "@vant/weapp/card/index",
     "van-circle": "@vant/weapp/circle/index",
-    "van-progress": "@vant/weapp/progress/index"
+    "van-progress": "@vant/weapp/progress/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
   }
 }
