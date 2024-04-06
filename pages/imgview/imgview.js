@@ -27,7 +27,11 @@ Page({
         fileTmpPath: options.path,
         fileName: filePath.substring(0,filePath.lastIndexOf('.')),
     });
-    this.fileUpload(options.path);
+    console.log(options.path)
+    let pathArray = JSON.parse(options.path)
+    for (const e of pathArray) {
+        this.fileUpload(e);
+    }
   },
   // 显示底层可移动模块
   showMoveBlock(e){
@@ -87,28 +91,15 @@ Page({
   })
   },
   onUpload() {
-    const requestUrl = baseUrl + '/doc/upload';
+    const picCount = 9 - this.data.picObjList.length;
+    console.log(picCount)
     wx.chooseImage({
-        count: 1,
+        count:picCount,
         success:(res) => {
-        const tempFilePath = res.tempFiles[0].path
-        // const that = this;
-        this.fileUpload(tempFilePath);
-        // wx.uploadFile({
-        //     url: requestUrl,
-        //     filePath: tempFilePath,
-        //     name: 'file',
-        //     success:function (res) {
-        //         let obj = JSON.parse(res.data)
-        //         that.setData({
-        //             picObjList: that.data.picObjList.concat(obj.data),
-        //         });
-        //     },
-        //     fail(err) {
-        //         console.log(err);
-        //         Toast.fail('服务网络异常')
-        //     }
-        // })
+        const pathArray = res.tempFiles.map(item => item.path)
+        for (const e of pathArray) {
+            this.fileUpload(e);
+        }
         }
     })
   },

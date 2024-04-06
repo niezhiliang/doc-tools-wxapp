@@ -29,8 +29,8 @@
   width: 196rpx;
   height: 196rpx;
   margin-right: 40rpx;
-  margin-bottom: 40rpx;
-  border: 1rpx dashed rgba(0, 0, 0, 0.06);
+  margin-bottom: 30rpx;
+  border: 2rpx solid rgba(0, 0, 0, 0.06);
 }
 .picRelative:nth-child(3n){
   margin-right: 0;

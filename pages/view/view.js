@@ -11,7 +11,7 @@ Page({
   data: {
     bgColor: '',
     adSwitch: false,
-    percentage: 0,
+    percentage: 1,
     appId: 1,
     fileInfo: {},
     fileName: '',
@@ -60,7 +60,8 @@ Page({
         if (result.code === 'SUCCESS') {
           that.setData({
             fileInfo: result.data,
-            loadStatus: false
+            loadStatus: false,
+            percentage: 100
           })
           Toast.success('上传成功')
         } else {
@@ -68,15 +69,17 @@ Page({
         }
     },
     fail(err) {
-        console.log(err.detail)
+      console.log(err.detail)
       Toast.fail('文件上传失败');
     }
     })
   uploadTask.onProgressUpdate((res) => {
-    this.setData({
-        percentage:res.progress
-      });
-      console.log('上传进度', res.progress)
+      if (res.progress < 96) {
+        this.setData({
+            percentage:res.progress
+        });
+      }
+    console.log('上传进度', res.progress)
   })
   },
   onConvert() {
@@ -87,8 +90,8 @@ Page({
       duration: 0,     
     });
     console.log(this.data.fileInfo)
-
     const appId = this.data.appId;
+    const fileName = this.data.fileName;
     requestApi({ url: "/doc/convert", method: 'POST',
      data: {
         "type": appId,
@@ -99,11 +102,12 @@ Page({
             Toast.clear();
             var response = JSON.stringify(res.data.data);
             wx.reLaunch({
-              url: '/pages/result/result?appId=' + appId + '&respData=' + response,
+              url: '/pages/result/result?appId=' + appId + '&name=' + fileName
+              + '&respData=' + response,
             })
         } else {
             Toast.fail('转换失败',5)
         }
     })
-  },
+  }
 })

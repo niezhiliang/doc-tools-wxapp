@@ -1,7 +1,6 @@
 const app = getApp();
 import { requestApi } from "../../utils/service";
 import Toast from '@vant/weapp/toast/toast';
-const baseUrl = app.globalData.baseUrl;
 
 Page({
   /**
@@ -68,18 +67,18 @@ uploadChatMsgFile() {
   const extension = this.data.appInfo.supportType.split(',');
   const that = this;
   wx.chooseMessageFile({
-    count: 1,
+    count: type == 'image' ? 9 : 1,
     type: type,
     extension: extension,
     success (res) {
-      console.log('haha' + JSON.stringify(res.tempFiles))
       const fileName = res.tempFiles[0].name;   
-      const path = res.tempFiles[0].path;
+      let path = res.tempFiles[0].path;
       const size = that.formatBytes(res.tempFiles[0].size);
 
       let toPage = '/pages/view/view?name=' + fileName+'&data=';
         if (type === 'image') {
             toPage = '/pages/imgview/imgview?name=' + fileName+'&data=';
+            path = JSON.stringify(res.tempFiles.map(item => item.path));
         }
         wx.navigateTo({
             url: toPage + '&appId=' + appId + '&path=' + path

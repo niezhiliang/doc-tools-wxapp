@@ -9,6 +9,7 @@ Page({
   data: {
     bgColor: '',
     adSwitch: false,
+    fileName: '',
     respData: [],
     appId: 2,
     preBtnColor: '',
@@ -21,12 +22,15 @@ Page({
    */
   onLoad(options) {
       const respData = JSON.parse(options.respData);
+      const url = respData[0];
       this.setData({
         bgColor: app.globalData.bgColor,
         adSwitch: app.globalData.adSwitch,
         appId: options.appId,
-        respData: respData
+        respData: respData,
+        fileName: options.name + url.substring(url.lastIndexOf('.'))
       })
+      console.log(this.data.fileName)
       if (this.data.appId == 1) {
           this.setData({
             preBtnText: '预览分享保存',
@@ -37,6 +41,7 @@ Page({
   // 文件分享到聊天记录
   fileShare() {
       // callback 写法
+      const fileName = this.data.fileName;
       wx.downloadFile({
         // 下载url
         url: this.data.respData[0], 
@@ -45,7 +50,10 @@ Page({
           // 下载完成后转发
           wx.shareFileMessage({
             filePath: res.tempFilePath,
-            success() {},
+            fileName: fileName,
+            success() {
+                console.log('文件分享成功')
+            },
             fail: console.error,
           })
         },
