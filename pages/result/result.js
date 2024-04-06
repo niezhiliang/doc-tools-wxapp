@@ -23,6 +23,7 @@ Page({
   onLoad(options) {
       const respData = JSON.parse(options.respData);
       const url = respData[0];
+      console.log('232' + JSON.stringify(url))
       this.setData({
         bgColor: app.globalData.bgColor,
         adSwitch: app.globalData.adSwitch,

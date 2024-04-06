@@ -12,7 +12,7 @@
     </view>
 </movable-area>
 
-<van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" />
+<!-- <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" /> -->
 
 
 <view>

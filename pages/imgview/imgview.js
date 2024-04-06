@@ -113,6 +113,7 @@ Page({
       duration: 0,     
     });
     const appId = this.data.appId;
+    const fileName = this.data.fileName;
     requestApi({ url: "/doc/convert", method: 'POST',
      data: {
         "type": appId,
@@ -120,10 +121,10 @@ Page({
     }})
     .then((res) => {
         if (res.statusCode ===200 && res.data.code === 'SUCCESS') {
-            var response = JSON.stringify(res.data);
+            var response = JSON.stringify(res.data.data);
             Toast.clear();
             wx.reLaunch({
-              url: '/pages/result/result?respData=' + response,
+              url: '/pages/result/result?respData=' + response + '&name=' + fileName,
             })
         } else {
             Toast.fail('转换失败',5)

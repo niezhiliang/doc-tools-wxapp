@@ -8,7 +8,6 @@ export const requestApi = (parmas) => {
     ajaxTimes++;
     // 显示加载中loading效果
    if (parmas.url !== '/doc/convert') {
-       console.log('11111120')
     wx.showLoading({
         title: "加载中",
         mask: true  //开启蒙版遮罩

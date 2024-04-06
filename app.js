@@ -15,7 +15,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl: 'http://192.168.3.92:8080', // 后端请求地址的常量
+    // baseUrl: 'http://192.168.3.92:8080', // 后端请求地址的常量
+    baseUrl: 'http://159.75.95.172:8080',
     bgColor: '#FFB6C1',
     adSwitch: true
   }
