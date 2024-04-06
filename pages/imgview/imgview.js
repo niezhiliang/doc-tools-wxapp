@@ -93,13 +93,15 @@ Page({
   onUpload() {
     const picCount = 9 - this.data.picObjList.length;
     console.log(picCount)
-    wx.chooseImage({
-        count:picCount,
-        success:(res) => {
-        const pathArray = res.tempFiles.map(item => item.path)
-        for (const e of pathArray) {
-            this.fileUpload(e);
-        }
+    const that = this;
+    wx.chooseMessageFile({
+        count: picCount,
+        type: 'image',
+        success (res) {
+            const pathArray = res.tempFiles.map(item => item.path)
+            for (const e of pathArray) {
+                that.fileUpload(e);
+            }
         }
     })
   },

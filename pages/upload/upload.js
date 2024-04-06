@@ -39,11 +39,12 @@ Page({
     this.getAppPrompt(option.appId);
   },
   openShow(params) {
-    if (this.data.docType == 2) {
-        this.chooseImage();
-    } else {
-      this.setData({ show: true });
-    }
+    this.uploadChatMsgFile();
+    // if (this.data.docType == 2) {
+    //     this.chooseImage();
+    // } else {
+    //     this.setData({ show: true });
+    // }
 },
 onClose() {
   this.setData({ show: false });

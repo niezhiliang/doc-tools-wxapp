@@ -12,6 +12,9 @@
     </view>
 </movable-area>
 
+<van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" />
+
+
 <view>
     <van-button 
     bind:click="onUpload"
