@@ -73,36 +73,18 @@ uploadChatMsgFile() {
     extension: extension,
     success (res) {
       console.log('haha' + JSON.stringify(res.tempFiles))
-      const tempFilePath = res.tempFiles[0].path;   
       const fileName = res.tempFiles[0].name;   
       const path = res.tempFiles[0].path;
       const size = that.formatBytes(res.tempFiles[0].size);
-      const requestUrl = baseUrl + '/doc/upload?fileName=' + fileName;
-      const uploadTask = wx.uploadFile({
-        url: requestUrl,
-        filePath: tempFilePath,
-        name: 'file',
-        success:function (res) {
-            let toPage = '/pages/view/view?name=' + fileName+'&data=';
-            if (type === 'image') {
-                toPage = '/pages/imgview/imgview?name=' + fileName+'&data=';
-            }
-            wx.navigateTo({
-                url: toPage + res.data + '&appId=' + appId + '&path=' + path
-                + '&size=' +  size
-            })
-            // 上传成功后的处理逻辑
-      },
-      fail(err) {
-          console.log(err.detail)
-        Toast.fail('文件上传失败');
-      }
-      })
-    uploadTask.onProgressUpdate((res) => {
-        console.log('上传进度', res.progress)
-        console.log('已经上传的数据长度', res.totalBytesSent)
-        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-    })
+
+      let toPage = '/pages/view/view?name=' + fileName+'&data=';
+        if (type === 'image') {
+            toPage = '/pages/imgview/imgview?name=' + fileName+'&data=';
+        }
+        wx.navigateTo({
+            url: toPage + '&appId=' + appId + '&path=' + path
+            + '&size=' +  size
+        })
     }
   })
 },

@@ -7,10 +7,12 @@ export const requestApi = (parmas) => {
     // 当有地方调用请求方法的时候，就增加全局变量，用于判断有几个请求了
     ajaxTimes++;
     // 显示加载中loading效果
+   if (parmas.url !== '/doc/convert') {
     wx.showLoading({
         title: "加载中",
         mask: true  //开启蒙版遮罩
     });
+   }
     /**
      *   根据不同的url接口,来设置不同的header请求头
      **  判断 url中是否带有 /my/ 请求的是私有的路径 带上header token

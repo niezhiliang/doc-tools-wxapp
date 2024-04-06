@@ -31,6 +31,7 @@ Page({
                     appSeeting: res.data.data
                 })
             } else {
+                console.log('获取服务失败啦')
                 Toast.fail('功能列表获取失败');
             }
         })

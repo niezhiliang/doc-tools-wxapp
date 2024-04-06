@@ -8,6 +8,7 @@ Page({
     appId: 1,
     bgColor: '',
     adSwitch: false,
+    fileName: '',
     currentTouchIndex: -1,
     currentX: 0,
     currentY: 0,
@@ -17,13 +18,16 @@ Page({
     picObjList: []
   },
   onLoad(options){
-    let obj = JSON.parse(options.data)
+    let filePath = options.name;
     this.setData({
         appId: options.appId,
-        picObjList: this.data.picObjList.concat(obj.data),
+        // picObjList: this.data.picObjList.concat(obj.data),
         bgColor: app.globalData.bgColor,
         adSwitch: app.globalData.adSwitch,
+        fileTmpPath: options.path,
+        fileName: filePath.substring(0,filePath.lastIndexOf('.')),
     });
+    this.fileUpload(options.path);
   },
   // 显示底层可移动模块
   showMoveBlock(e){
@@ -50,28 +54,61 @@ Page({
       urls: this.data.picObjList.map(item => item.url) // 需要预览的图片 http 链接列表
     })
   },
+  fileUpload(tmpPath) {
+    const that = this;
+    const requestUrl = baseUrl + '/doc/upload?fileName=' + this.data.fileName;
+    const uploadTask = wx.uploadFile({
+      url: requestUrl,
+      filePath: tmpPath,
+      name: 'file',
+      success:function (res) {
+        let result = JSON.parse(res.data);
+        console.log(result)
+          // 上传成功后的处理逻辑
+        if (result.code === 'SUCCESS') {
+            that.setData({
+                picObjList: that.data.picObjList.concat(result.data),
+            });
+          Toast.success('上传成功')
+        } else {
+            Toast.fail('图片上传失败');
+        }
+    },
+    fail(err) {
+      console.log(err.detail)
+      Toast.fail('服务端异常');
+    }
+    })
+  uploadTask.onProgressUpdate((res) => {
+    // this.setData({
+    //     percentage:res.progress
+    //   });
+      console.log('上传进度', res.progress)
+  })
+  },
   onUpload() {
     const requestUrl = baseUrl + '/doc/upload';
     wx.chooseImage({
         count: 1,
         success:(res) => {
         const tempFilePath = res.tempFiles[0].path
-        const that = this;
-        wx.uploadFile({
-            url: requestUrl,
-            filePath: tempFilePath,
-            name: 'file',
-            success:function (res) {
-                let obj = JSON.parse(res.data)
-                that.setData({
-                    picObjList: that.data.picObjList.concat(obj.data),
-                });
-            },
-            fail(err) {
-                console.log(err);
-                Toast.fail('服务网络异常')
-            }
-        })
+        // const that = this;
+        this.fileUpload(tempFilePath);
+        // wx.uploadFile({
+        //     url: requestUrl,
+        //     filePath: tempFilePath,
+        //     name: 'file',
+        //     success:function (res) {
+        //         let obj = JSON.parse(res.data)
+        //         that.setData({
+        //             picObjList: that.data.picObjList.concat(obj.data),
+        //         });
+        //     },
+        //     fail(err) {
+        //         console.log(err);
+        //         Toast.fail('服务网络异常')
+        //     }
+        // })
         }
     })
   },
