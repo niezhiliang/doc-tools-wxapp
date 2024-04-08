@@ -20,10 +20,14 @@
     <van-button type="default" 
      class="preview-button"
      color="{{preBtnColor}}"
+     loading="{{preViewLoading}}"
+     loading-text="下载中..."
      bind:click="preView">{{preBtnText}}</van-button>
      <van-button type="primary" wx:if="{{appId != 1}}"
      color="{{bgColor}}"
      class="bottom-button"
+     loading="{{shareLoading}}"
+     loading-text="下载中..."
      bind:click="fileShare">转发到微信</van-button>
    </view>
    <van-toast id="van-toast" />

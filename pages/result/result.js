@@ -14,7 +14,10 @@ Page({
     appId: 2,
     preBtnColor: '',
     preBtnText: '预览',
-    convertMsg:"如需转发到微信，将在广告展示完成后转发"
+    convertMsg:"如需转发到微信，将在广告展示完成后转发",
+    tempFilePath: '',
+    preViewLoading: false,
+    shareLoading: false
   },
 
   /**
@@ -43,32 +46,78 @@ Page({
   fileShare() {
       // callback 写法
       const fileName = this.data.fileName;
-      wx.downloadFile({
-        // 下载url
-        url: this.data.respData[0], 
-        success (res) {
-          console.log("文件下载完成")
-          // 下载完成后转发
-          wx.shareFileMessage({
-            filePath: res.tempFilePath,
+     if (this.data.tempFilePath === ''){
+        this.setData({
+            shareLoading: true
+        });
+        const that = this
+        wx.downloadFile({
+            // 下载url
+            url: that.data.respData[0], 
+            success (res) {
+                console.log("文件下载完成")
+                that.setData({
+                    shareLoading: false,
+                    tempFilePath: res.tempFilePath
+                })
+                // 下载完成后转发
+                wx.shareFileMessage({
+                filePath: res.tempFilePath,
+                fileName: fileName,
+                success() {
+                    console.log('文件分享成功')
+                },
+                fail: console.error,
+                })
+            },
+            fail: console.error,
+            })
+     } else {
+        wx.shareFileMessage({
+            filePath: this.data.tempFilePath,
             fileName: fileName,
             success() {
                 console.log('文件分享成功')
             },
             fail: console.error,
-          })
-        },
-        fail: console.error,
-      })
+        })
+     }
   },
   preView() {
     if (this.data.appId != 1) {
-        docView.fileViwe(this.data.respData[0]);
+        if (this.data.tempFilePath.trim() === '') {
+            this.setData({
+                preViewLoading: true
+            })
+            this.preDownload()
+        } else {
+            docView.directViwe(this.data.tempFilePath)
+        }
     } else {
         wx.previewImage({
             current: this.data.respData[0], // 当前显示图片的 http 链接
             urls: this.data.respData // 需要预览的图片 http 链接列表
         })
     }
+  },
+  preDownload() {
+    const that = this;
+    wx.downloadFile({
+        url: that.data.respData[0],
+        success: function (res) {
+            if(res.statusCode != 200) {
+                Toast.fail(res.statusCode)
+            }
+            that.setData({
+                tempFilePath: res.tempFilePath,
+                preViewLoading: false
+            })
+            docView.directViwe(res.tempFilePath)
+        },
+        fail: function (err) {
+            console.log(err, "wx.downloadFile fail err");
+            Toast.success('文件加载失败')
+        }
+    })
   }
 })

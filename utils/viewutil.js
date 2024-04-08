@@ -2,13 +2,14 @@
 * 文件并预览
 */
 function fileViwe(url) {
-    console.log('方法被调用了 + ' + url)
+    console.log('方法被调用了 + ' + url + new Date())
     wx.downloadFile({
         url: url,
         success: function (res) {
             if(res.statusCode != 200) {
                 Toast.fail(res.statusCode)
             }
+            console.log(new Date)
             var Path = res.tempFilePath 
             wx.openDocument({
                 filePath: Path,
