@@ -14,10 +14,12 @@ Page({
     appId: 2,
     preBtnColor: '',
     preBtnText: '预览',
-    convertMsg:"如需转发到微信，将在广告展示完成后转发",
+    convertMsg:"如需转发到微信，将在广告展示完成后转发。",
+    noticeMsg: '微信预览样式可能会有差异，请以电脑查看为准。文件太大，预览可能会白屏，请耐心等一会。',
     tempFilePath: '',
     preViewLoading: false,
-    shareLoading: false
+    shareLoading: false,
+    disabled: false
   },
 
   /**
@@ -38,6 +40,7 @@ Page({
       if (this.data.appId == 1) {
           this.setData({
             preBtnText: '预览分享保存',
+            noticeMsg: '预览时，图片可左右滑动，长按目标图片，屏幕下方会弹出微信内置的转发到微信和保存到相册的选项。',
             preBtnColor: app.globalData.bgColor,
           })
       }
@@ -48,7 +51,8 @@ Page({
       const fileName = this.data.fileName;
      if (this.data.tempFilePath === ''){
         this.setData({
-            shareLoading: true
+            shareLoading: true,
+            disabled: true
         });
         const that = this
         wx.downloadFile({
@@ -58,6 +62,7 @@ Page({
                 console.log("文件下载完成")
                 that.setData({
                     shareLoading: false,
+                    disabled: false,
                     tempFilePath: res.tempFilePath
                 })
                 // 下载完成后转发
@@ -87,7 +92,8 @@ Page({
     if (this.data.appId != 1) {
         if (this.data.tempFilePath.trim() === '') {
             this.setData({
-                preViewLoading: true
+                preViewLoading: true,
+                disabled: true
             })
             this.preDownload()
         } else {
@@ -110,7 +116,8 @@ Page({
             }
             that.setData({
                 tempFilePath: res.tempFilePath,
-                preViewLoading: false
+                preViewLoading: false,
+                disabled: false
             })
             docView.directViwe(res.tempFilePath)
         },

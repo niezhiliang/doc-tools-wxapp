@@ -38,7 +38,7 @@ export const requestApi = (parmas) => {
             ...parmas,
             // 注意，此行必须放在   ...parmas  之下，才能覆盖其传入的url:xxx参数
             url: baseUrl + parmas.url,
-            timeout: 30000,
+            timeout: 60000,
             /**
              * !可以设置上默认的content-type，然后再扩展出传入的myHeader，如果传入的myHeader为空，那header就还是默认的content-type一个键值对
              * !{ 'content-type': 'application/json', ...myHeader } ==》 扩展出myHeader这个对象中的键值对;

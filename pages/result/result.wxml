@@ -2,10 +2,9 @@
 <van-notice-bar 
     background="#f8f7fad8"
     left-icon="volume-o"
-    wx:if="{{appId == 1}}"
     color="{{bgColor}}"
     style="margin-top: 30rpx;border-radius: 10rpx;"
-    text="预览时，图片可左右滑动，长按目标图片，屏幕下方会弹出微信内置的转发到微信和保存到相册的选项。"/>
+    text="{{noticeMsg}}"/>
   <van-empty image="/imgs/success1.png" 
   description="转换成功" 
   custom-class="small-image"
@@ -21,13 +20,15 @@
      class="preview-button"
      color="{{preBtnColor}}"
      loading="{{preViewLoading}}"
-     loading-text="下载中..."
+     loading-text="下载中"
+     disabled="{{disabled}}"
      bind:click="preView">{{preBtnText}}</van-button>
      <van-button type="primary" wx:if="{{appId != 1}}"
      color="{{bgColor}}"
      class="bottom-button"
+     disabled="{{disabled}}"
      loading="{{shareLoading}}"
-     loading-text="下载中..."
+     loading-text="下载中"
      bind:click="fileShare">转发到微信</van-button>
    </view>
    <van-toast id="van-toast" />
