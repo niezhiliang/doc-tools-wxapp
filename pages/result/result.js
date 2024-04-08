@@ -15,7 +15,7 @@ Page({
     preBtnColor: '',
     preBtnText: '预览',
     convertMsg:"如需转发到微信，将在广告展示完成后转发。",
-    noticeMsg: '微信预览样式可能会有差异，请以电脑查看为准。文件太大，预览可能会白屏，请耐心等一会。',
+    noticeMsg: '预览样式可能会有差异，请以电脑查看为准。文件太大，预览可能会出现白屏，请耐心等一会。',
     tempFilePath: '',
     preViewLoading: false,
     shareLoading: false,
