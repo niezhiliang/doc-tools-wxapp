@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/imgview/imgview",
+    "pages/home/home",
     "pages/index/index",
     "pages/result/result",
     "pages/view/view",
-    "pages/imgview/imgview",
-    "pages/home/home",
     "pages/upload/upload"
   ],
   "window": {

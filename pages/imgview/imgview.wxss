@@ -28,8 +28,7 @@
   position: relative;
   width: 196rpx;
   height: 196rpx;
-  margin-right: 40rpx;
-  margin-bottom: 30rpx;
+  margin: 18rpx;
   border: 2rpx solid rgba(0, 0, 0, 0.06);
 }
 .picRelative:nth-child(3n){

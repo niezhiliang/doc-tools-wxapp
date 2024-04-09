@@ -3,6 +3,7 @@
 <view class="van-doc-content">
     <view class="van-doc-card">
     <view class="jie-shao-title">{{msg}}</view>
+    <view wx:if="{{appPrompt.length == 0}}" class="jie-shao-front">暂无使用说明</view>
     <block wx:for="{{appPrompt}}" wx:key="tip" wx:for-item="tip" wx:for-index="i">
         <view class="jie-shao-front">{{tip}}</view>
     </block>

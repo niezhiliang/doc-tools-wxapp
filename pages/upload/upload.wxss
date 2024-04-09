@@ -1,6 +1,9 @@
+.van-doc-card{
+    border-radius: 30rpx;
+}
 .van-doc-content {
   flex: 1;
-  padding: 0 0 75px;
+  padding: 0 0 75rpx;
   position: relative;
   margin-left: 1rem;
   margin-right: 1rem;
