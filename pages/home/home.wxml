@@ -1,6 +1,3 @@
-<view>
- <canvas canvas-id="myCanvas" catchtouchstart="handleTouchStart" catchtouchmove="handleTouchMove" style="width:100%;height:100vh;"></canvas>
- <view style="position:fixed;bottom:20rpx;width:100%;text-align:center;">
-   <button bindtap="saveImageToPhotosAlbum">保存图片</button>
- </view>
-</view>
+<div class="upload-container">
+ <van-uploader file-list="{{ fileList }}" show-upload="false" preview-size="110"/>
+</div>

@@ -6,14 +6,22 @@ page {
   background-color: #BE99FF;
   align-items:stretch;
 }
-
 .custom-grid-item .van-grid-item__text {
     font-size:0.8rem;
-    font-weight: bolder;
+    font-weight: 700;
     margin-top:2rem;
+    color: #646566;
    }
+
+.grid .van-grid-item__content {
+    /* background-color: #F5F5F6; */
+    /* border-radius: 30rpx; */
+    border: none;
+    /* border: 1rpx solid #BE99FF; */
+}
 /* 在 WXSS 文件中 */
 .grid-container {
+    margin: 0;
     position:absolute;
     top:0;
     bottom:0;
@@ -21,9 +29,8 @@ page {
     right:0;
     margin-top: 280rpx;
     padding-top: 30rpx;
-    overflow:hidden;
     background-color: white;
-    border-radius: 40rpx;
+    border-radius: 30rpx;
     flex:1;/* 填充剩余的空间，将高度延伸至底部 */
    }
    .title {
@@ -59,4 +66,22 @@ page {
     font-weight: bold;
     line-height: 1.5;
     font-family: Open Sans, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, miui, Hiragino Sans GB, Microsoft Yahei, sans-serif;
+ }
+
+ .tool-box{
+     width: 100%;
+     height: auto;
+     /* background-color: #F5F5F6; */
+     border-radius: 15rpx;
+ }
+
+ .guangao{
+     box-sizing: border-box;
+     background-color: violet;
+     width: 96%;
+     margin-left: 2%;
+     border-radius: 20rpx;
+     height: 12rem;
+     align-items: center;
+     justify-content: center;
  }
