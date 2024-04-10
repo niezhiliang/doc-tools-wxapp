@@ -10,8 +10,7 @@
   custom-class="small-image"
   custom-class="custom-empty">
     <view class="button-container">
-      <view wx:if="{{adSwitch}}" class="convert-msg">{{convertMsg}}</view>
-      <view  class="convert-msg"></view>
+      <view wx:if="{{app.globalData.adSwich}}" class="convert-msg">{{convertMsg}}</view>
     </view>
 </van-empty>
 

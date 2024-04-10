@@ -8,7 +8,6 @@ Page({
    */
   data: {
     bgColor: '',
-    adSwitch: false,
     appInfo:{
         id: 1,
         title: "APP标题",
@@ -32,8 +31,7 @@ Page({
         title: '文件上传',
       })
     this.setData({
-        bgColor: app.globalData.bgColor,
-        adSwitch: app.globalData.adSwitch
+        bgColor: app.globalData.bgColor
     }),
     this.getAppInfo(option.appId);
     this.getAppPrompt(option.appId);

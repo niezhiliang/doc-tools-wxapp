@@ -18,7 +18,14 @@ page {
   margin-bottom: 2rem;
   padding: 1rem;
 }
-
+.ad{
+    box-sizing: border-box;
+    border: 1rpx solid red;
+    width: 96%;
+    margin-left: 2%;
+    border-radius: 20rpx;
+    height: 12rem;
+}
 .footer{
     position: fixed;
     right: 0;

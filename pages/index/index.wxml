@@ -20,7 +20,14 @@
             </van-grid>
         </view>
         </view>
-        <!-- <view class="guangao">
+        <!-- <view class="ad footer">
+            <ad unit-id="adunit-c1dfad7bb6c1d324" 
+            ad-type="video" 
+            ad-theme="white" 
+            bindload="adLoad"
+            binderror="adError" 
+            bindclose="adClose">             
+            </ad>
         </view> -->
     </view>
 </view>

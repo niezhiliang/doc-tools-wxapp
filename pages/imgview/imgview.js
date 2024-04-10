@@ -7,23 +7,15 @@ Page({
   data: {
     appId: 1,
     bgColor: '',
-    adSwitch: false,
     fileName: '',
     currentTouchIndex: -1,
-    currentX: 0,
-    currentY: 0,
-    defaultX: 0,
-    defaultY: 0,
-    moveIng: false,
     picObjList: []
   },
   onLoad(options){
     let filePath = options.name;
     this.setData({
         appId: options.appId,
-        // picObjList: this.data.picObjList.concat(obj.data),
         bgColor: app.globalData.bgColor,
-        adSwitch: app.globalData.adSwitch,
         fileTmpPath: options.path,
         fileName: filePath.substring(0,filePath.lastIndexOf('.')),
     });
@@ -33,15 +25,9 @@ Page({
         this.fileUpload(e);
     }
   },
-  // 显示底层可移动模块
-  showMoveBlock(e){
-    const { index } = e.currentTarget.dataset
-    this.setData({
-      currentTouchIndex: index
-    })
-  },
   deleteImg(e){
     const i = e.currentTarget.dataset.index
+    console.log(i + 'xxx')
     const picObjList = this.data.picObjList;
     picObjList.splice(i,1);
     this.setData({
@@ -51,8 +37,6 @@ Page({
   // 预览图片
   previewImg(e){
     const i = e.currentTarget.dataset.index
-    console.log('7777777'+this.data.picObjList[i].url)
-    console.log('7777777'+this.data.picObjList.map(item => item.url))
     wx.previewImage({
       current: this.data.picObjList[i].url, // 当前显示图片的 http 链接
       urls: this.data.picObjList.map(item => item.url) // 需要预览的图片 http 链接列表

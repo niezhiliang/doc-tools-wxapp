@@ -74,14 +74,3 @@ page {
      /* background-color: #F5F5F6; */
      border-radius: 15rpx;
  }
-
- .guangao{
-     box-sizing: border-box;
-     background-color: violet;
-     width: 96%;
-     margin-left: 2%;
-     border-radius: 20rpx;
-     height: 12rem;
-     align-items: center;
-     justify-content: center;
- }
