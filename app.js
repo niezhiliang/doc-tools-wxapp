@@ -16,8 +16,7 @@ App({
   globalData: {
     userInfo: null,
     // baseUrl: 'http://192.168.3.92:9876', // 后端请求地址的常量
-    // baseUrl: 'http://159.75.95.172:8080',
-    baseUrl: 'http://159.75.137.212:9876',
+    baseUrl: 'https://api.doctool.cc/api',
     bgColor: '#FFB6C1',
     adSwitch: true
   }
