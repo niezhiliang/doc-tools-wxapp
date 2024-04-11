@@ -8,7 +8,6 @@ Page({
    */
   data: {
     bgColor: '',
-    adSwitch: false,
     fileName: '',
     respData: [],
     appId: 2,
@@ -31,7 +30,6 @@ Page({
       console.log('232' + JSON.stringify(url))
       this.setData({
         bgColor: app.globalData.bgColor,
-        adSwitch: app.globalData.adSwitch,
         appId: options.appId,
         respData: respData,
         fileName: options.name + url.substring(url.lastIndexOf('.'))

@@ -10,7 +10,6 @@ Page({
    */
   data: {
     bgColor: '',
-    adSwitch: false,
     percentage: 1,
     appId: 1,
     fileInfo: {},
@@ -32,7 +31,6 @@ Page({
     let filePath = options.name;
     this.setData({
         bgColor: app.globalData.bgColor,
-        adSwitch: app.globalData.adSwitch,
         appId: options.appId,
         fileName: filePath.substring(0,filePath.lastIndexOf('.')),
         fileType: filePath.substring(filePath.lastIndexOf('.') + 1),

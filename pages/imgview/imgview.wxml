@@ -2,17 +2,10 @@
     <view class="picList">
         <view class="picRelative" wx:for="{{picObjList}}" wx:key="p" wx:for-item="pic" wx:for-index="">
             <image class="dynamicImg" src="{{pic.url}}" mode="aspectFill" lazy-load="true" binderror="" bindload=""></image>
-            <!-- <image class="deleteImg" wx:if="{{index !== picList.length - 1}}" bindtap="deleteImg" src="/imgs/delete.png" mode="scaleToFill" lazy-load="false" binderror="" bindload="" data-index="{{index}}" /> -->
             <image class="deleteImg" wx:if="{{0 !== picList.length}}" bindtap="deleteImg" src="/imgs/delete.png" mode="scaleToFill" lazy-load="false" binderror="" bindload="" data-index="{{index}}" />
-            <movable-view wx:if="{{!moveIng}}" class="areaMove" bindchange="bindchange" direction="all" damping="30" x="{{defaultX}}" y="{{defaultY}}" disabled="{{currentTouchIndex === index ? false : true}}" style="z-index: {{currentTouchIndex === index ? '3' : '1'}}">
-                <image class="{{currentTouchIndex === index ? 'areaImg' : ''}}" bindtap="previewImg" data-index="{{index}}" src="{{item.tempFilePath}}" mode="aspectFill" lazy-load="false" binderror="" bindload="" />
-            </movable-view>
         </view>
     </view>
 </movable-area>
-
-<!-- <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" /> -->
-
 
 <view>
     <van-button 

@@ -3,6 +3,15 @@ const app = getApp();
 import { requestApi } from "../../utils/service";
 
 Page({
+    adLoad() {
+        console.log('Banner 广告加载成功')
+      },
+      adError(err) {
+        console.error('Banner 广告加载失败', err)
+      },
+      adClose() {
+        console.log('Banner 广告关闭')
+      },
     data: {
         appList: [],
         appSeeting: {
@@ -20,7 +29,7 @@ Page({
         this.getAppList();
         // 全局变量存入缓存
         app.globalData.bgColor = this.data.appSeeting.bgColor;
-        app.globalData.adSwich = this.data.appSeeting.adSwich;
+        app.globalData.adSwich = this.data.appSeeting.adSwich == 1;
     },
     getAppSeeting() {
         const that = this;
