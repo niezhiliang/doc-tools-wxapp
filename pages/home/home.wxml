@@ -1,3 +1,6 @@
 <div class="upload-container">
- <van-uploader file-list="{{ fileList }}" show-upload="false" preview-size="110"/>
+ <van-uploader file-list="{{ fileList }}" 
+ show-upload="false" 
+ preview-size="110"
+ bind:delete="deleteImg"/>
 </div>

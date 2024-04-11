@@ -1,8 +1,15 @@
 <movable-area class="areaBlock">
     <view class="picList">
-        <view class="picRelative" wx:for="{{picObjList}}" wx:key="p" wx:for-item="pic" wx:for-index="">
+        <view class="picRelative" 
+        wx:for="{{picObjList}}" 
+        wx:key="p" 
+        wx:for-item="pic" 
+        wx:for-index="index">
             <image class="dynamicImg" src="{{pic.url}}" mode="aspectFill" lazy-load="true" binderror="" bindload=""></image>
-            <image class="deleteImg" wx:if="{{0 !== picList.length}}" bindtap="deleteImg" src="/imgs/delete.png" mode="scaleToFill" lazy-load="false" binderror="" bindload="" data-index="{{index}}" />
+            <image class="deleteImg" wx:if="{{0 !== picList.length}}" bindtap="deleteImg" src="/imgs/delete.png" mode="scaleToFill" lazy-load="false" 
+            binderror="" 
+            bindload="" 
+            data-index="{{index}}" />
         </view>
     </view>
 </movable-area>
