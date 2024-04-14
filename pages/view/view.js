@@ -5,6 +5,18 @@ import { requestApi } from "../../utils/service";
 const docView = require('../../utils/viewutil');
 
 Page({
+    onShareAppMessage: function (res) {
+        return {
+          title: 'PDF转换器',
+          path: '/pages/index/index',
+        }
+      },
+      onShareTimeline() {
+        return {
+          title: '[小程序] PDF转换器，支持PDF和多种文档之间的相互转换！快来体验一下吧！',
+          query: 'zzfrom=pyq'
+        }
+      },
   /**
    * 页面的初始数据
    */

@@ -75,7 +75,7 @@ let listData = [
 
 Page({
 	data: {
-		isIphoneX: true,
+		isIphoneX: app.globalData.isIphoneX,
 		size: 4,
 		listData: [],
 		extraNodes: [
@@ -157,6 +157,7 @@ Page({
 	},
 	// 页面滚动
 	onPageScroll(e) {
+        console.log(JSON.stringify(e) + "--------")
 		this.setData({
 			scrollTop: e.scrollTop
 		});

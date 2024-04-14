@@ -10,12 +10,10 @@ page {
     font-size:0.8rem;
     font-weight: 700;
     color: #646566 !important;
-    /* color: #BE99FF !important; */
    }
 .grid .van-grid-item__content {
     background-color: #F5F5F6;
     border-radius: 17rpx;
-    border:none !important;
 }
 /* 在 WXSS 文件中 */
 .grid-container {

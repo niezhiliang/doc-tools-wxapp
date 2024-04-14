@@ -1,13 +1,16 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/imgview/imgview",
+    "pages/drag/index",   
     "pages/home/home",
+    "pages/imgview/imgview",
     "pages/result/result",
     "pages/view/view",
     "pages/upload/upload"
   ],
+  "shareTimeline": true,
   "window": {
+    "backgroundTextStyle": "dark",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "PDF转换器",
     "navigationBarBackgroundColor": "#ffffff"

@@ -4,6 +4,18 @@ const baseUrl = app.globalData.baseUrl;
 import { requestApi } from "../../utils/service";
 
 Page({
+    onShareAppMessage: function (res) {
+        return {
+          title: 'PDF转换器',
+          path: '/pages/index/index',
+        }
+      },      
+      onShareTimeline() {
+        return {
+          title: '[小程序] PDF转换器，支持PDF和多种文档之间的相互转换！快来体验一下吧！',
+          query: 'zzfrom=pyq'
+        }
+      },
   data: {
     appId: 1,
     bgColor: '',

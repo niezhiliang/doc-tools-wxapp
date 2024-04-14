@@ -6,7 +6,7 @@
             <view  wx:for="{{appList}}" wx:for-item="appGroup" style="padding: 5rpx;">
             <view class="app-group">{{appGroup.groupName}}</view>
             <van-grid 
-                border="true"
+                border="{{false}}"
                 gutter="{{appSeeting.gutter}}" 
                 direction="horizontal"
                 column-num="{{appSeeting.columnNum}}"
