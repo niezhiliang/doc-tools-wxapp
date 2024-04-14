@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/imgview/imgview",
     "pages/home/home",
-    "pages/index/index",
     "pages/result/result",
     "pages/view/view",
     "pages/upload/upload"
@@ -17,6 +17,8 @@
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
     "van-button": "@vant/weapp/button/index",
     "van-grid": "@vant/weapp/grid/index",
     "van-grid-item": "@vant/weapp/grid-item/index",

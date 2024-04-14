@@ -17,7 +17,7 @@ App({
     userInfo: null,
     // baseUrl: 'http://192.168.3.92:9876', // 后端请求地址的常量
     baseUrl: 'https://api.doctool.cc/api',
-    bgColor: '#FFB6C1',
+    bgColor: '#BE99FF',
     adSwitch: true
   }
 })

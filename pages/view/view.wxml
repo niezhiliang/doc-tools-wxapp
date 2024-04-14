@@ -16,7 +16,21 @@
             <van-progress color="{{bgColor}}" percentage="{{percentage}}" />
         </view>
     </van-card>
-    <!-- </view> -->
+    <!-- <view wx:if="{{appId == 4}}" 
+    style="padding: 10rpx 30rpx; display: flex;color: #646566;">
+        <span>转换格式：</span>
+        <van-radio-group
+        value="{{ imgFlagRadio }}"
+        bind:change="onChange"
+        direction="horizontal">
+            <van-radio 
+            checked-color="{{ bgColor }}" 
+            name="true">图片</van-radio>
+            <van-radio 
+            checked-color="{{ bgColor }}"
+            name="false">文本</van-radio>
+        </van-radio-group>
+    </view> -->
     
     
 

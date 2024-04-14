@@ -1,14 +1,16 @@
 <view class="full-screen-container">
     <view class="title">{{appSeeting.appName}}</view>
     <view class="grid-container">
+        <!-- https://pdf19.hfyhwl.cn/word2html 偷图网址-->
         <view class="tool-box">
-            <view  wx:for="{{appList}}" wx:for-item="appGroup" style="padding: 15rpx;">
+            <view  wx:for="{{appList}}" wx:for-item="appGroup" style="padding: 5rpx;">
             <view class="app-group">{{appGroup.groupName}}</view>
             <van-grid 
+                border="true"
                 gutter="{{appSeeting.gutter}}" 
-                border="false"
+                direction="horizontal"
                 column-num="{{appSeeting.columnNum}}"
-                 icon-size="{{appSeeting.iconSize}}">
+                icon-size="{{appSeeting.iconSize}}">
                  
                 <van-grid-item
                 wx:for="{{appGroup.appList}}" wx:for-item="app"

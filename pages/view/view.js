@@ -18,7 +18,8 @@ Page({
     fileTmpPath: '',
     fileSize: '',
     loadStatus: true,
-    btnText: '文件上传中...'
+    btnText: '文件上传中...',
+    imgFlagRadio: 'true',
   },
 
   /**
@@ -38,6 +39,12 @@ Page({
         fileSize: options.size,
     });
     this.fileUpload();
+  },
+  onChange(event) {
+    console.log(event)
+    this.setData({
+      imgFlagRadio: event.detail,
+    })
   },
   // 文件预览功能
   onPreView() {
@@ -93,7 +100,8 @@ Page({
     requestApi({ url: "/doc/convert", method: 'POST',
      data: {
         "type": appId,
-        "pathKeys":new Array(this.data.fileInfo.urlKey)
+        "pathKeys":new Array(this.data.fileInfo.urlKey),
+        "saveImgFlag": this.data.imgFlagRadio
     }})
     .then((res) => {
         if (res.statusCode ===200 && res.data.code === 'SUCCESS') {

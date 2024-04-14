@@ -9,15 +9,13 @@ page {
 .custom-grid-item .van-grid-item__text {
     font-size:0.8rem;
     font-weight: 700;
-    margin-top:2rem;
-    color: #646566;
+    color: #646566 !important;
+    /* color: #BE99FF !important; */
    }
-
 .grid .van-grid-item__content {
-    /* background-color: #F5F5F6; */
-    /* border-radius: 30rpx; */
-    border: none;
-    /* border: 1rpx solid #BE99FF; */
+    background-color: #F5F5F6;
+    border-radius: 17rpx;
+    border:none !important;
 }
 /* 在 WXSS 文件中 */
 .grid-container {
@@ -52,12 +50,10 @@ page {
       opacity:1;
     }
    }
- 
  .custom-grid-item .van-grid-item__text {
-    margin-top:20rpx !important;
     font-size: 23rpx;
     color: #323233;
-    border: none !important;
+    margin-top: -2rpx !important;
  }
  .app-group {
     margin: 15rpx;
