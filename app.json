@@ -1,7 +1,8 @@
 {
   "pages": [
+    "pages/history/record",
     "pages/index/index",
-    "pages/drag/index",   
+    "pages/drag/index",
     "pages/home/home",
     "pages/imgview/imgview",
     "pages/result/result",
@@ -38,6 +39,8 @@
     "van-card": "@vant/weapp/card/index",
     "van-circle": "@vant/weapp/circle/index",
     "van-progress": "@vant/weapp/progress/index",
-    "van-notice-bar": "@vant/weapp/notice-bar/index"
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index"
   }
 }

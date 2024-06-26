@@ -1,0 +1,15 @@
+ <view wx:for="{{9}}" wx:key="i"  wx:for-item="index"
+  style="border: 1rpx solid red;margin: 20rpx;">
+    <van-card
+  num="2024-06-26 19:36:30"
+  price="转换成功"
+  currency=""
+  desc="Word转PDF"
+  title="测试文件转换.docx"
+  thumb="/imgs/file.png"
+  price-class="font-class"
+  desc-class="desc-class2"
+  title-class="font-class"
+  thumb-class="thumb-class2"
+/>
+ </view>

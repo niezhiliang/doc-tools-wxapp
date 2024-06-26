@@ -25,6 +25,7 @@ Page({
         console.log('Banner 广告关闭')
       },
     data: {
+        active: 0,
         appList: [],
         appSeeting: {
             "id": 1,
@@ -43,6 +44,9 @@ Page({
         app.globalData.bgColor = this.data.appSeeting.bgColor;
         app.globalData.adSwich = this.data.appSeeting.adSwich == 1;
     },
+    onChange(event) {
+        this.setData({ active: event.detail });
+      },
     getAppSeeting() {
         const that = this;
         requestApi({ url: "/app/getAppSetting", data: {} })

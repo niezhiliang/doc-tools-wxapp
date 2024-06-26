@@ -1,0 +1,17 @@
+/* pages/record.wxss */
+
+
+.font-class {
+    color: burlywood;
+    font-size: 25rpx !important;
+    font-weight:normal !important;
+}
+.thumb-class2 {
+    width: 130rpx;
+    height: 130rpx;
+}
+.desc-class2 {
+    margin-top: 15rpx;
+    font-size: 30rpx;
+    display: flex;
+}
