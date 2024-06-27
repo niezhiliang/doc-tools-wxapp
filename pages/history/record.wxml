@@ -1,15 +1,34 @@
- <view wx:for="{{9}}" wx:key="i"  wx:for-item="index"
+ <view wx:for="{{records}}" wx:for-item="record"
   style="border: 1rpx solid red;margin: 20rpx;">
     <van-card
-  num="2024-06-26 19:36:30"
-  price="转换成功"
+  bind:tap="redirectToResult"
+  data-id="{{record.id}}"
+  data-type="{{record.convertType}}"
+  num="{{record.createTime}}"
+  price="{{typeEnum[record.convertStatus]}}"
   currency=""
-  desc="Word转PDF"
-  title="测试文件转换.docx"
-  thumb="/imgs/file.png"
+  desc="{{record.appName}}"
+  title="{{record.fileName}}"
+  thumb="{{record.convertTypeImg}}"
   price-class="font-class"
   desc-class="desc-class2"
   title-class="font-class"
   thumb-class="thumb-class2"
 />
  </view>
+
+ <van-tabbar
+  active="{{active}}"
+  active-color="{{bgColor}}"
+  inactive-color="#000"
+  bind:change="onChange"
+>
+  <van-tabbar-item icon="home-o">首页</van-tabbar-item>
+  <van-tabbar-item icon="search"></van-tabbar-item>
+  <!-- <van-tabbar-item icon="friends-o">我</van-tabbar-item> -->
+</van-tabbar>
+
+<view class="refresh" hidden="{{!isRefreshing}}">
+  <text class="text">{{refreshText}}</text>
+  <image class="icon" src="/images/refresh.png"></image>
+</view>

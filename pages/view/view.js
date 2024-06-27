@@ -113,15 +113,14 @@ Page({
      data: {
         "type": appId,
         "pathKeys":new Array(this.data.fileInfo.urlKey),
-        "saveImgFlag": this.data.imgFlagRadio
+        "saveImgFlag": this.data.imgFlagRadio,
+        "openId": app.globalData.openId
     }})
     .then((res) => {
         if (res.statusCode ===200 && res.data.code === 'SUCCESS') {
             Toast.clear();
-            var response = JSON.stringify(res.data.data);
             wx.reLaunch({
-              url: '/pages/result/result?appId=' + appId + '&name=' + fileName
-              + '&respData=' + response,
+              url: '/pages/history/record'
             })
         } else {
             Toast.fail('转换失败',5)

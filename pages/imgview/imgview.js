@@ -112,15 +112,16 @@ Page({
     const fileName = this.data.fileName;
     requestApi({ url: "/doc/convert", method: 'POST',
      data: {
+        "openId": app.globalData.openId,
         "type": appId,
+        "openId": app.globalData.openId,
         "pathKeys": this.data.picObjList.map(item => item.urlKey)
     }})
     .then((res) => {
         if (res.statusCode ===200 && res.data.code === 'SUCCESS') {
-            var response = JSON.stringify(res.data.data);
             Toast.clear();
             wx.reLaunch({
-              url: '/pages/result/result?respData=' + response + '&name=' + fileName,
+              url: '/pages/history/record'
             })
         } else {
             Toast.fail('转换失败',5)

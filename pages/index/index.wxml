@@ -32,7 +32,7 @@
             </ad>
         </view> -->
     </view>
-    <van-tabbar
+<van-tabbar
   active="{{ active }}"
   active-color="{{appSeeting.bgColor}}"
   inactive-color="#000"
@@ -40,7 +40,7 @@
 >
   <van-tabbar-item icon="home-o">首页</van-tabbar-item>
   <van-tabbar-item icon="search"></van-tabbar-item>
-  <van-tabbar-item icon="friends-o">我</van-tabbar-item>
+  <!-- <van-tabbar-item icon="friends-o">我</van-tabbar-item> -->
 </van-tabbar>
 </view>
 

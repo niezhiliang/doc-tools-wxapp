@@ -46,6 +46,11 @@ Page({
     },
     onChange(event) {
         this.setData({ active: event.detail });
+        if (event.detail == 1) {
+            wx.redirectTo({
+              url: '/pages/history/record',
+            })
+        }
       },
     getAppSeeting() {
         const that = this;

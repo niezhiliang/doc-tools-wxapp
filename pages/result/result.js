@@ -1,6 +1,8 @@
 const docView = require('../../utils/viewutil');
 import Toast from '@vant/weapp/toast/toast';
 const app = getApp();
+import { requestApi } from "../../utils/service";
+
 Page({
     onShareAppMessage: function (res) {
         return {
@@ -36,14 +38,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-      const respData = JSON.parse(options.respData);
-      const url = respData[0];
-      console.log('232' + JSON.stringify(url))
+    //   const respData = JSON.parse(options.respData);
+    //   const url = respData[0];
+    //   console.log('232' + JSON.stringify(url))
+      this.getConvertDetail(options.id);
       this.setData({
-        bgColor: app.globalData.bgColor,
-        appId: options.appId,
-        respData: respData,
-        fileName: options.name + url.substring(url.lastIndexOf('.'))
+        bgColor: app.globalData.bgColor
       })
       console.log(this.data.fileName)
       if (this.data.appId == 1) {
@@ -117,6 +117,7 @@ Page({
   },
   preDownload() {
     const that = this;
+    console.log(that.data.respData +'1111')
     wx.downloadFile({
         url: that.data.respData[0],
         success: function (res) {
@@ -133,6 +134,22 @@ Page({
         fail: function (err) {
             console.log(err, "wx.downloadFile fail err");
             Toast.success('文件加载失败')
+        }
+    })
+  },
+  // 获取转换详情
+  getConvertDetail(id) {
+    const that = this;
+    requestApi({ url: "/doc/getConvertRecordDetail", data: {"id": id} })
+    .then((res) => {
+        if (res.data.code === 'SUCCESS') {
+            that.setData({
+                appId: res.data.data.convertType,
+                respData: JSON.parse(res.data.data.convertedFile),
+                fileName: res.data.data.fileNameme
+            })
+        } else {
+            Toast.fail('获取转换详情失败');
         }
     })
   }

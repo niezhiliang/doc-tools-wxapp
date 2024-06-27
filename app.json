@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/history/record",
     "pages/index/index",
+    "pages/history/record",
     "pages/drag/index",
     "pages/home/home",
     "pages/imgview/imgview",
