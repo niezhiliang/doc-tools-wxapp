@@ -3,7 +3,6 @@ App({
   onLaunch() {
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
         //判断机型(适配iphoneX)
 		wx.getSystemInfo({
@@ -14,11 +13,23 @@ App({
 				}
 			}
 		});
-
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.request({
+          url: this.globalData.baseUrl +'/app/getOpenId?code=' + res.code,
+          timeout: 10000,
+          success: (res) => {
+            if (res.data.code === 'SUCCESS') {
+              this.globalData.openId = res.data.data;
+              console.log('open_id:' + this.globalData.openId)
+          } else {
+            this.globalData.openId = res.data.message;
+            console.log(this.globalData.openId)
+          }
+        }
+        })
       }
     })
   },
@@ -28,6 +39,7 @@ App({
     baseUrl: 'https://api.doctool.cc/api',
     bgColor: '#BE99FF',
     adSwitch: true,
-    isIphoneX: false
+    isIphoneX: false,
+    openId: ''
   }
 })
