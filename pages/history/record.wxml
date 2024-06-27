@@ -1,5 +1,6 @@
- <view wx:for="{{records}}" wx:for-item="record"
-  style="border: 1rpx solid red;margin: 20rpx;">
+<view style="padding: 10rpx;">
+    <view wx:for="{{records}}" wx:for-item="record"
+  style="border: 1rpx solid #BE99FF;margin: 10rpx">
     <van-card
   bind:tap="redirectToResult"
   data-id="{{record.id}}"
@@ -31,4 +32,5 @@
 <view class="refresh" hidden="{{!isRefreshing}}">
   <text class="text">{{refreshText}}</text>
   <image class="icon" src="/images/refresh.png"></image>
+</view>
 </view>
