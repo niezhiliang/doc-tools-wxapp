@@ -7,7 +7,7 @@
 </view>
 <view style="padding: 10rpx;">
     <view wx:for="{{records}}" wx:for-item="record"
-  style="margin: 15rpx;box-shadow: 0 0 2rpx 2rpx #BE99FF; border-radius: 15rpx;">
+  style="margin: 15rpx;box-shadow: 0 0 2rpx 2rpx #BE99FF; border-radius: 5rpx;">
     <van-card
   bind:tap="redirectToResult"
   data-id="{{record.id}}"
