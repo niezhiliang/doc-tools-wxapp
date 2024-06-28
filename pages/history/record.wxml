@@ -1,18 +1,26 @@
+<van-notice-bar 
+    left-icon="volume-o"
+    style="margin-top: 30rpx;border-radius: 10rpx;"
+    text="{{noticeMsg}}"/>
+<view wx:if="{{records.length == 0}}">
+  <van-empty description="暂无数据" />
+</view>
 <view style="padding: 10rpx;">
     <view wx:for="{{records}}" wx:for-item="record"
-  style="border: 1rpx solid #BE99FF;margin: 10rpx">
+  style="margin: 15rpx;box-shadow: 0 0 2rpx 2rpx #BE99FF; border-radius: 15rpx;">
     <van-card
   bind:tap="redirectToResult"
   data-id="{{record.id}}"
   data-type="{{record.convertType}}"
+  data-status="{{record.convertStatus}}"
   num="{{record.createTime}}"
   price="{{typeEnum[record.convertStatus]}}"
   currency=""
   desc="{{record.appName}}"
   title="{{record.fileName}}"
   thumb="{{record.convertTypeImg}}"
-  price-class="font-class"
-  desc-class="desc-class2"
+  price-class="bottom-font"
+  desc-class="bottom-font"
   title-class="font-class"
   thumb-class="thumb-class2"
 />
@@ -25,12 +33,8 @@
   bind:change="onChange"
 >
   <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-  <van-tabbar-item icon="search"></van-tabbar-item>
+  <van-tabbar-item icon="notes-o">记录</van-tabbar-item>
   <!-- <van-tabbar-item icon="friends-o">我</van-tabbar-item> -->
 </van-tabbar>
-
-<view class="refresh" hidden="{{!isRefreshing}}">
-  <text class="text">{{refreshText}}</text>
-  <image class="icon" src="/images/refresh.png"></image>
 </view>
-</view>
+<van-toast id="van-toast" />

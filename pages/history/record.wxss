@@ -2,18 +2,34 @@
 
 
 .font-class {
-    color: burlywood;
-    font-size: 25rpx !important;
+    color: #646566;
+    font-size: 29rpx !important;
     font-weight:normal !important;
 }
 .thumb-class2 {
-    width: 130rpx;
-    height: 130rpx;
+    width: 120rpx !important;
+    height: 120rpx !important;
 }
-.desc-class2 {
-    margin-top: 15rpx;
-    font-size: 30rpx;
-    display: flex;
+.bottom-font {
+    /* margin-top: 15rpx; */
+    font-size: 23rpx;
+    font-weight: 500 !important;
+}
+.van-card {
+  padding: 10rpx !important;
+  height: 150rpx !important;
+}
+.van-card{
+  display: block;
+}
+.van-card__content{
+  justify-content: flex-start !important;
+}
+.van-card__header{
+  height: 120rpx !important;
+}
+.van-card__thumb{
+  height: 120rpx !important;
 }
   
   .refresh {

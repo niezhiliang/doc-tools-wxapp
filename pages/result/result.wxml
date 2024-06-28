@@ -1,8 +1,6 @@
 <!--pages/result/result.wxml-->
 <van-notice-bar 
-    background="#f8f7fad8"
     left-icon="volume-o"
-    color="{{bgColor}}"
     style="margin-top: 30rpx;border-radius: 10rpx;"
     text="{{noticeMsg}}"/>
   <van-empty image="/imgs/success1.png" 

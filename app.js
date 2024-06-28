@@ -35,8 +35,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl: 'http://192.168.3.92:9876', // 后端请求地址的常量
-    // baseUrl: 'https://api.doctool.cc/api',
+    // baseUrl: 'http://192.168.3.92:9876', // 后端请求地址的常量
+    baseUrl: 'https://api.doctool.cc/api',
     bgColor: '#BE99FF',
     adSwitch: true,
     isIphoneX: false,

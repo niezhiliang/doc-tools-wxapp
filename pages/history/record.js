@@ -1,14 +1,14 @@
 const app = getApp();
 import { requestApi } from "../../utils/service";
+import Toast from '@vant/weapp/toast/toast';
 
 Page({
   data: {
-    isRefreshing: false, // 是否正在刷新
-    refreshText: '下拉刷新', // 下拉刷新文字提示
     bgColor: '',
     active: 1,
     records:[],
-    typeEnum:['','待转换','转换中','转换完成','转换失败']
+    typeEnum:['','待转换','转换中','转换完成','转换失败'],
+    noticeMsg: '转换记录和文件仅保留72小时，请及时保存！'
   },
   onLoad(options) {
     this.setData({
@@ -30,11 +30,9 @@ Page({
      data: {"openId": app.globalData.openId} })
     .then((res) => {
         if (res.data.code === 'SUCCESS') {
-            console.log(res.data)
             that.setData({
-                records: res.data.data
+              records: res.data.data
             })
-            console.log(that.data.records)
         } else {
             Toast.fail('转换列表获取失败');
         }
@@ -44,30 +42,23 @@ Page({
     redirectToResult(e) {
         const id = e.currentTarget.dataset.id;
         const appId = e.currentTarget.dataset.type;
-        console.log('resultId:'+id + ' ' + appId)
-        wx.reLaunch({
+        const status = e.currentTarget.dataset.status;
+        console.log(status + '111111')
+        if (status == 1) {
+          Toast.fail("转换排队中");
+        } else if (status == 2) {
+          Toast.fail('文件转换中');
+        } else if (status == 3) {
+          wx.reLaunch({
             url: '/pages/result/result?id=' + id
           })
+        } else if (status == 4) {
+          Toast.fail('转换失败请,重试');
+        }
     },
   // 下拉刷新事件
-  onPullDownRefresh: function () {
-    if (this.data.isRefreshing) {
-      return;
-    }
-    this.setData({
-      isRefreshing: true,
-      refreshText: '正在刷新...'
-    });
-
-    // 模拟异步请求数据
-    setTimeout(() => {
-      // 更新数据
-      this.getConvertReocrd();
-      this.setData({
-        isRefreshing: false,
-        refreshText: '下拉刷新'
-      });
-      wx.stopPullDownRefresh(); // 停止下拉刷新
-    }, 1500);
-  }
+  onPullDownRefresh() {
+    this.getConvertReocrd();
+    wx.stopPullDownRefresh();
+  },
 })

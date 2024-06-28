@@ -1,4 +1,5 @@
 {
     "navigationStyle":"custom",
-    "navigationBarTitleText": "PDF转换器"
+    "navigationBarTitleText": "PDF转换器",
+    "enablePullDownRefresh": true
 }
