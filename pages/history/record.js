@@ -72,7 +72,7 @@ Page({
         // 调起授权界面弹窗
         if (res.subscriptionsSetting.mainSwitch) {  // 用户打开了订阅消息总开关
           if (res.subscriptionsSetting.itemSettings != null) {   // 用户同意总是保持是否推送消息的选择, 这里表示以后不会再拉起推送消息的授权
-            let moIdState = res.subscriptionsSetting.itemSettings[tmplIds];  // 用户同意的消息模板id
+            let moIdState = res.subscriptionsSetting.itemSettings[that.data.tmplIds];  // 用户同意的消息模板id
             if(moIdState === 'accept'){   
               console.log('接受了消息推送');
 
@@ -87,7 +87,7 @@ Page({
           	// 当用户没有点击 ’总是保持以上选择，不再询问‘  按钮。那每次执到这都会拉起授权弹窗
             wx.showModal({
               title: '提示',
-              content:'请授权开通转换结果推送通知功能',
+              content:'请授权接收转换结果推送通知功能',
               showCancel: true,
               success: function (ress) {
                 if (ress.confirm) {  
