@@ -29,15 +29,15 @@
     "uploadWithSourceMap": true,
     "compileHotReLoad": true,
     "lazyloadPlaceholderEnable": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": false,
-    "useApiHostProcess": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useIsolateContext": false,
+    "useIsolateContext": true,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
@@ -52,7 +52,7 @@
     "tabIndent": "auto",
     "tabSize": 2
   },
-  "appid": "wx79c75fd16c306a19",
+  "appid": "wxf7cf8156b00d3728",
   "projectname": "doc-tools-wxapp",
   "condition": {}
 }
