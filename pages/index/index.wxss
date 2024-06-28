@@ -33,9 +33,9 @@ page {
     font-family: Helvetica;
     position:absolute;
     top:150rpx;/* 距离顶部的距离 */
-    left:60rpx;/* 距离左侧的距离 */
+    left:45rpx;/* 距离左侧的距离 */
     color:#ffffff;/* 设置为白色字体 */
-    font-size:50rpx;/* 设置字体大小 */
+    font-size:49rpx;/* 设置字体大小 */
     opacity:0;/* 初始设置为透明 */
     animation:fadeIn 1s forwards;/* 使用动画实现延时显示 */
    }
