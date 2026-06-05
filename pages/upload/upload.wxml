@@ -1,31 +1,34 @@
-<!-- 文件上传标题，提示用户使用的类型 -->
-<view style="text-align: center;padding-top: 2rem; padding-bottom: 2rem;font-size: 1.5rem;">{{appInfo.appName}}</view>
+<!-- 文件上传标题 -->
+<view class="upload-header">
+  <view class="upload-title">{{appInfo.appName}}</view>
+  <view class="upload-limit">最大支持 {{appInfo.maxSize}}MB</view>
+</view>
+
 <view class="van-doc-content">
-    <view class="van-doc-card">
+  <view class="van-doc-card">
     <view class="jie-shao-title">{{msg}}</view>
     <view wx:if="{{appPrompt.length == 0}}" class="jie-shao-front">暂无使用说明</view>
     <block wx:for="{{appPrompt}}" wx:key="tip" wx:for-item="tip" wx:for-index="i">
-        <view class="jie-shao-front">{{tip}}</view>
+      <view class="jie-shao-front">{{tip}}</view>
     </block>
-</view>
- <!-- 打开弹框，让用户选择文件类型，也是增加广告时长 -->
-    <view class="footer">
-        <van-button type="primary" 
-        class="footer"
-        bind:click="openShow" 
-        loading="{{loadStatus}}"
-        custom-class="custom-button"
-        color="{{bgColor}}"
-        loading-text="上传中...">选择文件</van-button>
+  </view>
+
+  <view class="support-types" wx:if="{{appInfo.supportType}}">
+    <view class="type-label">支持格式：</view>
+    <view class="type-tags">
+      <view wx:for="{{appInfo.supportType.split(',')}}" wx:key="*this" class="type-tag">{{item}}</view>
     </view>
-    
-    <van-action-sheet
-    show="{{ show }}"
-    actions="{{ actions }}"
-    bind:close="onClose"
-    bind:select="onSelect"
-    />
-    <van-toast id="van-toast" />
+  </view>
+
+  <view class="footer">
+    <van-button type="primary"
+      class="footer"
+      bind:click="openShow"
+      loading="{{loadStatus}}"
+      custom-class="custom-button"
+      color="{{bgColor}}"
+      loading-text="上传中...">选择文件</van-button>
+  </view>
+
+  <van-toast id="van-toast" />
 </view>
-
-

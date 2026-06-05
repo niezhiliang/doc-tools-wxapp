@@ -1,10 +1,9 @@
-    <!-- <view wx:for="{{2}}" wx:key="i"  wx:for-item="index"> -->
-        <van-card
-        style="padding: 30rpx; "
+    <van-card
+        style="padding: 30rpx;"
         lazy-load="true"
         thumb="/imgs/file.png">
-        <view slot="title" 
-        bind:tap="onPreView" 
+        <view slot="title"
+        bind:tap="onPreView"
         class="van-card__title">
         {{fileName}}
         </view>
@@ -13,33 +12,25 @@
            <view>文件大小：{{fileSize}}</view>
         </view>
         <view slot="price" style="margin-bottom: 35rpx;">
-            <van-progress color="{{bgColor}}" percentage="{{percentage}}" />
+            <van-progress
+              color="{{uploadError ? '#ee0a24' : bgColor}}"
+              percentage="{{percentage}}"
+              stroke-width="6" />
+            <view class="upload-status">
+              <text wx:if="{{!uploadDone && !uploadError}}" class="status-uploading">上传中 {{percentage}}%</text>
+              <text wx:if="{{uploadDone}}" class="status-done">上传完成</text>
+              <text wx:if="{{uploadError}}" class="status-error">上传失败</text>
+            </view>
         </view>
     </van-card>
-    <!-- <view wx:if="{{appId == 4}}" 
-    style="padding: 10rpx 30rpx; display: flex;color: #646566;">
-        <span>转换格式：</span>
-        <van-radio-group
-        value="{{ imgFlagRadio }}"
-        bind:change="onChange"
-        direction="horizontal">
-            <van-radio 
-            checked-color="{{ bgColor }}" 
-            name="true">图片</van-radio>
-            <van-radio 
-            checked-color="{{ bgColor }}"
-            name="false">文本</van-radio>
-        </van-radio-group>
-    </view> -->
-    
-    
 
     <van-button loading="{{loadStatus}}"
       type="primary"
-      size="large" 
+      size="large"
       bind:click="onConvert"
       class="footer"
       custom-class="custom-button"
       color="{{bgColor}}"
+      disabled="{{!uploadDone}}"
       loading-text="{{btnText}}">立即转换</van-button>
     <van-toast id="van-toast" />

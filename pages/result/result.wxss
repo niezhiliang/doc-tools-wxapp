@@ -1,48 +1,52 @@
 /* pages/result/result.wxss */
 
-.custom-empty{
+.custom-empty {
     margin-top: 50rpx !important;
 }
 .custom-empty .van-empty__image {
-    width:80px;/* 例如100px */
-    height:80px;/* 例如100px */
+    width: 80px;
+    height: 80px;
+}
+.custom-empty .van-empty__description {
+    color: black;
+    font-size: 20px;
 }
 
-.custom-empty .van-empty__description {
-    color:black;
-    font-size:40rpx;
+.file-info-card {
+    margin-top: 20rpx;
+    padding: 0 40rpx;
+    width: 100%;
 }
-
-.custom-empty .van-empty__description {
-    color:black;
-    font-size:20px;
-   }
-   
-.button-container {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    margin-top: -20rpx;
+.file-info-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12rpx;
+    padding: 8rpx 0;
+}
+.file-info-label {
+    font-size: 24rpx;
+    color: #969799;
+    flex-shrink: 0;
+}
+.file-info-value {
+    font-size: 24rpx;
+    color: #323233;
+}
+.file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .button-group {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    margin-top: 80rpx;
-   }
-   
-   .preview-button,.bottom-button {
-      margin-bottom:15px;
-   }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60rpx;
+    padding: 0 40rpx;
+}
 
-.convert-msg {
-    font-size:28rpx;  /* 设置字体大小为16像素 */
-    color:#969799;     /* 设置字体颜色为黑色 */
-    white-space:pre-wrap;/* 处理换行 */
-    text-align:center; /* 居中对齐 */
-    width: 55%;
-    margin-top: 10rpx;
-   }
+.action-button {
+    width: 100%;
+    margin-bottom: 24rpx;
+}

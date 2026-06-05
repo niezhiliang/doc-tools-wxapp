@@ -15,15 +15,6 @@ Page({
           query: 'zzfrom=pyq'
         }
       },
-    adLoad() {
-        console.log('Banner 广告加载成功')
-      },
-      adError(err) {
-        console.error('Banner 广告加载失败', err)
-      },
-      adClose() {
-        console.log('Banner 广告关闭')
-      },
     data: {
         active: 0,
         appList: [],
@@ -47,31 +38,30 @@ Page({
     onChange(event) {
         this.setData({ active: event.detail });
         if (event.detail == 1) {
-            wx.redirectTo({
+            wx.switchTab({
               url: '/pages/history/record',
             })
         }
       },
     getAppSeeting() {
         const that = this;
-        requestApi({ url: "/app/getAppSetting", data: {} })
+        return requestApi({ url: "/app/getAppSetting", data: {} })
         .then((res) => {
             if (res.data.code === 'SUCCESS') {
                 that.setData({
                     appSeeting: res.data.data
                 })
             } else {
-                console.log('获取服务失败啦')
                 Toast.fail('功能列表获取失败');
             }
         })
-        //     fail:function (error) {
-        //       Toast.fail('服务网络异常');
-        //     }
+        .catch(() => {
+            Toast.fail('服务网络异常');
+        })
     },
     getAppList() {
         const that = this;
-        requestApi({ url: "/app/getAppList", data: {} })
+        return requestApi({ url: "/app/getAppList", data: {} })
         .then((res) => {
             if (res.data.code === 'SUCCESS') {
                 that.setData({
@@ -81,11 +71,14 @@ Page({
                 Toast.fail('功能列表获取失败');
             }
         })
+        .catch(() => {
+            Toast.fail('服务网络异常');
+        })
     },
       // 下拉刷新事件
   onPullDownRefresh() {
-    this.getAppSeeting();
-    this.getAppList();
-    wx.stopPullDownRefresh();
+    Promise.all([this.getAppSeeting(), this.getAppList()]).finally(() => {
+      wx.stopPullDownRefresh();
+    });
   },
 })

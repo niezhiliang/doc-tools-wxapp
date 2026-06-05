@@ -1,4 +1,4 @@
-const docView = require('../../utils/viewutil');
+import { fileView, directView } from '../../utils/viewutil';
 import Toast from '@vant/weapp/toast/toast';
 const app = getApp();
 import { requestApi } from "../../utils/service";
@@ -16,86 +16,118 @@ Page({
           query: 'zzfrom=pyq'
         }
       },
-  /**
-   * 页面的初始数据
-   */
   data: {
     bgColor: '',
     fileName: '',
     respData: [],
-    appId: 2,
+    appId: 0,
     preBtnColor: '',
     preBtnText: '预览',
-    convertMsg:"如需转发到微信，将在广告展示完成后转发。",
     noticeMsg: '预览样式可能会有差异，请以电脑查看为准。文件太大，预览可能会出现白屏，请耐心等一会。',
     tempFilePath: '',
     preViewLoading: false,
     shareLoading: false,
-    disabled: false
+    saveLoading: false,
+    disabled: false,
+    dataReady: false
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
-    //   const respData = JSON.parse(options.respData);
-    //   const url = respData[0];
-    //   console.log('232' + JSON.stringify(url))
       this.getConvertDetail(options.id);
       this.setData({
         bgColor: app.globalData.bgColor
-      })
-      console.log(this.data.fileName)
-      if (this.data.appId == 1) {
-          this.setData({
-            preBtnText: '预览分享保存',
-            noticeMsg: '预览时，图片可左右滑动，长按目标图片，屏幕下方会弹出微信内置的转发到微信和保存到相册的选项。',
-            preBtnColor: app.globalData.bgColor,
-          })
-      }
+      });
   },
-  // 文件分享到聊天记录
   fileShare() {
-      // callback 写法
       const fileName = this.data.fileName;
-     if (this.data.tempFilePath === ''){
+      if (this.data.tempFilePath === '') {
         this.setData({
             shareLoading: true,
             disabled: true
         });
-        const that = this
+        const that = this;
         wx.downloadFile({
-            // 下载url
-            url: that.data.respData[0], 
-            success (res) {
-                console.log("文件下载完成")
+            url: that.data.respData[0],
+            success(res) {
                 that.setData({
                     shareLoading: false,
                     disabled: false,
                     tempFilePath: res.tempFilePath
-                })
-                // 下载完成后转发
+                });
                 wx.shareFileMessage({
-                filePath: res.tempFilePath,
-                fileName: fileName,
-                success() {
-                    console.log('文件分享成功')
-                },
-                fail: console.error,
-                })
+                    filePath: res.tempFilePath,
+                    fileName: fileName,
+                    success() {},
+                    fail() {
+                        Toast.fail('分享失败');
+                    },
+                });
             },
-            fail: console.error,
-            })
-     } else {
+            fail() {
+                that.setData({
+                    shareLoading: false,
+                    disabled: false
+                });
+                Toast.fail('文件下载失败');
+            },
+        });
+      } else {
         wx.shareFileMessage({
             filePath: this.data.tempFilePath,
             fileName: fileName,
-            success() {
-                console.log('文件分享成功')
+            success() {},
+            fail() {
+                Toast.fail('分享失败');
             },
-            fail: console.error,
-        })
-     }
+        });
+      }
+  },
+  saveFile() {
+      const that = this;
+      if (this.data.appId == 1) {
+          wx.previewImage({
+              current: this.data.respData[0],
+              urls: this.data.respData
+          });
+          return;
+      }
+      if (this.data.tempFilePath !== '') {
+          wx.openDocument({
+              filePath: this.data.tempFilePath,
+              showMenu: true,
+              fail() {
+                  Toast.fail('文件打开失败');
+              }
+          });
+          return;
+      }
+      this.setData({ saveLoading: true, disabled: true });
+      wx.downloadFile({
+          url: that.data.respData[0],
+          success(res) {
+              if (res.statusCode !== 200) {
+                  Toast.fail('文件下载失败');
+                  that.setData({ saveLoading: false, disabled: false });
+                  return;
+              }
+              that.setData({
+                  tempFilePath: res.tempFilePath,
+                  saveLoading: false,
+                  disabled: false
+              });
+              wx.openDocument({
+                  filePath: res.tempFilePath,
+                  showMenu: true,
+                  fail() {
+                      Toast.fail('文件打开失败');
+                  }
+              });
+          },
+          fail() {
+              Toast.fail('文件下载失败');
+              that.setData({ saveLoading: false, disabled: false });
+          }
+      });
   },
   preView() {
     if (this.data.appId != 1) {
@@ -103,54 +135,72 @@ Page({
             this.setData({
                 preViewLoading: true,
                 disabled: true
-            })
-            this.preDownload()
+            });
+            this.preDownload();
         } else {
-            docView.directViwe(this.data.tempFilePath)
+            directView(this.data.tempFilePath);
         }
     } else {
         wx.previewImage({
-            current: this.data.respData[0], // 当前显示图片的 http 链接
-            urls: this.data.respData // 需要预览的图片 http 链接列表
-        })
+            current: this.data.respData[0],
+            urls: this.data.respData
+        });
     }
   },
   preDownload() {
     const that = this;
-    console.log(that.data.respData +'1111')
     wx.downloadFile({
         url: that.data.respData[0],
         success: function (res) {
-            if(res.statusCode != 200) {
-                Toast.fail(res.statusCode)
+            if (res.statusCode !== 200) {
+                Toast.fail('文件下载失败');
+                that.setData({
+                    preViewLoading: false,
+                    disabled: false
+                });
+                return;
             }
             that.setData({
                 tempFilePath: res.tempFilePath,
                 preViewLoading: false,
                 disabled: false
-            })
-            docView.directViwe(res.tempFilePath)
+            });
+            directView(res.tempFilePath);
         },
-        fail: function (err) {
-            console.log(err, "wx.downloadFile fail err");
-            Toast.success('文件加载失败')
+        fail: function () {
+            Toast.fail('文件加载失败');
+            that.setData({
+                preViewLoading: false,
+                disabled: false
+            });
         }
-    })
+    });
   },
-  // 获取转换详情
   getConvertDetail(id) {
     const that = this;
     requestApi({ url: "/doc/getConvertRecordDetail", data: {"id": id} })
     .then((res) => {
         if (res.data.code === 'SUCCESS') {
+            const appId = res.data.data.convertType;
             that.setData({
-                appId: res.data.data.convertType,
+                appId: appId,
                 respData: JSON.parse(res.data.data.convertedFile),
-                fileName: res.data.data.fileNameme
-            })
+                fileName: res.data.data.fileName,
+                dataReady: true
+            });
+            if (appId == 1) {
+                that.setData({
+                    preBtnText: '预览图片',
+                    noticeMsg: '预览时图片可左右滑动，长按目标图片可转发到微信或保存到相册。',
+                    preBtnColor: app.globalData.bgColor,
+                });
+            }
         } else {
             Toast.fail('获取转换详情失败');
         }
     })
+    .catch(() => {
+        Toast.fail('网络异常，请稍后重试');
+    });
   }
-})
+});

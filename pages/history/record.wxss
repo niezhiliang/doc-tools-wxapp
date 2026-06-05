@@ -1,56 +1,86 @@
 /* pages/record.wxss */
 
+.empty-state {
+  padding-top: 100rpx;
+}
 
-.font-class {
-    color: #646566;
-    font-size: 29rpx !important;
-    font-weight:normal !important;
+.record-list {
+  padding: 10rpx 20rpx;
+  padding-bottom: 120rpx;
 }
-.thumb-class2 {
-    width: 120rpx !important;
-    height: 120rpx !important;
+
+.record-card {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  margin: 16rpx 0;
+  background: #fff;
+  border-radius: 16rpx;
+  border: 1rpx solid #ebedf0;
 }
-.bottom-font {
-    font-size: 23rpx;
-    font-weight: 500 !important;
+
+.record-thumb {
+  flex-shrink: 0;
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f8fa;
+  border-radius: 12rpx;
 }
-.van-card {
-  padding: 10rpx !important;
-  height: 150rpx !important;
+.thumb-img {
+  width: 56rpx;
+  height: 56rpx;
 }
-.van-card{
-  display: block;
+
+.record-info {
+  flex: 1;
+  min-width: 0;
 }
-.van-card__content{
-  justify-content: flex-start !important;
+.record-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #323233;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 6rpx;
 }
-.van-card__header{
-  height: 120rpx !important;
+.record-desc {
+  font-size: 22rpx;
+  color: #969799;
+  margin-bottom: 4rpx;
 }
-.van-card__thumb{
-  height: 120rpx !important;
+.record-time {
+  font-size: 20rpx;
+  color: #c8c9cc;
 }
-  
-  .refresh {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    font-size: 14px;
-    color: #999;
-  }
-  
-  .text {
-    margin-right: 10px;
-  }
-  
-  .icon {
-    width: 20px;
-    height: 20px;
-    animation: rotate 1s linear infinite;
-  }
-  
-  @keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+
+.record-status {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+.status-tag {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  white-space: nowrap;
+}
+.status-1 {
+  color: #ff976a;
+  background: rgba(255, 151, 106, 0.1);
+}
+.status-2 {
+  color: #1989fa;
+  background: rgba(25, 137, 250, 0.1);
+}
+.status-3 {
+  color: #07c160;
+  background: rgba(7, 193, 96, 0.1);
+}
+.status-4 {
+  color: #ee0a24;
+  background: rgba(238, 10, 36, 0.1);
+}

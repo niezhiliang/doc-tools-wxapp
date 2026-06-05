@@ -30,12 +30,6 @@ Page({
     fileTypeArray:['file','all','file','image','video'],
     appPrompt:[],
     msg: "功能说明",
-    responseData:[],
-    show: false,
-    actions: [
-        { name:'微信聊天文件',value:0 },
-        { name:'本地文件',value: 1 }
-    ],
     loadStatus: false
   },
   onLoad(option) {
@@ -48,17 +42,9 @@ Page({
     this.getAppInfo(option.appId);
     this.getAppPrompt(option.appId);
   },
-  openShow(params) {
+  openShow() {
     this.uploadChatMsgFile();
-    // if (this.data.docType == 2) {
-    //     this.chooseImage();
-    // } else {
-    //     this.setData({ show: true });
-    // }
-},
-onClose() {
-  this.setData({ show: false });
-},
+  },
 formatBytes(bytes) {
     if (bytes === 0) return '0 B';
    
@@ -73,14 +59,13 @@ formatBytes(bytes) {
 uploadChatMsgFile() {
   const appId = this.data.appInfo.id;
   const type = this.data.fileTypeArray[this.data.appInfo.fileType];
-  console.log(JSON.stringify(this.data.appInfo))
-  // TODO 文件类型排除
   const extension = this.data.appInfo.supportType.split(',');
   const that = this;
   wx.chooseMessageFile({
     count: type == 'image' ? 9 : 1,
     type: type,
     extension: extension,
+    sourceType: ['message'],
     success (res) {
       const fileName = res.tempFiles[0].name;   
       let path = res.tempFiles[0].path;
@@ -97,20 +82,6 @@ uploadChatMsgFile() {
         })
     }
   })
-},
-onSelect(event) {
-    const { value } = event.detail;
-    // 微信聊天记录赛选文件
-    if (value == 0) {
-        this.uploadChatMsgFile();
-    } else if(value == 1) {
-        // TODO 打开本地资源路径
-        this.uploadChatMsgFile();
-        // this.chooseImage();
-    }
-    this.setData({
-      loadStatus: false
-    })
 },
 getAppInfo(appId) {
     const that = this;

@@ -29,6 +29,20 @@
 .van-card__thumb{
     height: 150rpx !important;
     width: 150rpx !important;
-    /* margin-top: 20rpx; */
     border: 4px solid whitesmoke;
+}
+
+.upload-status {
+    text-align: center;
+    margin-top: 10rpx;
+    font-size: 24rpx;
+}
+.status-uploading {
+    color: #969799;
+}
+.status-done {
+    color: #07c160;
+}
+.status-error {
+    color: #ee0a24;
 }

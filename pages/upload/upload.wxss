@@ -1,4 +1,4 @@
-.van-doc-card{
+.van-doc-card {
     border-radius: 30rpx;
 }
 .van-doc-content {
@@ -9,13 +9,49 @@
   margin-right: 1rem;
 }
 
+.upload-header {
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+.upload-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+.upload-limit {
+  font-size: 24rpx;
+  color: #969799;
+}
+
+.support-types {
+  padding: 20rpx 30rpx;
+}
+.type-label {
+  font-size: 26rpx;
+  color: #969799;
+  margin-bottom: 12rpx;
+}
+.type-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+.type-tag {
+  font-size: 22rpx;
+  color: #646566;
+  background: #f2f3f5;
+  padding: 6rpx 16rpx;
+  border-radius: 6rpx;
+  text-transform: uppercase;
+}
+
 .jie-shao-title {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color:  #323233;
+  color: #323233;
 }
-
 .jie-shao-front {
   padding: 0.5rem;
   color: #34495e;
@@ -24,10 +60,6 @@
 }
 
 .custom-button {
-    width:85% !important; /* 自定义按钮宽度 */
-    border-radius:10rpx !important;
- }
-
-.van-action-sheet__item{
-    width: 100% !important;
+    width: 85% !important;
+    border-radius: 10rpx !important;
 }

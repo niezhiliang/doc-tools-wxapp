@@ -3,8 +3,7 @@ page {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #BE99FF;
-  align-items:stretch;
+  align-items: stretch;
 }
 .custom-grid-item .van-grid-item__text {
     font-size:0.8rem;

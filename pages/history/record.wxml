@@ -1,32 +1,38 @@
-<van-notice-bar 
+<van-notice-bar
     left-icon="volume-o"
     style="margin-top: 30rpx;border-radius: 10rpx;"
     text="{{noticeMsg}}"/>
-<view wx:if="{{records.length == 0}}">
-  <van-empty description="暂无数据" />
-</view>
-<view style="padding: 10rpx;">
-    <view wx:for="{{records}}" wx:for-item="record"
-  style="margin: 15rpx;box-shadow: 0 0 2rpx 2rpx #BE99FF; border-radius: 5rpx;">
-    <van-card
-  bind:tap="redirectToResult"
-  data-id="{{record.id}}"
-  data-type="{{record.convertType}}"
-  data-status="{{record.convertStatus}}"
-  num="{{record.createTime}}"
-  price="{{typeEnum[record.convertStatus]}}"
-  currency=""
-  desc="{{record.appName}}"
-  title="{{record.fileName}}"
-  thumb="{{record.convertTypeImg}}"
-  price-class="bottom-font"
-  desc-class="bottom-font"
-  title-class="font-class"
-  thumb-class="thumb-class2"
-/>
- </view>
 
- <van-tabbar
+<view wx:if="{{records.length == 0}}" class="empty-state">
+  <van-empty description="暂无转换记录" image="search">
+    <van-button type="primary" size="small" color="{{bgColor}}" bind:click="onChange" data-target="0">去转换</van-button>
+  </van-empty>
+</view>
+
+<view class="record-list" wx:if="{{records.length > 0}}">
+  <view wx:for="{{records}}" wx:for-item="record" wx:key="id"
+    class="record-card"
+    bind:tap="redirectToResult"
+    data-id="{{record.id}}"
+    data-type="{{record.convertType}}"
+    data-status="{{record.convertStatus}}">
+    <view class="record-thumb">
+      <image src="{{record.convertTypeImg}}" mode="aspectFit" class="thumb-img" />
+    </view>
+    <view class="record-info">
+      <view class="record-title">{{record.fileName}}</view>
+      <view class="record-desc">{{record.appName}}</view>
+      <view class="record-time">{{record.createTime}}</view>
+    </view>
+    <view class="record-status">
+      <view class="status-tag status-{{record.convertStatus}}">
+        {{typeEnum[record.convertStatus]}}
+      </view>
+    </view>
+  </view>
+</view>
+
+<van-tabbar
   active="{{active}}"
   active-color="{{bgColor}}"
   inactive-color="#000"
@@ -34,7 +40,6 @@
 >
   <van-tabbar-item icon="home-o">首页</van-tabbar-item>
   <van-tabbar-item icon="notes-o">记录</van-tabbar-item>
-  <!-- <van-tabbar-item icon="friends-o">我</van-tabbar-item> -->
 </van-tabbar>
-</view>
+
 <van-toast id="van-toast" />

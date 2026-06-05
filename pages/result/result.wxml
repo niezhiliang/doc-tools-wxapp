@@ -1,34 +1,44 @@
 <!--pages/result/result.wxml-->
-<van-notice-bar 
+<van-notice-bar
     left-icon="volume-o"
     style="margin-top: 30rpx;border-radius: 10rpx;"
     text="{{noticeMsg}}"/>
-  <van-empty image="/imgs/success1.png" 
-  description="转换成功" 
-  custom-class="small-image"
+
+<van-empty image="/imgs/success1.png"
+  description="转换成功"
   custom-class="custom-empty">
-    <view class="button-container">
-      <view wx:if="{{app.globalData.adSwich}}" class="convert-msg">{{convertMsg}}</view>
+  <view class="file-info-card" wx:if="{{dataReady}}">
+    <view class="file-info-item">
+      <text class="file-info-label">文件名</text>
+      <text class="file-info-value file-name">{{fileName}}</text>
     </view>
+  </view>
 </van-empty>
 
 <view class="button-group">
-    <van-button type="default" 
-     class="preview-button"
-     color="{{preBtnColor}}"
+    <van-button type="primary"
+     color="{{bgColor}}"
+     class="action-button"
+     loading="{{saveLoading}}"
+     loading-text="下载中"
+     disabled="{{disabled}}"
+     bind:click="saveFile">保存到手机</van-button>
+
+    <van-button type="default"
+     class="action-button"
      loading="{{preViewLoading}}"
      loading-text="下载中"
      disabled="{{disabled}}"
      bind:click="preView">{{preBtnText}}</van-button>
-     <van-button type="primary" wx:if="{{appId != 1}}"
+
+    <van-button wx:if="{{appId != 1}}"
+     plain
+     type="default"
      color="{{bgColor}}"
-     class="bottom-button"
+     class="action-button"
      disabled="{{disabled}}"
      loading="{{shareLoading}}"
      loading-text="下载中"
      bind:click="fileShare">转发到微信</van-button>
-   </view>
-   <van-toast id="van-toast" />
-
-
-
+</view>
+<van-toast id="van-toast" />
