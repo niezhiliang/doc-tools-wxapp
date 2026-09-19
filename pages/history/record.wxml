@@ -1,45 +1,37 @@
-<van-notice-bar
-    left-icon="volume-o"
-    style="margin-top: 30rpx;border-radius: 10rpx;"
-    text="{{noticeMsg}}"/>
-
-<view wx:if="{{records.length == 0}}" class="empty-state">
-  <van-empty description="暂无转换记录" image="search">
-    <van-button type="primary" size="small" color="{{bgColor}}" bind:click="onChange" data-target="0">去转换</van-button>
-  </van-empty>
+<view class="screen history-screen">
+  <view class="section-head">
+<view class="section-title">我的文件</view>
+<text class="small-tag">最近 3 天</text>
 </view>
-
-<view class="record-list" wx:if="{{records.length > 0}}">
-  <view wx:for="{{records}}" wx:for-item="record" wx:key="id"
-    class="record-card"
-    bind:tap="redirectToResult"
-    data-id="{{record.id}}"
-    data-type="{{record.convertType}}"
-    data-status="{{record.convertStatus}}">
-    <view class="record-thumb">
-      <image src="{{record.convertTypeImg}}" mode="aspectFit" class="thumb-img" />
-    </view>
-    <view class="record-info">
-      <view class="record-title">{{record.fileName}}</view>
-      <view class="record-desc">{{record.appName}}</view>
-      <view class="record-time">{{record.createTime}}</view>
-    </view>
-    <view class="record-status">
-      <view class="status-tag status-{{record.convertStatus}}">
-        {{typeEnum[record.convertStatus]}}
-      </view>
-    </view>
-  </view>
+  <view class="muted history-intro">未完成的任务也会保留在这里</view>
+  <view class="error" wx:if="{{error}}">{{error}}<button class="secondary" bindtap="load">重新加载</button>
 </view>
-
-<van-tabbar
-  active="{{active}}"
-  active-color="{{bgColor}}"
-  inactive-color="#000"
-  bind:change="onChange"
->
-  <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-  <van-tabbar-item icon="notes-o">记录</van-tabbar-item>
-</van-tabbar>
-
-<van-toast id="van-toast" />
+  <view wx:if="{{loading}}" class="empty">
+<view class="spinner">
+</view>
+<view class="muted">正在查找转换记录</view>
+</view>
+  <view class="empty" wx:if="{{!loading && !error && !records.length}}">
+<view class="empty-file">
+<view class="file-icon tone-file">PDF</view>
+</view>
+<view class="section-title">还没有转换记录</view>
+<view class="muted">从一份文件开始<view>转换进度和结果都会出现在这里</view>
+</view>
+<button class="secondary" bindtap="home">去转换文件</button>
+</view>
+  <button class="record-row" wx:for="{{records}}" wx:key="id" data-id="{{item.id}}" bindtap="open">
+<view class="file-icon tone-{{item.targetTone}}">{{item.target}}</view>
+<view class="file-copy">
+<view class="filename">{{item.fileName}}</view>
+<view class="record-meta">{{item.appName || item.source+'转'+item.target}}</view>
+<view class="record-meta">{{item.createTime}}</view>
+</view>
+<view class="record-state">
+<text class="status-{{item.convertStatus}}">{{labels[item.convertStatus]}}</text>
+<view class="chevron">›</view>
+</view>
+</button>
+  <view wx:if="{{!loading && records.length}}" class="footnote">显示近 3 天记录及未完成任务<view>转换结果请及时保存</view>
+</view>
+</view>

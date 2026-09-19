@@ -1,86 +1,12 @@
-/* pages/record.wxss */
-
-.empty-state {
-  padding-top: 100rpx;
-}
-
-.record-list {
-  padding: 10rpx 20rpx;
-  padding-bottom: 120rpx;
-}
-
-.record-card {
-  display: flex;
-  align-items: center;
-  padding: 24rpx;
-  margin: 16rpx 0;
-  background: #fff;
-  border-radius: 16rpx;
-  border: 1rpx solid #ebedf0;
-}
-
-.record-thumb {
-  flex-shrink: 0;
-  width: 80rpx;
-  height: 80rpx;
-  margin-right: 20rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f7f8fa;
-  border-radius: 12rpx;
-}
-.thumb-img {
-  width: 56rpx;
-  height: 56rpx;
-}
-
-.record-info {
-  flex: 1;
-  min-width: 0;
-}
-.record-title {
-  font-size: 28rpx;
-  font-weight: 500;
-  color: #323233;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-bottom: 6rpx;
-}
-.record-desc {
-  font-size: 22rpx;
-  color: #969799;
-  margin-bottom: 4rpx;
-}
-.record-time {
-  font-size: 20rpx;
-  color: #c8c9cc;
-}
-
-.record-status {
-  flex-shrink: 0;
-  margin-left: 16rpx;
-}
-.status-tag {
-  font-size: 20rpx;
-  padding: 4rpx 12rpx;
-  border-radius: 6rpx;
-  white-space: nowrap;
-}
-.status-1 {
-  color: #ff976a;
-  background: rgba(255, 151, 106, 0.1);
-}
-.status-2 {
-  color: #1989fa;
-  background: rgba(25, 137, 250, 0.1);
-}
-.status-3 {
-  color: #07c160;
-  background: rgba(7, 193, 96, 0.1);
-}
-.status-4 {
-  color: #ee0a24;
-  background: rgba(238, 10, 36, 0.1);
-}
+page{background:#fff}
+.history-intro{margin-top:-16rpx;margin-bottom:30rpx}
+button.record-row[class]{display:flex;align-items:center;gap:22rpx;padding:30rpx 0;border-bottom:1rpx solid #f2f2f6;width:100%;text-align:left}
+button.record-row[class] .file-icon{width:78rpx;height:88rpx;font-size:24rpx;border-radius:18rpx}
+button.record-row[class] .filename{font-size:28rpx}
+.record-meta{font-size:22rpx;color:#9696a2;margin-top:5rpx}
+.record-state{text-align:right;flex-shrink:0;font-size:21rpx;color:#8e87bf}
+.record-state .chevron{line-height:1.2;margin-top:6rpx}
+.status-3{color:#40a782}
+.status-4{color:#d58c53}
+.empty-file{width:142rpx;height:142rpx;border-radius:50%;background:#f7f6fc;display:flex;align-items:center;justify-content:center;margin:auto}
+.empty-file .file-icon{transform:rotate(-8deg)}

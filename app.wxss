@@ -1,32 +1,52 @@
-/**app.wxss**/
-page {
-  background-color: #f8f7fa;
-}
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-}
-
-.van-doc-card {
-  background-color: #fff;
-  border-radius: 2rem;
-  box-shadow: 0 8px 12px #ebedf0;
-  margin-bottom: 2rem;
-  padding: 1rem;
-}
-.footer{
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 99;
-    margin-bottom: 3rem;
-    border-radius: 20rpx;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+page{background:#f6f6f8;color:#252533;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:28rpx;line-height:1.6}
+view,button{box-sizing:border-box}
+/* Override native v2 button defaults; class-only rules lose to its selectors. */
+button[class]{display:block;box-sizing:border-box;width:auto;min-width:0;max-width:100%;margin:0;padding:0;background:transparent;color:inherit;border:0;border-radius:0;font-family:inherit;font-size:inherit;font-weight:400;line-height:1.5;text-align:center}
+button::after{border:0}
+button[disabled]{opacity:.48}
+button:active{opacity:.78}
+.screen{padding:36rpx 32rpx 64rpx;min-height:100vh}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:28rpx}
+.section-title{font-size:32rpx;font-weight:600}
+.body-title{font-size:29rpx;font-weight:500}
+.muted{font-size:25rpx;color:#858591;line-height:1.7}
+.footnote{font-size:23rpx;color:#9696a2;text-align:center;line-height:1.8;margin-top:40rpx}
+.spaced{margin-top:20rpx}
+.row{display:flex;align-items:center;gap:24rpx}
+.between{justify-content:space-between}
+.card{background:#fff;border-radius:24rpx;padding:28rpx;margin-bottom:24rpx}
+.filename{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.file-copy{flex:1;min-width:0}
+button.primary[class],button.secondary[class]{width:100%;border-radius:999rpx;padding:25rpx 28rpx;text-align:center;font-weight:500;font-size:30rpx}
+button.primary[class]{background:#5952ed;color:#fff}
+button.secondary[class]{background:#f0effc;color:#5952df}
+button.link[class]{color:#5952df;font-size:25rpx}
+button.text-button[class]{min-height:88rpx;padding:18rpx;color:#5952df;font-size:26rpx}
+.error,.notice{background:#fff2ef;border-radius:20rpx;padding:24rpx;color:#b34b3a;font-size:26rpx;margin-bottom:24rpx;overflow-wrap:anywhere}
+.error button.secondary[class],.notice button.secondary[class]{margin-top:20rpx;background:#fff}
+.small-tag{font-size:21rpx;line-height:1.5;padding:6rpx 14rpx;border-radius:999rpx;background:#f0efff;color:#665ee0}
+.file-icon{width:88rpx;height:100rpx;border-radius:20rpx;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28rpx;flex-shrink:0;position:relative}
+.file-icon::after{content:"";position:absolute;right:0;top:0;border-top:17rpx solid #ffffffaa;border-left:17rpx solid transparent}
+.tone-pdf{background:#ffe8ec;color:#ef747d}
+.tone-word{background:#e0f0ff;color:#4895db}
+.tone-excel{background:#ddf7ed;color:#36b58d}
+.tone-ppt{background:#ffeadb;color:#f19252}
+.tone-image{background:#fff0d8;color:#eba735}
+.tone-file{background:#eeebff;color:#8b7be5}
+.file-pair{position:relative;width:92rpx;height:92rpx;margin:auto}
+.file-icon.small{width:59rpx;height:65rpx;border-radius:13rpx;font-size:17rpx}
+.small::after{border-top-width:12rpx;border-left-width:12rpx}
+.back{position:absolute;left:0;top:0;opacity:.65}
+.front{position:absolute;right:0;bottom:0;box-shadow:0 5rpx 12rpx #ffffff}
+.chevron{font-size:42rpx;color:#aaaab5;font-weight:300}
+.bottom-actions{position:fixed;left:0;right:0;bottom:0;padding:24rpx 32rpx calc(24rpx + env(safe-area-inset-bottom));background:#f6f6f8;z-index:2}
+.bottom-actions .row>button{flex:1;min-width:0}
+.bottom-actions .muted{text-align:center;margin-bottom:16rpx;font-size:23rpx}
+.with-actions{padding-bottom:230rpx}
+.empty{text-align:center;padding:150rpx 20rpx 80rpx}
+.empty .section-title{margin:30rpx 0 12rpx}
+.empty button.secondary[class]{margin:36rpx auto 0;max-width:380rpx}
+.empty.compact{padding:60rpx 20rpx}
+.spinner{width:44rpx;height:44rpx;border-radius:50%;border:5rpx solid #eae8fc;border-top-color:#655ce9;margin:0 auto 24rpx;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}
 }

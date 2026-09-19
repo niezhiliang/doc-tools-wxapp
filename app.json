@@ -2,12 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/history/record",
-    "pages/drag/index",
-    "pages/home/home",
-    "pages/imgview/imgview",
-    "pages/result/result",
-    "pages/view/view",
-    "pages/upload/upload"
+    "pages/upload/upload",
+    "pages/result/result"
   ],
   "shareTimeline": true,
   "window": {
@@ -19,27 +15,20 @@
   "style": "v2",
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
-  "usingComponents": {
-    "van-radio": "@vant/weapp/radio/index",
-    "van-radio-group": "@vant/weapp/radio-group/index",
-    "van-button": "@vant/weapp/button/index",
-    "van-grid": "@vant/weapp/grid/index",
-    "van-grid-item": "@vant/weapp/grid-item/index",
-    "van-action-sheet": "@vant/weapp/action-sheet/index",
-    "van-uploader": "@vant/weapp/uploader/index",
-    "van-toast": "@vant/weapp/toast/index",
-    "van-image": "@vant/weapp/image/index",
-    "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-empty": "@vant/weapp/empty/index",
-    "van-row": "@vant/weapp/row/index",
-    "van-col": "@vant/weapp/col/index",
-    "van-notify": "@vant/weapp/notify/index",
-    "van-card": "@vant/weapp/card/index",
-    "van-circle": "@vant/weapp/circle/index",
-    "van-progress": "@vant/weapp/progress/index",
-    "van-notice-bar": "@vant/weapp/notice-bar/index",
-    "van-tabbar": "@vant/weapp/tabbar/index",
-    "van-tabbar-item": "@vant/weapp/tabbar-item/index"
+  "tabBar": {
+    "color": "#94949e",
+    "selectedColor": "#5952ed",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/history/record",
+        "text": "转换记录"
+      }
+    ],
+    "borderStyle": "white"
   }
 }

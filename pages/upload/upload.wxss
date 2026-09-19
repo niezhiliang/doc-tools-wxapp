@@ -1,65 +1,28 @@
-.van-doc-card {
-    border-radius: 30rpx;
-}
-.van-doc-content {
-  flex: 1;
-  padding: 0 0 75rpx;
-  position: relative;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-.upload-header {
-  text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
-}
-.upload-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 8rpx;
-}
-.upload-limit {
-  font-size: 24rpx;
-  color: #969799;
-}
-
-.support-types {
-  padding: 20rpx 30rpx;
-}
-.type-label {
-  font-size: 26rpx;
-  color: #969799;
-  margin-bottom: 12rpx;
-}
-.type-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12rpx;
-}
-.type-tag {
-  font-size: 22rpx;
-  color: #646566;
-  background: #f2f3f5;
-  padding: 6rpx 16rpx;
-  border-radius: 6rpx;
-  text-transform: uppercase;
-}
-
-.jie-shao-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #323233;
-}
-.jie-shao-front {
-  padding: 0.5rem;
-  color: #34495e;
-  font-weight: normal;
-  font-size: 1rem;
-}
-
-.custom-button {
-    width: 85% !important;
-    border-radius: 10rpx !important;
-}
+.import-empty{text-align:center;padding:100rpx 12rpx 10rpx}
+.large-pair{width:184rpx;height:184rpx}
+.large-pair .file-icon{width:124rpx;height:142rpx;font-size:35rpx;border-radius:28rpx}
+.large-pair .front{box-shadow:0 14rpx 28rpx #e9e7f166}
+.import-title{font-size:38rpx;font-weight:600;margin:56rpx 0 12rpx}
+.import-empty .primary{margin-top:64rpx}
+.import-help{margin-top:74rpx}
+.thumb{width:88rpx;height:100rpx;border-radius:16rpx;flex-shrink:0}
+button.remove[class]{font-size:38rpx;color:#9696a2;width:88rpx;height:88rpx;line-height:88rpx;flex-shrink:0}
+.order-row{display:flex;align-items:center;justify-content:space-between;border-top:1rpx solid #f1f1f5;margin-top:24rpx;padding-top:20rpx}
+.order-row button{padding:6rpx 16rpx;min-height:88rpx;display:flex;align-items:center}
+button.add-file[class]{padding:22rpx;border-radius:20rpx;border:2rpx dashed #d9d6f1;color:#645ce0;background:#f1f0fb;width:100%;font-size:26rpx}
+.target-heading{margin-top:48rpx}
+.radio-checked{width:38rpx;height:38rpx;border-radius:50%;background:#7766ee;color:#fff;text-align:center;line-height:38rpx;font-size:24rpx}
+.rule-copy{padding:0 8rpx}
+.sheet-mask{position:fixed;inset:0;background:#0006;z-index:10;display:flex;align-items:flex-end}
+.source-sheet{width:100%;background:#fff;border-radius:32rpx 32rpx 0 0;padding:16rpx 32rpx calc(16rpx + env(safe-area-inset-bottom))}
+.sheet-handle{width:64rpx;height:7rpx;border-radius:8rpx;background:#e5e5eb;margin:0 auto 22rpx}
+.sheet-title{text-align:center;font-size:34rpx;font-weight:600;position:relative}
+button.sheet-close[class]{position:absolute;right:0;top:-8rpx;font-size:42rpx;font-weight:400;width:88rpx;min-height:88rpx;color:#858591}
+.source-options{display:flex;gap:16rpx;margin-top:36rpx}
+button.source-option[class]{flex:1;min-width:0;background:#f7f7f9;border-radius:24rpx;padding:30rpx 8rpx;font-weight:500}
+button.source-option[class] .muted{font-size:22rpx}
+.source-icon{width:66rpx;height:60rpx;line-height:60rpx;border-radius:18rpx;margin:0 auto 18rpx;font-size:40rpx;color:#fff}
+.chat-icon{background:#43bc8d;font-size:30rpx}
+.album-icon{background:#f1b344}
+.camera-icon{background:#5f9ef2}
+button.sheet-cancel[class]{width:100%;margin-top:20rpx;color:#898994}

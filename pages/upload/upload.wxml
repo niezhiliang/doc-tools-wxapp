@@ -1,34 +1,89 @@
-<!-- 文件上传标题 -->
-<view class="upload-header">
-  <view class="upload-title">{{appInfo.appName}}</view>
-  <view class="upload-limit">最大支持 {{appInfo.maxSize}}MB</view>
+<view class="screen with-actions">
+  <view wx:if="{{loading}}" class="empty">
+<view class="spinner">
 </view>
-
-<view class="van-doc-content">
-  <view class="van-doc-card">
-    <view class="jie-shao-title">{{msg}}</view>
-    <view wx:if="{{appPrompt.length == 0}}" class="jie-shao-front">暂无使用说明</view>
-    <block wx:for="{{appPrompt}}" wx:key="tip" wx:for-item="tip" wx:for-index="i">
-      <view class="jie-shao-front">{{tip}}</view>
-    </block>
-  </view>
-
-  <view class="support-types" wx:if="{{appInfo.supportType}}">
-    <view class="type-label">支持格式：</view>
-    <view class="type-tags">
-      <view wx:for="{{appInfo.supportType.split(',')}}" wx:key="*this" class="type-tag">{{item}}</view>
+<view class="muted">正在准备转换工具</view>
+</view>
+  <view class="error" wx:if="{{error}}">{{error}}<button wx:if="{{!info && !loading}}" class="secondary" bindtap="load">重新加载</button>
+</view>
+  <block wx:if="{{info}}">
+    <view wx:if="{{!files.length}}" class="import-empty">
+      <view class="file-pair large-pair">
+<view class="file-icon back tone-{{info.sourceTone}}">{{info.source}}</view>
+<view class="file-icon front tone-{{info.targetTone}}">{{info.target}}</view>
+</view>
+      <view class="import-title">{{imageMode ? '把图片，装进一份 PDF' : '先选择一份文件'}}</view>
+      <view class="muted">{{imageMode ? '从微信、相册导入，或直接拍照' : '支持 '+info.supportType+' 格式'}}</view>
+      <button class="primary" bindtap="choose">{{imageMode ? '选择图片' : '选择文件'}}</button>
+      <view class="footnote">{{imageMode ? '最多 '+info.maxImages+' 张，合计不超过 '+info.maxImageTotalMb+'MB' : '单个文件不超过 '+info.maxSize+'MB'}}<view wx:if="{{info.source == 'PDF'}}">PDF 最多 {{info.maxPdfPages}} 页</view>
+</view>
     </view>
-  </view>
-
-  <view class="footer">
-    <van-button type="primary"
-      class="footer"
-      bind:click="openShow"
-      loading="{{loadStatus}}"
-      custom-class="custom-button"
-      color="{{bgColor}}"
-      loading-text="上传中...">选择文件</van-button>
-  </view>
-
-  <van-toast id="van-toast" />
+    <block wx:else>
+      <view class="section-head">
+<view class="section-title">已选择{{imageMode ? '的图片' : '的文件'}}</view>
+<text class="muted">{{imageMode ? files.length+' / '+info.maxImages : '1 个文件'}}</text>
+</view>
+      <view class="card" wx:for="{{files}}" wx:key="path">
+        <view class="row">
+          <image wx:if="{{imageMode}}" class="thumb" src="{{item.path}}" mode="aspectFill" data-index="{{index}}" bindtap="preview"/>
+          <view wx:else class="file-icon tone-{{info.sourceTone}}">{{info.source}}</view>
+          <view class="file-copy">
+<view class="filename">{{imageMode ? (index+1)+'. ' : ''}}{{item.name}}</view>
+<view class="muted">{{item.size}}</view>
+</view>
+          <button class="remove" disabled="{{busy}}" aria-label="移除文件" data-index="{{index}}" bindtap="remove">×</button>
+        </view>
+        <view wx:if="{{imageMode && files.length > 1}}" class="order-row">
+<text class="muted">第 {{index+1}} 页</text>
+<view class="row">
+<button class="link" disabled="{{busy || index == 0}}" data-index="{{index}}" data-step="-1" bindtap="move">前移</button>
+<button class="link" disabled="{{busy || index == files.length-1}}" data-index="{{index}}" data-step="1" bindtap="move">后移</button>
+</view>
+</view>
+      </view>
+      <button class="add-file" disabled="{{busy}}" wx:if="{{!imageMode || files.length < info.maxImages}}" bindtap="choose">{{imageMode ? '＋ 继续添加图片' : '更换文件'}}</button>
+      <view class="section-head target-heading">
+<view class="section-title">转换为</view>
+</view>
+      <view class="card row">
+<view class="file-icon tone-{{info.targetTone}}">{{info.target}}</view>
+<view class="file-copy">
+<view class="body-title">{{info.target}}{{imageMode ? ' 文档' : ''}}</view>
+<view class="muted">{{imageMode ? '按上方图片顺序合成' : info.target == '图片' ? '每页生成一张图片' : '保留内容，轻松分享'}}</view>
+</view>
+<view class="radio-checked">✓</view>
+</view>
+      <view class="muted rule-copy">{{imageMode ? '每张不超过 '+info.maxSize+'MB，合计不超过 '+info.maxImageTotalMb+'MB。' : '单个文件不超过 '+info.maxSize+'MB。'}}{{info.source == 'PDF' ? 'PDF 最多 '+info.maxPdfPages+' 页。' : ''}}</view>
+      <view class="bottom-actions">
+<view class="muted">{{busy ? '请保持当前页面打开，等待文件提交' : '提交后可离开，在转换记录查看进度'}}</view>
+<button class="primary" loading="{{busy}}" disabled="{{busy}}" bindtap="convert">{{busy ? status : submittedId ? '查看已提交任务' : '开始转换'}}</button>
+</view>
+    </block>
+    <view wx:if="{{!files.length}}" class="footnote import-help">文件找不到？<view>先把文件发送到微信聊天，再回来选择。</view>
+<view class="spaced">当前免费转换 · 免费导出</view>
+</view>
+  </block>
+</view>
+<view wx:if="{{sourceSheet}}" class="sheet-mask" bindtap="closeSource">
+<view class="source-sheet" catchtap="stopTap">
+<view class="sheet-handle">
+</view>
+<view class="sheet-title">选择文件来源<button class="sheet-close" bindtap="closeSource" aria-label="关闭">×</button>
+</view>
+<view class="source-options">
+<button class="source-option" data-source="chat" bindtap="selectSource">
+<view class="source-icon chat-icon">•••</view>
+<view>微信文件</view>
+</button>
+<button wx:if="{{imageMode}}" class="source-option" data-source="album" bindtap="selectSource">
+<view class="source-icon album-icon">▧</view>
+<view>手机相册</view>
+</button>
+<button wx:if="{{imageMode}}" class="source-option" data-source="camera" bindtap="selectSource">
+<view class="source-icon camera-icon">◎</view>
+<view>拍摄照片</view>
+</button>
+</view>
+<button class="text-button sheet-cancel" bindtap="closeSource">取消</button>
+</view>
 </view>

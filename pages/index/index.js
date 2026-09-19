@@ -1,84 +1,40 @@
-import Toast from '@vant/weapp/toast/toast';
-const app = getApp();
-import { requestApi } from "../../utils/service";
+const {requestApi} = require('../../utils/service');
+const {describe} = require('../../utils/file-ui');
 
 Page({
-    onShareAppMessage: function (res) {
-        return {
-          title: 'PDF转换器',
-          path: '/pages/index/index',
-        }
-      },
-      onShareTimeline() {
-        return {
-          title: '[小程序] PDF转换器，支持PDF和多种文档之间的相互转换！快来体验一下吧！',
-          query: 'zzfrom=pyq'
-        }
-      },
-    data: {
-        active: 0,
-        appList: [],
-        appSeeting: {
-            "id": 1,
-            "bgColor": "#BE99FF",
-            "gutter": 3,
-            "columnNum": 4,
-            "iconSize": 30,
-            "appName": "PDF转换助手",
-            "adSwich": 0
-          }
-      },
-     onLoad(options) {
-        this.getAppSeeting();
-        this.getAppList();
-        // 全局变量存入缓存
-        app.globalData.bgColor = this.data.appSeeting.bgColor;
-        app.globalData.adSwich = this.data.appSeeting.adSwich == 1;
-    },
-    onChange(event) {
-        this.setData({ active: event.detail });
-        if (event.detail == 1) {
-            wx.switchTab({
-              url: '/pages/history/record',
-            })
-        }
-      },
-    getAppSeeting() {
-        const that = this;
-        return requestApi({ url: "/app/getAppSetting", data: {} })
-        .then((res) => {
-            if (res.data.code === 'SUCCESS') {
-                that.setData({
-                    appSeeting: res.data.data
-                })
-            } else {
-                Toast.fail('功能列表获取失败');
-            }
-        })
-        .catch(() => {
-            Toast.fail('服务网络异常');
-        })
-    },
-    getAppList() {
-        const that = this;
-        return requestApi({ url: "/app/getAppList", data: {} })
-        .then((res) => {
-            if (res.data.code === 'SUCCESS') {
-                that.setData({
-                    appList: res.data.data
-                })
-            } else {
-                Toast.fail('功能列表获取失败');
-            }
-        })
-        .catch(() => {
-            Toast.fail('服务网络异常');
-        })
-    },
-      // 下拉刷新事件
+  data: {tools: [], loading: true, error: ''},
+
+  onLoad() { this.load(); },
+  onUnload() { this.disposed = true; },
   onPullDownRefresh() {
-    Promise.all([this.getAppSeeting(), this.getAppList()]).finally(() => {
-      wx.stopPullDownRefresh();
-    });
+    this.load().finally(() => wx.stopPullDownRefresh());
   },
-})
+
+  async load() {
+    if (this.fetching) return;
+    this.fetching = true;
+    this.setData({loading: true, error: ''});
+    try {
+      const response = await requestApi({url: '/app/getAppList'});
+      const groups = response.data.data;
+      if (!Array.isArray(groups)) throw new Error('工具列表异常，请重试');
+      const tools = groups.reduce((list, group) => list.concat(group.appList || []), [])
+        .map(tool => ({...tool, ...describe(tool.id)}));
+      if (!tools.length) throw new Error('暂时没有可用工具，请稍后重试');
+      if (!this.disposed) this.setData({tools});
+    } catch (error) {
+      if (!this.disposed) this.setData({error: error.message || '工具加载失败，请重试'});
+    } finally {
+      this.fetching = false;
+      if (!this.disposed) this.setData({loading: false});
+    }
+  },
+
+  open(event) {
+    wx.navigateTo({url: '/pages/upload/upload?appId=' + event.currentTarget.dataset.id});
+  },
+  history() { wx.switchTab({url: '/pages/history/record'}); },
+  onShareAppMessage() {
+    return {title: 'PDF转换器 · 文件轻松转换', path: '/pages/index/index'};
+  }
+});

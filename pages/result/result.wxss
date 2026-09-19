@@ -1,52 +1,28 @@
-/* pages/result/result.wxss */
-
-.custom-empty {
-    margin-top: 50rpx !important;
+page{background:#fff}
+.result-screen{padding-top:32rpx}
+.result-hero{text-align:center;padding-top:88rpx}
+.result-art{width:230rpx;height:210rpx;border-radius:38rpx;background:#f8f8fb;position:relative;display:flex;justify-content:center;align-items:center;margin:0 auto 42rpx}
+.hero-file{width:116rpx;height:140rpx;border-radius:24rpx;font-size:34rpx;transform:rotate(-5deg)}
+.state-mark{position:absolute;right:34rpx;bottom:26rpx;width:46rpx;height:46rpx;border:5rpx solid #fff;border-radius:50%;color:#fff;background:#8c81ec;line-height:36rpx;font-weight:700;font-size:26rpx}
+.state-3{background:#49bd97}
+.state-4{background:#e89953}
+.result-title{font-size:38rpx;font-weight:600}
+.result-name{margin:18rpx auto 0;font-size:28rpx;overflow-wrap:anywhere;max-width:590rpx}
+.conversion-label{font-size:24rpx;color:#9696a2;margin-top:12rpx}
+.conversion-label text{padding:0 18rpx}
+.progress-track{height:7rpx;background:#eeedf8;border-radius:8rpx;overflow:hidden;margin:64rpx 44rpx 24rpx}
+.progress-moving{height:100%;width:28%;border-radius:8rpx;background:#6558eb;animation:processing 2s ease-in-out infinite alternate}
+@keyframes processing{from{transform:translateX(-90%)}
+to{transform:translateX(355%)}
 }
-.custom-empty .van-empty__image {
-    width: 80px;
-    height: 80px;
-}
-.custom-empty .van-empty__description {
-    color: black;
-    font-size: 20px;
-}
-
-.file-info-card {
-    margin-top: 20rpx;
-    padding: 0 40rpx;
-    width: 100%;
-}
-.file-info-item {
-    display: flex;
-    align-items: baseline;
-    gap: 12rpx;
-    padding: 8rpx 0;
-}
-.file-info-label {
-    font-size: 24rpx;
-    color: #969799;
-    flex-shrink: 0;
-}
-.file-info-value {
-    font-size: 24rpx;
-    color: #323233;
-}
-.file-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 60rpx;
-    padding: 0 40rpx;
-}
-
-.action-button {
-    width: 100%;
-    margin-bottom: 24rpx;
-}
+.status-copy,.centered{text-align:center}
+.status-copy{font-size:27rpx}
+.result-screen .bottom-actions{background:#fff}
+.bottom-actions button.primary[class],.bottom-actions button.secondary[class]{font-size:27rpx;padding-left:12rpx;padding-right:12rpx}
+.bottom-actions button.text-button[class]{width:100%;margin-top:12rpx}
+.success-tip{margin:32rpx 0 48rpx;text-align:center;font-size:24rpx;color:#9696a2}
+.failure-reason{background:#fff6ed;color:#99704d;border-radius:20rpx;padding:28rpx;margin-top:42rpx;font-size:27rpx;overflow-wrap:anywhere}
+.output-row{display:flex;align-items:center;justify-content:space-between;padding:24rpx 0;border-bottom:1rpx solid #f0f0f4}
+.page-number{width:48rpx;height:56rpx;text-align:center;line-height:56rpx;border-radius:10rpx;background:#fff0d8;color:#d89a2d;font-size:23rpx}
+button.save-small[class]{padding:10rpx 26rpx;border-radius:999rpx;background:#f0effc;color:#6559df;font-size:25rpx}
+.output-row button{min-height:88rpx;display:flex;align-items:center;padding-left:22rpx;padding-right:22rpx}

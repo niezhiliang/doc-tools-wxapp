@@ -1,69 +1,13 @@
-/**index.wxss**/
-page {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-.custom-grid-item .van-grid-item__text {
-    font-size:0.8rem;
-    font-weight: 700;
-    color: #646566 !important;
-   }
-.grid .van-grid-item__content {
-    background-color: #F5F5F6;
-    border-radius: 17rpx;
-}
-/* 在 WXSS 文件中 */
-.grid-container {
-    margin: 0;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    margin-top: 280rpx;
-    padding-top: 30rpx;
-    background-color: white;
-    border-radius: 30rpx;
-    flex:1;/* 填充剩余的空间，将高度延伸至底部 */
-   }
-   .title {
-    font-family: Helvetica;
-    position:absolute;
-    top:150rpx;/* 距离顶部的距离 */
-    left:45rpx;/* 距离左侧的距离 */
-    color:#ffffff;/* 设置为白色字体 */
-    font-size:49rpx;/* 设置字体大小 */
-    opacity:0;/* 初始设置为透明 */
-    animation:fadeIn 1s forwards;/* 使用动画实现延时显示 */
-   }
-   
-   @keyframes fadeIn {
-    from {
-      opacity:0;
-    }
-    to {
-      opacity:1;
-    }
-   }
- .custom-grid-item .van-grid-item__text {
-    font-size: 23rpx;
-    color: #323233;
-    margin-top: -2rpx !important;
- }
- .app-group {
-    margin: 15rpx;
-    font-size: 32rpx;
-    color: #323233;
-    font-weight: bold;
-    line-height: 1.5;
-    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, miui, Hiragino Sans GB, Microsoft Yahei, sans-serif;
- }
-
- .tool-box{
-     width: 100%;
-     height: auto;
-     /* background-color: #F5F5F6; */
-     border-radius: 15rpx;
- }
+page{background:#fff}
+.home-screen{padding-top:40rpx}
+.tools{display:flex;flex-wrap:wrap;width:100%}
+button.tool[class]{flex:0 0 25%;width:25%;min-width:0;margin:0;padding:8rpx 0 28rpx;background:transparent}
+.tool-name{font-size:24rpx;white-space:nowrap;margin-top:14rpx;font-weight:400}
+.quick-heading{margin-top:58rpx}
+button.upload-zone[class]{width:100%;margin:0;min-height:360rpx;border:2rpx dashed #a29cf4;border-radius:26rpx;background:#f2f1ff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:34rpx 16rpx}
+.upload-symbol{width:76rpx;height:68rpx;background:#655aee;color:#fff;border-radius:24rpx;font-size:54rpx;line-height:64rpx;font-weight:500;box-shadow:0 10rpx 24rpx #655aee22}
+.upload-title{font-size:33rpx;font-weight:600;margin:24rpx 0 8rpx}
+.upload-link{color:#6259df;font-size:26rpx;margin-top:26rpx}
+.upload-link text{margin-left:14rpx}
+button.history-entry[class]{width:100%;margin-left:0;margin-right:0;display:flex;align-items:center;justify-content:space-between;text-align:left;padding:36rpx 0;border-bottom:1rpx solid #f1f1f5;margin-top:18rpx}
+button.history-entry[class] .muted{margin-top:6rpx}

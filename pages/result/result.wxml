@@ -1,44 +1,64 @@
-<!--pages/result/result.wxml-->
-<van-notice-bar
-    left-icon="volume-o"
-    style="margin-top: 30rpx;border-radius: 10rpx;"
-    text="{{noticeMsg}}"/>
-
-<van-empty image="/imgs/success1.png"
-  description="转换成功"
-  custom-class="custom-empty">
-  <view class="file-info-card" wx:if="{{dataReady}}">
-    <view class="file-info-item">
-      <text class="file-info-label">文件名</text>
-      <text class="file-info-value file-name">{{fileName}}</text>
-    </view>
-  </view>
-</van-empty>
-
-<view class="button-group">
-    <van-button type="primary"
-     color="{{bgColor}}"
-     class="action-button"
-     loading="{{saveLoading}}"
-     loading-text="下载中"
-     disabled="{{disabled}}"
-     bind:click="saveFile">保存到手机</van-button>
-
-    <van-button type="default"
-     class="action-button"
-     loading="{{preViewLoading}}"
-     loading-text="下载中"
-     disabled="{{disabled}}"
-     bind:click="preView">{{preBtnText}}</van-button>
-
-    <van-button wx:if="{{appId != 1}}"
-     plain
-     type="default"
-     color="{{bgColor}}"
-     class="action-button"
-     disabled="{{disabled}}"
-     loading="{{shareLoading}}"
-     loading-text="下载中"
-     bind:click="fileShare">转发到微信</van-button>
+<view class="screen result-screen with-actions">
+  <view class="error" wx:if="{{error}}">{{error}}<button class="secondary" bindtap="refresh">重新查询</button>
 </view>
-<van-toast id="van-toast" />
+  <view wx:if="{{!record && !error}}" class="empty">
+<view class="spinner">
+</view>
+<view class="muted">正在查询转换任务</view>
+</view>
+  <block wx:if="{{record}}">
+    <view class="result-hero">
+      <view class="result-art">
+<view class="file-icon hero-file tone-{{record.targetTone}}">{{record.target}}</view>
+<view class="state-mark state-{{record.convertStatus}}">{{record.convertStatus == 3 ? '✓' : record.convertStatus == 4 ? '!' : '···'}}</view>
+</view>
+      <view class="result-title">{{record.convertStatus == 1 ? '已加入转换队列' : record.convertStatus == 2 ? '正在转换文件' : record.convertStatus == 3 ? '文件转换完成' : '这次转换未成功'}}</view>
+      <view class="result-name">{{record.convertStatus == 3 && outputs.length && record.convertType != 1 ? outputs[0].name : record.fileName}}</view>
+      <view class="conversion-label">{{record.source}} <text>→</text> {{record.target}}</view>
+    </view>
+    <block wx:if="{{record.convertStatus == 1 || record.convertStatus == 2}}">
+      <view class="progress-track">
+<view class="progress-moving">
+</view>
+</view>
+      <view class="status-copy">{{record.convertStatus == 1 ? '前方还有 '+record.queueAhead+' 个任务，请稍候' : '文件处理中，完成后自动显示结果'}}</view>
+      <view class="muted centered spaced">无需一直等待，可以放心离开<view>稍后从「转换记录」查看结果</view>
+</view>
+      <view class="bottom-actions">
+<button class="secondary" bindtap="history">返回转换记录</button>
+</view>
+    </block>
+    <block wx:if="{{record.convertStatus == 4}}">
+<view class="failure-reason">{{record.remark || '请检查文件是否损坏或加密，也可以尝试更小的文件。'}}</view>
+<view class="bottom-actions">
+<button class="primary" bindtap="again">重新选择文件</button>
+<button class="text-button" bindtap="history">查看转换记录</button>
+</view>
+</block>
+    <block wx:if="{{record.convertStatus == 3}}">
+      <view class="success-tip">已为你准备好{{record.convertType == 1 ? ' '+outputs.length+' 张图片' : '新的文件'}}，请及时保存</view>
+      <view wx:if="{{record.convertType == 1}}" class="output-list">
+<view class="output-row" wx:for="{{outputs}}" wx:key="url">
+<view class="row">
+<view class="page-number">{{index+1}}</view>
+<text>{{item.name}}</text>
+</view>
+<view class="row">
+<button class="link" disabled="{{exporting}}" data-index="{{index}}" data-action="preview" bindtap="exportFile">预览</button>
+<button class="save-small" disabled="{{exporting}}" data-index="{{index}}" data-action="save" bindtap="exportFile">保存</button>
+</view>
+</view>
+</view>
+      <view wx:if="{{!outputs.length}}" class="error">未找到结果文件，请重新查询或重新转换。</view>
+      <view class="bottom-actions">
+<view class="muted">{{exporting ? '正在打开文件，请稍候…' : '当前免费导出'}}</view>
+<view wx:if="{{outputs.length && record.convertType != 1}}" class="row">
+<button class="primary" disabled="{{exporting}}" data-index="0" data-action="send" bindtap="exportFile">分享给微信好友</button>
+<button class="secondary" disabled="{{exporting}}" data-index="0" data-action="preview" bindtap="exportFile">预览文件</button>
+</view>
+<button class="text-button" bindtap="again">继续转换</button>
+</view>
+    </block>
+  </block>
+  <button wx:if="{{!record && error}}" class="secondary" bindtap="history">返回转换记录</button>
+</view>

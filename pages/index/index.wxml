@@ -1,46 +1,44 @@
-<view class="full-screen-container" style="background-color: {{appSeeting.bgColor}}">
-    <view class="title">{{appSeeting.appName}}</view>
-    <view class="grid-container">
-        <!-- https://pdf19.hfyhwl.cn/word2html 偷图网址-->
-        <view class="tool-box">
-            <view  wx:for="{{appList}}" wx:for-item="appGroup" style="padding: 5rpx;">
-            <view class="app-group">{{appGroup.groupName}}</view>
-            <van-grid 
-                border="{{false}}"
-                gutter="{{appSeeting.gutter}}" 
-                direction="horizontal"
-                column-num="{{appSeeting.columnNum}}"
-                icon-size="{{appSeeting.iconSize}}">
-                 
-                <van-grid-item
-                wx:for="{{appGroup.appList}}" wx:for-item="app"
-                key="{{app.id}}"
-                text="{{app.appName}}"
-                url="{{app.appUrl + '?appId=' + app.id}}"
-                icon="{{app.appIcon}}"
-                custom-class="custom-grid-item grid"/>
-            </van-grid>
-        </view>
-        </view>
-        <!-- <view class="ad footer">
-            <ad unit-id="adunit-c1dfad7bb6c1d324" 
-            ad-type="video" 
-            ad-theme="white" 
-            bindload="adLoad"
-            binderror="adError" 
-            bindclose="adClose">             
-            </ad>
-        </view> -->
-    </view>
-<van-tabbar
-  active="{{ active }}"
-  active-color="{{appSeeting.bgColor}}"
-  inactive-color="#000"
-  bind:change="onChange"
->
-  <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-  <van-tabbar-item icon="notes-o">记录</van-tabbar-item>
-  <!-- <van-tabbar-item icon="friends-o">我</van-tabbar-item> -->
-</van-tabbar>
+<view class="screen home-screen">
+  <view class="section-head">
+<view class="section-title">常用功能</view>
+<text class="small-tag">限时免费</text>
 </view>
-
+  <view wx:if="{{loading}}" class="empty compact">
+<view class="spinner">
+</view>
+<view class="muted">正在加载转换工具</view>
+</view>
+  <view wx:elif="{{error}}" class="notice">
+<view>{{error}}</view>
+<button class="secondary" bindtap="load">重新加载</button>
+</view>
+  <view wx:else class="tools">
+    <button class="tool" wx:for="{{tools}}" wx:key="id" data-id="{{item.id}}" bindtap="open">
+      <view class="file-pair">
+<view class="file-icon small back tone-{{item.sourceTone}}">{{item.source}}</view>
+<view class="file-icon small front tone-{{item.targetTone}}">{{item.target}}</view>
+</view>
+      <view class="tool-name">{{item.appName}}</view>
+    </button>
+  </view>
+  <block wx:if="{{!loading && !error}}">
+    <view class="section-head quick-heading">
+<view class="section-title">快捷入口</view>
+</view>
+    <button class="upload-zone" wx:for="{{tools}}" wx:key="id" wx:if="{{item.id == 6}}" data-id="{{item.id}}" bindtap="open">
+      <view class="upload-symbol">↑</view>
+<view class="upload-title">图片，轻松合成 PDF</view>
+      <view class="muted">微信图片、手机相册、拍照导入</view>
+<view class="upload-link">选择图片 <text>→</text>
+</view>
+    </button>
+    <button class="history-entry" bindtap="history">
+<view>
+<view class="body-title">我的转换记录</view>
+<view class="muted">查看进度，找回转换后的文件</view>
+</view>
+<text class="chevron">›</text>
+</button>
+    <view class="footnote">选好文件，剩下的交给我们</view>
+  </block>
+</view>

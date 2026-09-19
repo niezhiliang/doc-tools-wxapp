@@ -4,8 +4,52 @@
   "packOptions": {
     "ignore": [
       {
-        "value": ".eslintrc.js",
-        "type": "file"
+        "type": "folder",
+        "value": "design"
+      },
+      {
+        "type": "folder",
+        "value": "tests"
+      },
+      {
+        "type": "folder",
+        "value": ".git"
+      },
+      {
+        "type": "folder",
+        "value": "node_modules"
+      },
+      {
+        "type": "file",
+        "value": ".eslintrc.js"
+      },
+      {
+        "type": "file",
+        "value": ".gitignore"
+      },
+      {
+        "type": "file",
+        "value": ".DS_Store"
+      },
+      {
+        "type": "file",
+        "value": "package.json"
+      },
+      {
+        "type": "file",
+        "value": "package-lock.json"
+      },
+      {
+        "type": "file",
+        "value": "README.md"
+      },
+      {
+        "type": "file",
+        "value": "RELAUNCH_CHECKLIST.md"
+      },
+      {
+        "type": "file",
+        "value": "PRODUCT_ANALYSIS.md"
       }
     ],
     "include": []
@@ -46,7 +90,12 @@
     "minifyWXML": true,
     "showES6CompileOption": false,
     "useCompilerPlugins": false,
-    "ignoreUploadUnusedFiles": true
+    "ignoreUploadUnusedFiles": true,
+    "compileWorklet": false,
+    "localPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true
   },
   "editorSetting": {
     "tabIndent": "auto",
@@ -54,5 +103,6 @@
   },
   "appid": "wxf7cf8156b00d3728",
   "projectname": "doc-tools-wxapp",
-  "condition": {}
+  "condition": {},
+  "simulatorPluginLibVersion": {}
 }
